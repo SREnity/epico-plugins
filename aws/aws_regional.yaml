@@ -1,0 +1,322 @@
+---
+name: "awsinfra"
+vars_data:
+  region: [ "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "eu-north-1", "sa-east-1"] #, "us-gov-east-1", "us-gov-west-1" ] 
+vars:
+  region: "{{region}}"
+paging:
+  location_to: "querystring" # How we pass back our page.
+  indicator_from_field: "DescribeInstancesResponse.nextToken" # Field name paging info comes in.
+  indicator_to_field: "NextToken" # Field name paging info is passed back in.
+  indicator_from_structure: "response" # response/iterator/etc ???necessary???
+  indicator_to_structure: "null_value" # How to know it's done?
+endpoints: 
+  - name: "ec2"
+    vars:
+      xml_tags: "item"
+      service: "ec2"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeInstancesResponse.nextToken"
+      indicator_to_field: "NextToken"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeInstancesResponse.reservationSet"
+    desired_base_key: "Reservations"
+    current_error_key: "Response.Errors.Error"
+    desired_error_key: "Errors.{{service}}.instances"
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Instance.html"
+    params:
+      querystring:
+        Action: [ "DescribeInstances" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+        MaxResults: [ 5 ]
+        NextToken: []
+      header:
+      body:
+  - name: "rds_instances"
+    vars:
+      service: "rds"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeDBInstancesResponse.Marker"
+      indicator_to_field: "Marker"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeDBInstancesResponse.DescribeDBInstancesResult.DBInstances"
+    desired_base_key: "DBInstances"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.instances"
+    documentation: "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html"
+    params:
+      querystring:
+        Action: [ "DescribeDBInstances" ] # All flow lists iterated sequentially.
+        Version: [ "2014-10-31" ]
+        MaxResults: [ 100 ]
+        Marker: []
+      header:
+      body:
+  - name: "rds_clusters"
+    vars:
+      service: "rds"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeDBClustersResponse.Marker"
+      indicator_to_field: "Marker"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeDBClustersResponse.DescribeDBClustersResult.DBClusters"
+    desired_base_key: "DBClusters"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.clusters"
+    documentation: "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html"
+    params:
+      querystring:
+        Action: [ "DescribeDBClusters" ] # All flow lists iterated sequentially.
+        Version: [ "2014-10-31" ]
+        MaxResults: [ 100 ]
+        Marker: []
+      header:
+      body:
+  - name: "rds_sgs"
+    vars:
+      service: "rds"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeDBSecurityGroupsResponse.Marker"
+      indicator_to_field: "Marker"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeDBSecurityGroupsResponse.DescribeDBSecurityGroupsResult.DBSecurityGroups"
+    desired_base_key: "DBSecurityGroups"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.sgs"
+    documentation: "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSecurityGroups.html"
+    params:
+      querystring:
+        Action: [ "DescribeDBSecurityGroups" ] # All flow lists iterated sequentially.
+        Version: [ "2014-10-31" ]
+        MaxResults: [ 100 ]
+        Marker: []
+      header:
+      body:
+  - name: "rds_subnets"
+    vars:
+      service: "rds"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeDBSubnetGroupsResponse.Marker"
+      indicator_to_field: "Marker"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeDBSubnetGroupsResponse.DescribeDBSubnetGroupsResult.DBSubnetGroups"
+    desired_base_key: "DBSubnetGroups"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.subnets"
+    documentation: "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSubnetGroups.html"
+    params:
+      querystring:
+        Action: [ "DescribeDBSubnetGroups" ] # All flow lists iterated sequentially.
+        Version: [ "2014-10-31" ]
+        MaxResults: [ 100 ]
+        Marker: []
+      header:
+      body:
+  - name: "rds_reservations"
+    vars:
+      service: "rds"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeReservedDBInstancesResponse.Marker"
+      indicator_to_field: "Marker"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeReservedDBInstancesResponse.DescribeReservedDBInstancesResult.ReservedDBInstances.ReservedDBInstance"
+    desired_base_key: "ReservedDBInstances"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.reservations"
+    documentation: "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html"
+    params:
+      querystring:
+        Action: [ "DescribeReservedDBInstances" ] # All flow lists iterated sequentially.
+        Version: [ "2014-10-31" ]
+        MaxResults: [ 100 ]
+        Marker: []
+      header:
+      body:
+  - name: "elb_elbs_v2"
+    vars:
+      service: "elasticloadbalancing"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeLoadBalancersResponse.Marker"
+      indicator_to_field: "NextMarker"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeLoadBalancersResponse.DescribeLoadBalancersResult.LoadBalancers" #.member"
+    desired_base_key: "LoadBalancers"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.elbs_v2" # No documentation
+    documentation: "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html"
+    params:
+      querystring:
+        Action: [ "DescribeLoadBalancers" ] # All flow lists iterated sequentially.
+        Version: [ "2015-12-01" ]
+      header:
+      body:
+  - name: "elb_elbs_v1"
+    vars:
+      service: "elasticloadbalancing"
+      xml_tags: "member"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeLoadBalancersResponse.Marker"
+      indicator_to_field: "NextMarker"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeLoadBalancersResponse.DescribeLoadBalancersResult.LoadBalancerDescriptions"
+    desired_base_key: "LoadBalancers"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.elbs_v1" # No documentation
+    documentation: "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html"
+    params:
+      querystring:
+        Action: [ "DescribeLoadBalancers" ] # All flow lists iterated sequentially.
+        Version: [ "2012-06-01" ]
+      header:
+      body:
+  - name: "autoscaling_asg"
+    vars:
+      service: "autoscaling"
+      xml_tags: "member"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeAutoScalingGroupsResponse.NextToken"
+      indicator_to_field: "NextToken"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeAutoScalingGroupsResponse.DescribeAutoScalingGroupsResult.AutoScalingGroups"
+    desired_base_key: "AutoScalingGroups"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.asgs" # No documentation
+    documentation: "https://docs.aws.amazon.com/autoscaling/latest/APIReference/API_DescribeAutoScalingGroups.html"
+    params:
+      querystring:
+        Action: [ "DescribeAutoScalingGroups" ] # All flow lists iterated sequentially.
+        Version: [ "2011-01-01" ]
+      header:
+      body:
+  - name: "autoscaling_lc"
+    vars:
+      service: "autoscaling"
+      xml_tags: "member"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeLaunchConfigurationsResponse.NextToken"
+      indicator_to_field: "NextToken"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeLaunchConfigurationsResponse.DescribeLaunchConfigurationsResult.LaunchConfigurations"
+    desired_base_key: "LaunchConfigurations"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.lcs" # No documentation
+    documentation: "https://docs.aws.amazon.com/autoscaling/latest/APIReference/API_DescribeLaunchConfigurations.html"
+    params:
+      querystring:
+        Action: [ "DescribeLaunchConfigurations" ] # All flow lists iterated sequentially.
+        Version: [ "2011-01-01" ]
+      header:
+      body:
+  - name: "autoscaling_policies"
+    vars:
+      service: "autoscaling"
+      xml_tags: "member"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribePoliciesResponse.NextToken"
+      indicator_to_field: "NextToken"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribePoliciesResponse.DescribePoliciesResult.ScalingPolicies"
+    desired_base_key: "ScalingPolicies"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.policies" # No documentation
+    documentation: "https://docs.aws.amazon.com/autoscaling/latest/APIReference/API_DescribePolicies.html"
+    params:
+      querystring:
+        Action: [ "DescribePolicies" ] # All flow lists iterated sequentially.
+        Version: [ "2011-01-01" ]
+      header:
+      body:
+  - name: "elasticbeanstalk_apps"
+    vars:
+      service: "elasticbeanstalk"
+      xml_tags: "member"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeApplicationsResponse.DescribeApplicationsResult.Applications"
+    desired_base_key: "Applications"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.apps" # No documentation
+    documentation: "https://docs.aws.amazon.com/elasticbeanstalk/latest/APIReference/API_DescribeApplications.html"
+    params:
+      querystring:
+        Action: [ "DescribeApplications" ] # All flow lists iterated sequentially.
+        Version: [ "2010-12-01" ]
+      header:
+      body:
+  - name: "elasticbeanstalk_environments"
+    vars:
+      service: "elasticbeanstalk"
+      xml_tags: "member"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeEnvironmentsResponse.NextToken"
+      indicator_to_field: "NextToken"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeEnvironmentsResponse.DescribeEnvironmentsResult.Environments"
+    desired_base_key: "Environments"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.environments" # No documentation
+    documentation: "https://docs.aws.amazon.com/elasticbeanstalk/latest/APIReference/API_DescribeEnvironments.html"
+    params:
+      querystring:
+        Action: [ "DescribeEnvironments" ] # All flow lists iterated sequentially.
+        Version: [ "2010-12-01" ]
+      header:
+      body:
+  - name: "cloudformation_stacks"
+    vars:
+      service: "cloudformation"
+      xml_tags: "member"
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeStacksResponse.NextToken"
+      indicator_to_field: "NextToken"
+      indicator_from_structure: "response"
+      indicator_to_structure: "null_value"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeStacksResponse.DescribeStacksResult.Stacks"
+    desired_base_key: "Stacks"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.stacks" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStacks.html"
+    params:
+      querystring:
+        Action: [ "DescribeStacks" ] # All flow lists iterated sequentially.
+        Version: [ "2010-05-15" ]
+      header:
+      body:
+

@@ -1,0 +1,422 @@
+---
+name: "awsinfra"
+auth: "aws"
+post_process: "aws"
+paging_peek_process: "aws"
+paging:
+  location_to: "querystring" # How we pass back our page.
+  indicator_from_field: "DescribeInstancesResponse.nextToken" # Field name paging info comes in.
+  indicator_to_field: "NextToken" # Field name paging info is passed back in.
+  indicator_from_structure: "response" # response/iterator/etc ???necessary???
+  indicator_to_structure: "null_value" # How to know it's done?
+endpoints: 
+  - name: "ec2_vpcs"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+      xml_tags: "item"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeVpcsResponse.vpcSet"
+    desired_base_key: "Vpcs"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.vpcs" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html"
+    params:
+      querystring:
+        Action: [ "DescribeVpcs" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_subnets"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+      xml_tags: "item"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeSubnetsResponse.subnetSet"
+    desired_base_key: "Subnets"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.subnets" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSubnets.html"
+    params:
+      querystring:
+        Action: [ "DescribeSubnets" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_route_tables"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+      xml_tags: "item"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeRouteTablesResponse.routeTableSet"
+    desired_base_key: "RouteTables"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.route_tables" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRouteTables.html"
+    params:
+      querystring:
+        Action: [ "DescribeRouteTables" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_igw"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+      xml_tags: "item"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeInternetGatewaysResponse.internetGatewaySet"
+    desired_base_key: "InternetGateways"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.igw" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInternetGateways.html"
+    params:
+      querystring:
+        Action: [ "DescribeInternetGateways" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_eoigw"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeEgressOnlyInternetGatewaysResponse.egressOnlyInternetGatewaySet"
+    desired_base_key: "EgressOnlyInternetGateways"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.eoigw" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeEgressOnlyInternetGateways.html"
+    params:
+      querystring:
+        Action: [ "DescribeEgressOnlyInternetGateways" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_addresses"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+      xml_tags: "item"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeAddressesResponse.addressesSet"
+    desired_base_key: "Addresses"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.addresses" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAddresses.html"
+    params:
+      querystring:
+        Action: [ "DescribeAddresses" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_vpc_endpoints"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeVpcEndpointsResponse.vpcEndpointSet"
+    desired_base_key: "VpcEndpoints"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.vpc_endpoints" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcEndpoints.html"
+    params:
+      querystring:
+        Action: [ "DescribeVpcEndpoints" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_sgs"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+      xml_tags: "item"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeSecurityGroupsResponse.securityGroupInfo"
+    desired_base_key: "SecurityGroups"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.sgs" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html"
+    params:
+      querystring:
+        Action: [ "DescribeSecurityGroups" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_vpn_gw"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeVpnGatewaysResponse.vpnGatewaySet"
+    desired_base_key: "VpnGateways"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.vpn_gw" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnGateways.html"
+    params:
+      querystring:
+        Action: [ "DescribeVpnGateways" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_vpn_connections"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeVpnConnectionsResponse.vpnConnectionSet"
+    desired_base_key: "VpnConnections"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.vpn_connectoins" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html"
+    params:
+      querystring:
+        Action: [ "DescribeVpnConnections" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_cgw"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeCustomerGatewaysResponse.customerGatewaySet"
+    desired_base_key: "CustomerGateways"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.cgw" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeCustomerGateways.html"
+    params:
+      querystring:
+        Action: [ "DescribeCustomerGateways" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_acls"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+      xml_tags: "item"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeNetworkAclsResponse.networkAclSet"
+    desired_base_key: "NetworkAcls"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.acls" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNetworkAcls.html"
+    params:
+      querystring:
+        Action: [ "DescribeNetworkAcls" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_vpc_peering_connections"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+      xml_tags: "item"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeVpcPeeringConnectionsResponse.vpcPeeringConnectionSet"
+    desired_base_key: "VpcPeeringConnections"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.vpc_peering_connections" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcPeeringConnections.html"
+    params:
+      querystring:
+        Action: [ "DescribeVpcPeeringConnections" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_nat_gw"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeNatGatewaysResponse.natGatewaySet"
+    desired_base_key: "NatGateways"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.nat_gw" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNatGateways.html"
+    params:
+      querystring:
+        Action: [ "DescribeNatGateways" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "ec2_keypairs"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+      xml_tags: "item"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeKeyPairsResponse.keySet"
+    desired_base_key: "KeyPairs"
+    current_error_key: "Response.Errors.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.keypairs" # No documentation
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeKeyPairs.html"
+    params:
+      querystring:
+        Action: [ "DescribeKeyPairs" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
+  - name: "rds_quotas"
+    vars:
+      service: "rds"
+      region: "us-east-1"
+    # TODO: Should this have the region in it even though its global?
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: "DescribeAccountAttributesResponse.DescribeAccountAttributesResult.AccountQuotas.AccountQuota"
+    desired_base_key: "AccountQuotas"
+    current_error_key: "ErrorResponse.Error"
+    desired_error_key: "Errors.{{service}}.quotas"
+    documentation: "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeAccountAttributes.html"
+    params:
+      querystring:
+        Action: [ "DescribeAccountAttributes" ] # All flow lists iterated sequentially.
+        Version: [ "2014-10-31" ]
+      header:
+      body:
+  - name: "iam_groups"
+    vars:
+      service: "iam"
+      region: "us-east-1"
+      xml_tags: "member"
+    # TODO: Should this have the region in it even though its global?
+    endpoint: "https://{{service}}.amazonaws.com/"
+    current_base_key: "ListGroupsResponse.ListGroupsResult.Groups"
+    desired_base_key: "Groups"
+    current_error_key: "ErrorResponse.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.groups"
+    documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListGroups.html"
+    params:
+      querystring:
+        Action: [ "ListGroups" ] # All flow lists iterated sequentially.
+        Version: [ "2010-05-08" ]
+      header:
+      body:
+  - name: "iam_roles"
+    vars:
+      service: "iam"
+      region: "us-east-1"
+      xml_tags: "member"
+    # TODO: Should this have the region in it even though its global?
+    endpoint: "https://{{service}}.amazonaws.com/"
+    current_base_key: "ListRolesResponse.ListRolesResult.Roles"
+    desired_base_key: "Roles"
+    current_error_key: "ErrorResponse.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.roles"
+    documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListRoles.html"
+    params:
+      querystring:
+        Action: [ "ListRoles" ] # All flow lists iterated sequentially.
+        Version: [ "2010-05-08" ]
+      header:
+      body:
+  - name: "iam_policies"
+    vars:
+      service: "iam"
+      region: "us-east-1"
+      xml_tags: "member"
+    # TODO: Should this have the region in it even though its global?
+    endpoint: "https://{{service}}.amazonaws.com/"
+    current_base_key: "ListPoliciesResponse.ListPoliciesResult.Policies"
+    desired_base_key: "Policies"
+    current_error_key: "ErrorResponse.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.policies"
+    documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicies.html"
+    params:
+      querystring:
+        Action: [ "ListPolicies" ] # All flow lists iterated sequentially.
+        Version: [ "2010-05-08" ]
+      header:
+      body:
+  - name: "iam_users"
+    vars:
+      service: "iam"
+      region: "us-east-1"
+      xml_tags: "member"
+    # TODO: Should this have the region in it even though its global?
+    endpoint: "https://{{service}}.amazonaws.com/"
+    current_base_key: "ListUsersResponse.ListUsersResult.Users"
+    desired_base_key: "Users"
+    current_error_key: "ErrorResponse.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.users"
+    documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListUsers.html"
+    params:
+      querystring:
+        Action: [ "ListUsers" ] # All flow lists iterated sequentially.
+        Version: [ "2010-05-08" ]
+      header:
+      body:
+  - name: "iam_key_metadata"
+    vars:
+      service: "iam"
+      region: "us-east-1"
+      xml_tags: "member"
+    # TODO: Should this have the region in it even though its global?
+    endpoint: "https://{{service}}.amazonaws.com/"
+    current_base_key: "ListAccessKeysResponse.ListAccessKeysResult.AccessKeyMetadata"
+    desired_base_key: "AccessKeys"
+    current_error_key: "ErrorResponse.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.key_metadata"
+    documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAccessKeys.html"
+    params:
+      querystring:
+        Action: [ "ListAccessKeys" ] # All flow lists iterated sequentially.
+        Version: [ "2010-05-08" ]
+      header:
+      body:
+  - name: "iam_password_policy"
+    vars:
+      service: "iam"
+      region: "us-east-1"
+    # TODO: Should this have the region in it even though its global?
+    endpoint: "https://{{service}}.amazonaws.com/"
+    current_base_key: "GetAccountPasswordPolicyResponse.GetAccountPasswordPolicyResult.PasswordPolicy"
+    desired_base_key: "PasswordPolicy"
+    current_error_key: "ErrorResponse.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.password_policy"
+    documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html"
+    params:
+      querystring:
+        Action: [ "GetAccountPasswordPolicy" ] # All flow lists iterated sequentially.
+        Version: [ "2010-05-08" ]
+      header:
+      body:
+  - name: "iam_mfa_devices"
+    vars:
+      service: "iam"
+      region: "us-east-1"
+      xml_tags: "member"
+    # TODO: Should this have the region in it even though its global?
+    endpoint: "https://{{service}}.amazonaws.com/"
+    current_base_key: "ListMFADevicesResponse.ListMFADevicesResult.MFADevices"
+    desired_base_key: "MFADevices"
+    current_error_key: "ErrorResponse.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.mfa_devices"
+    documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListMFADevices.html"
+    params:
+      querystring:
+        Action: [ "ListMFADevices" ] # All flow lists iterated sequentially.
+        Version: [ "2010-05-08" ]
+      header:
+      body:
+  - name: "iam_virtual_mfa_defices"
+    vars:
+      service: "iam"
+      region: "us-east-1"
+      xml_tags: "member"
+    # TODO: Should this have the region in it even though its global?
+    endpoint: "https://{{service}}.amazonaws.com/"
+    current_base_key: "ListVirtualMFADevicesResponse.ListVirtualMFADevicesResult.VirtualMFADevices"
+    desired_base_key: "VirtualMFADevices"
+    current_error_key: "ErrorResponse.Error" # No documentation
+    desired_error_key: "Errors.{{service}}.virtual_mfa_devices"
+    documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListVirtualMFADevices.html"
+    params:
+      querystring:
+        Action: [ "ListVirtualMFADevices" ] # All flow lists iterated sequentially.
+        Version: [ "2010-05-08" ]
+      header:
+      body:
+
