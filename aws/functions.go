@@ -3,13 +3,11 @@ package main
 import (
     "bytes"
     "time"
-    "io/ioutil"
-    "net/http"
     "strings"
 
-    "../../epico/signers/aws_v4"
-    utils "../../epico/utils"
-    generic_structs "../../epico/structs"
+    "github.com/SREnity/epico/signers/aws_v4"
+    utils "github.com/SREnity/epico/utils"
+    generic_structs "github.com/SREnity/epico/structs"
     xj "github.com/basgys/goxml2json"
 )
 
@@ -20,7 +18,7 @@ var PluginPagingPeekFunction = PluginPagingPeek
 
 // authParams expects the AWS ACCESS ID in slice slot [0] and the AWS SECRET KEY
 //     in slice slot [1].
-func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) []byte {
+func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) generic_structs.ApiRequest {
 
     var err error
     signer := v4.NewSigner( generic_structs.ApiCredentials{
@@ -41,28 +39,10 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) []
 
     if err != nil {
         utils.LogFatal("AWS:PluginAuth", "Error presigning the AWS request", err)
-        return nil
     }
 
+    return apiRequest
 
-    client := &http.Client{}
-    resp, err := client.Do(apiRequest.FullRequest)
-    if err != nil {
-        utils.LogFatal("AWS:PluginAuth", "Error running the AWS request", err)
-        return nil
-    }
-    defer resp.Body.Close()
-    // TODO: Handle failed connections better / handle retry?
-    // i/o timeoutpanic: runtime error: invalid memory address or nil pointer dereference
-    // [signal SIGSEGV: segmentation violation code=0x1 addr=0x40 pc=0x6aa2ba]
-
-    body, err := ioutil.ReadAll(resp.Body)
-    if err != nil {
-        utils.LogFatal("AWS:PluginAuth", "Error reading AWS request body", err)
-        return nil
-    }
-
-    return body
 }
 
 
