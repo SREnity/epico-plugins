@@ -30,7 +30,6 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
 
     })
 
-    apiRequest.Time = time.Now()
     if apiRequest.Settings.Vars["region"] != "{{region}}" {
         apiRequest.FullRequest.Header, err = signer.Presign( apiRequest.FullRequest, nil, apiRequest.Settings.Vars["service"], apiRequest.Settings.Vars["region"], 60 * time.Minute, time.Now() )
     } else {
