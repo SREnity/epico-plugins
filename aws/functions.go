@@ -45,27 +45,29 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
 }
 
 
-func PluginPagingPeek( response []byte, responseKeys []string, oldPageValue interface{} ) ( interface{}, bool ) {
+func PluginPagingPeek( response []byte, responseKeys []string, oldPageValue interface{}, peekParams []string ) ( interface{}, bool ) {
 
-    responseMap := utils.XmlResponseProcess( response )
+    jsonResponse := utils.XmlResponseProcess( response )
 
-    var pageValue interface{}
-    for _, v := range responseKeys {
-        if pageValue == nil {
-            pageValue = responseMap[v]
-        } else {
-            pageValue = pageValue.(map[string]interface{})[v]
-        }
-    }
+    return utils.DefaultJsonPagingPeek( jsonResponse, responseKeys, oldPageValue )
 
-    if pageValue == oldPageValue {
-        pageValue = nil
-    }
-    return pageValue, ( pageValue != "" && pageValue != nil )
+//    var pageValue interface{}
+//    for _, v := range responseKeys {
+//        if pageValue == nil {
+//            pageValue = responseMap[v]
+//        } else {
+//            pageValue = pageValue.(map[string]interface{})[v]
+//        }
+//    }
+
+//    if pageValue == oldPageValue {
+//        pageValue = nil
+//    }
+//    return pageValue, ( pageValue != "" && pageValue != nil )
 }
 
 
-func PluginPostProcess( apiResponseMap map[generic_structs.ComparableApiRequest][]byte, jsonKeys []map[string]string ) []byte {
+func PluginPostProcess( apiResponseMap map[generic_structs.ComparableApiRequest][]byte, jsonKeys []map[string]string, postParams []string ) []byte {
 
     parsedStructure := make(map[string]interface{})
     parsedErrorStructure := make(map[string]interface{})
