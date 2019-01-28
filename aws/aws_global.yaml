@@ -1,8 +1,5 @@
 ---
 name: "awsinfra"
-auth: "aws"
-post_process: "aws"
-paging_peek_process: "aws"
 paging:
   location_to: "querystring" # How we pass back our page.
   indicator_from_field: "DescribeInstancesResponse.nextToken" # Field name paging info comes in.

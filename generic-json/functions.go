@@ -1,13 +1,8 @@
 package main
 
 import (
-    "bytes"
-    "time"
-    "strings"
-
     utils "github.com/SREnity/epico/utils"
     generic_structs "github.com/SREnity/epico/structs"
-    xj "github.com/basgys/goxml2json"
 )
 
 var PluginAuthFunction = PluginAuth
@@ -19,7 +14,7 @@ var PluginPagingPeekFunction = PluginPagingPeek
 //    of auth parameters
 func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) generic_structs.ApiRequest {
 
-    if (authParams) < 1 {
+    if len(authParams) < 1 {
         authParams = []string{""}
     }
 
@@ -31,6 +26,8 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
     //    create their own plugins.
     switch authParams[0] {
         case "JwtAuth":
+            // Expects authParams[1..5] to be:
+            // email, private key, private key id, scopes (csv), token url
             return utils.JwtAuth( apiRequest, authParams[1:] )
         default:
             return apiRequest
@@ -41,14 +38,14 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
 
 func PluginPagingPeek( response []byte, responseKeys []string, oldPageValue interface{}, peekParams []string ) ( interface{}, bool ) {
 
-    if (peekParams) < 1 {
+    if len(peekParams) < 1 {
         peekParams = []string{""}
     }
 
     switch peekParams[0] {
         default:
             return utils.DefaultJsonPagingPeek( response, responseKeys,
-                oldPageValue, peekParams )
+                oldPageValue )
     }
 
 }
@@ -56,23 +53,15 @@ func PluginPagingPeek( response []byte, responseKeys []string, oldPageValue inte
 
 func PluginPostProcess( apiResponseMap map[generic_structs.ComparableApiRequest][]byte, jsonKeys []map[string]string, postParams []string ) []byte {
 
-    if (postParams) < 1 {
+    if len(postParams) < 1 {
         postParams = []string{""}
     }
 
     switch postParams[0] {
         default:
-            parsedStructure := make(map[string]interface{})
-            parsedErrorStructure := make(map[string]interface{})
-
-            for response, apiResponse := range apiResponseMap {
-                utils.ParsePostProcessedJson( response, apiResponse,
-                    parsedStructure, parsedErrorStructure )
-            }
-
-            returnJson := utils.CollapseJson(
-                parsedStructure, parsedErrorStructure )
-            return returnJson
+            // No jsonKeys required because we aren't expecting any special vars
+            //    or configurations.
+            return utils.DefaultJsonPostProcess( apiResponseMap )
     }
 
 }
