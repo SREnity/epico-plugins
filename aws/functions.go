@@ -13,7 +13,7 @@ import (
 
 var PluginAuthFunction = PluginAuth
 var PluginPostProcessFunction = PluginPostProcess
-var PluginPagingPeekFunction = PluginPagingPeek
+var PluginPagingPeekFunction = utils.DefaultXmlPagingPeek
 
 
 // authParams expects the AWS ACCESS ID in slice slot [0] and the AWS SECRET KEY
@@ -42,28 +42,6 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
 
     return apiRequest
 
-}
-
-
-func PluginPagingPeek( response []byte, responseKeys []string, oldPageValue interface{}, peekParams []string ) ( interface{}, bool ) {
-
-    jsonResponse := utils.XmlResponseProcess( response )
-
-    return utils.DefaultJsonPagingPeek( jsonResponse, responseKeys, oldPageValue )
-
-//    var pageValue interface{}
-//    for _, v := range responseKeys {
-//        if pageValue == nil {
-//            pageValue = responseMap[v]
-//        } else {
-//            pageValue = pageValue.(map[string]interface{})[v]
-//        }
-//    }
-
-//    if pageValue == oldPageValue {
-//        pageValue = nil
-//    }
-//    return pageValue, ( pageValue != "" && pageValue != nil )
 }
 
 
