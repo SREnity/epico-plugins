@@ -61,7 +61,7 @@ func PluginPostProcess( apiResponseMap map[generic_structs.ComparableApiRequest]
         default:
             // No jsonKeys required because we aren't expecting any special vars
             //    or configurations.
-            return utils.DefaultJsonPostProcess( apiResponseMap )
+            return utils.DefaultJsonPostProcess( apiResponseMap, jsonKeys )
     }
 
 }

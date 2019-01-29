@@ -72,7 +72,7 @@ func PluginPostProcess( apiResponseMap map[generic_structs.ComparableApiRequest]
 
         // TODO: Should I just rebuild the map and pass to the generic
         //    utils.DefaultJsonPostProcess function?
-        utils.ParsePostProcessedJson( response, processedJson, parsedStructure, parsedErrorStructure )
+        utils.ParsePostProcessedJson( response, jsonKeys, processedJson, parsedStructure, parsedErrorStructure )
 
     }
 
