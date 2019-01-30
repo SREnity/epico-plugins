@@ -18,6 +18,10 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
         authParams = []string{""}
     }
 
+    // In the JSON plugin, these should all be JSON requests.
+    apiRequest.FullRequest.Header.Add("content-type", "application/json")
+    apiRequest.FullRequest.Header.Add("accept", "application/json")
+
     // TODO: I would like to be able to dynamically call whatever function name
     //    is passed in authParams[0], but this is difficult in Go - particularly
     //    if they are going outside the standard utils library. At this point,
@@ -25,12 +29,14 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
     //    generic files.  If folks want to use their own functions, they should
     //    create their own plugins.
     switch authParams[0] {
+        case "BasicAuth":
+            return utils.BasicAuth( apiRequest, authParams[1:] )
+        case "QuerystringTokenAuth":
+            return utils.QuerystringTokenAuth( apiRequest, authParams[1:] )
         case "JwtAuth":
             // Expects authParams[1..5] to be:
             // email, private key, private key id, scopes (csv), token url
             return utils.JwtAuth( apiRequest, authParams[1:] )
-        case "BasicAuth":
-            return utils.BasicAuth( apiRequest, authParams[1:] )
         default:
             return apiRequest
     }

@@ -1,6 +1,6 @@
 ---
 # TODO: Expand this with more of the API.
-name: "gcpinfra"
+name: "bitbucket"
 paging:
   location_to: "querystring"
   indicator_from_field: "next"

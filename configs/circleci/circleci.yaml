@@ -1,0 +1,23 @@
+---
+# TODO: Expand this with more of the API.
+name: "circleci"
+paging:
+  location_to: "querystring"
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+  indicator_to_structure: "null_value"
+endpoints: 
+  - name: "projects"
+    vars:
+      service: "projects"
+    endpoint: "https://circleci.com/api/v1.1/{{service}}"
+    current_base_key: [""]
+    desired_base_key: ["Projects"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
