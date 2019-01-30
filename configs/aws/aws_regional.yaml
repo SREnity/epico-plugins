@@ -8,7 +8,7 @@ paging:
   location_to: "querystring" # How we pass back our page.
   indicator_from_field: "DescribeInstancesResponse.nextToken" # Field name paging info comes in.
   indicator_to_field: "NextToken" # Field name paging info is passed back in.
-  indicator_from_structure: "response" # response/iterator/etc ???necessary???
+  indicator_from_structure: "param" # response/iterator/etc ???necessary???
   indicator_to_structure: "null_value" # How to know it's done?
 endpoints: 
   - name: "ec2"
@@ -19,7 +19,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribeInstancesResponse.nextToken"
       indicator_to_field: "NextToken"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeInstancesResponse.reservationSet"]
@@ -42,7 +42,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribeDBInstancesResponse.Marker"
       indicator_to_field: "Marker"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeDBInstancesResponse.DescribeDBInstancesResult.DBInstances"]
@@ -65,7 +65,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribeDBClustersResponse.Marker"
       indicator_to_field: "Marker"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeDBClustersResponse.DescribeDBClustersResult.DBClusters"]
@@ -88,7 +88,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribeDBSecurityGroupsResponse.Marker"
       indicator_to_field: "Marker"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeDBSecurityGroupsResponse.DescribeDBSecurityGroupsResult.DBSecurityGroups"]
@@ -111,7 +111,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribeDBSubnetGroupsResponse.Marker"
       indicator_to_field: "Marker"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeDBSubnetGroupsResponse.DescribeDBSubnetGroupsResult.DBSubnetGroups"]
@@ -134,7 +134,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribeReservedDBInstancesResponse.Marker"
       indicator_to_field: "Marker"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeReservedDBInstancesResponse.DescribeReservedDBInstancesResult.ReservedDBInstances.ReservedDBInstance"]
@@ -157,7 +157,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribeLoadBalancersResponse.Marker"
       indicator_to_field: "NextMarker"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeLoadBalancersResponse.DescribeLoadBalancersResult.LoadBalancers"]
@@ -179,7 +179,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribeLoadBalancersResponse.Marker"
       indicator_to_field: "NextMarker"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeLoadBalancersResponse.DescribeLoadBalancersResult.LoadBalancerDescriptions"]
@@ -201,7 +201,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribeAutoScalingGroupsResponse.NextToken"
       indicator_to_field: "NextToken"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeAutoScalingGroupsResponse.DescribeAutoScalingGroupsResult.AutoScalingGroups"]
@@ -223,7 +223,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribeLaunchConfigurationsResponse.NextToken"
       indicator_to_field: "NextToken"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeLaunchConfigurationsResponse.DescribeLaunchConfigurationsResult.LaunchConfigurations"]
@@ -245,7 +245,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribePoliciesResponse.NextToken"
       indicator_to_field: "NextToken"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribePoliciesResponse.DescribePoliciesResult.ScalingPolicies"]
@@ -283,7 +283,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribeEnvironmentsResponse.NextToken"
       indicator_to_field: "NextToken"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeEnvironmentsResponse.DescribeEnvironmentsResult.Environments"]
@@ -305,7 +305,7 @@ endpoints:
       location_to: "querystring"
       indicator_from_field: "DescribeStacksResponse.NextToken"
       indicator_to_field: "NextToken"
-      indicator_from_structure: "response"
+      indicator_from_structure: "param"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeStacksResponse.DescribeStacksResult.Stacks"]

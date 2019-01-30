@@ -1,0 +1,23 @@
+---
+# TODO: Expand this with more of the API.
+name: "gcpinfra"
+paging:
+  location_to: "querystring"
+  indicator_from_field: "next"
+  indicator_to_field: "after"
+  indicator_from_structure: "full_url"
+  indicator_to_structure: "null_value"
+endpoints: 
+  - name: "repos"
+    vars:
+      service: "repositories"
+    endpoint: "https://api.bitbucket.org/2.0/{{service}}/robwar"
+    current_base_key: ["values"]
+    desired_base_key: ["Respositories"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:

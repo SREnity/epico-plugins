@@ -1,10 +1,11 @@
 ---
+# TODO: Expand this with more of the API.
 name: "gcpinfra"
 paging:
   location_to: "body"
   indicator_from_field: "pageToken"
   indicator_to_field: "pageToken"
-  indicator_from_structure: "response"
+  indicator_from_structure: "param"
   indicator_to_structure: "null_value"
 endpoints: 
   - name: "aggregated_addresses"

@@ -29,6 +29,8 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
             // Expects authParams[1..5] to be:
             // email, private key, private key id, scopes (csv), token url
             return utils.JwtAuth( apiRequest, authParams[1:] )
+        case "BasicAuth":
+            return utils.BasicAuth( apiRequest, authParams[1:] )
         default:
             return apiRequest
     }
