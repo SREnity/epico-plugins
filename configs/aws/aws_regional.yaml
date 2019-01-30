@@ -22,10 +22,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeInstancesResponse.reservationSet"
-    desired_base_key: "Reservations"
-    current_error_key: "Response.Errors.Error"
-    desired_error_key: "Errors.{{service}}.instances"
+    current_base_key: ["DescribeInstancesResponse.reservationSet"]
+    desired_base_key: ["Reservations"]
+    current_error_key: ["Response.Errors.Error"]
+    desired_error_key: ["Errors.{{service}}.instances"]
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Instance.html"
     params:
       querystring:
@@ -45,10 +45,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeDBInstancesResponse.DescribeDBInstancesResult.DBInstances"
-    desired_base_key: "DBInstances"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.instances"
+    current_base_key: ["DescribeDBInstancesResponse.DescribeDBInstancesResult.DBInstances"]
+    desired_base_key: ["DBInstances"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.instances"]
     documentation: "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBInstances.html"
     params:
       querystring:
@@ -68,10 +68,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeDBClustersResponse.DescribeDBClustersResult.DBClusters"
-    desired_base_key: "DBClusters"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.clusters"
+    current_base_key: ["DescribeDBClustersResponse.DescribeDBClustersResult.DBClusters"]
+    desired_base_key: ["DBClusters"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.clusters"]
     documentation: "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBClusters.html"
     params:
       querystring:
@@ -91,10 +91,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeDBSecurityGroupsResponse.DescribeDBSecurityGroupsResult.DBSecurityGroups"
-    desired_base_key: "DBSecurityGroups"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.sgs"
+    current_base_key: ["DescribeDBSecurityGroupsResponse.DescribeDBSecurityGroupsResult.DBSecurityGroups"]
+    desired_base_key: ["DBSecurityGroups"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.sgs"]
     documentation: "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSecurityGroups.html"
     params:
       querystring:
@@ -114,10 +114,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeDBSubnetGroupsResponse.DescribeDBSubnetGroupsResult.DBSubnetGroups"
-    desired_base_key: "DBSubnetGroups"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.subnets"
+    current_base_key: ["DescribeDBSubnetGroupsResponse.DescribeDBSubnetGroupsResult.DBSubnetGroups"]
+    desired_base_key: ["DBSubnetGroups"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.subnets"]
     documentation: "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeDBSubnetGroups.html"
     params:
       querystring:
@@ -137,10 +137,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeReservedDBInstancesResponse.DescribeReservedDBInstancesResult.ReservedDBInstances.ReservedDBInstance"
-    desired_base_key: "ReservedDBInstances"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.reservations"
+    current_base_key: ["DescribeReservedDBInstancesResponse.DescribeReservedDBInstancesResult.ReservedDBInstances.ReservedDBInstance"]
+    desired_base_key: ["ReservedDBInstances"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.reservations"]
     documentation: "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeReservedDBInstances.html"
     params:
       querystring:
@@ -160,10 +160,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeLoadBalancersResponse.DescribeLoadBalancersResult.LoadBalancers" #.member"
-    desired_base_key: "LoadBalancers"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.elbs_v2" # No documentation
+    current_base_key: ["DescribeLoadBalancersResponse.DescribeLoadBalancersResult.LoadBalancers"]
+    desired_base_key: ["LoadBalancers"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.elbs_v2"] # No documentation
     documentation: "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html"
     params:
       querystring:
@@ -182,10 +182,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeLoadBalancersResponse.DescribeLoadBalancersResult.LoadBalancerDescriptions"
-    desired_base_key: "LoadBalancers"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.elbs_v1" # No documentation
+    current_base_key: ["DescribeLoadBalancersResponse.DescribeLoadBalancersResult.LoadBalancerDescriptions"]
+    desired_base_key: ["LoadBalancers"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.elbs_v1"] # No documentation
     documentation: "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html"
     params:
       querystring:
@@ -204,10 +204,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeAutoScalingGroupsResponse.DescribeAutoScalingGroupsResult.AutoScalingGroups"
-    desired_base_key: "AutoScalingGroups"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.asgs" # No documentation
+    current_base_key: ["DescribeAutoScalingGroupsResponse.DescribeAutoScalingGroupsResult.AutoScalingGroups"]
+    desired_base_key: ["AutoScalingGroups"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.asgs"] # No documentation
     documentation: "https://docs.aws.amazon.com/autoscaling/latest/APIReference/API_DescribeAutoScalingGroups.html"
     params:
       querystring:
@@ -226,10 +226,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeLaunchConfigurationsResponse.DescribeLaunchConfigurationsResult.LaunchConfigurations"
-    desired_base_key: "LaunchConfigurations"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.lcs" # No documentation
+    current_base_key: ["DescribeLaunchConfigurationsResponse.DescribeLaunchConfigurationsResult.LaunchConfigurations"]
+    desired_base_key: ["LaunchConfigurations"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.lcs"] # No documentation
     documentation: "https://docs.aws.amazon.com/autoscaling/latest/APIReference/API_DescribeLaunchConfigurations.html"
     params:
       querystring:
@@ -248,10 +248,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribePoliciesResponse.DescribePoliciesResult.ScalingPolicies"
-    desired_base_key: "ScalingPolicies"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.policies" # No documentation
+    current_base_key: ["DescribePoliciesResponse.DescribePoliciesResult.ScalingPolicies"]
+    desired_base_key: ["ScalingPolicies"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.policies"] # No documentation
     documentation: "https://docs.aws.amazon.com/autoscaling/latest/APIReference/API_DescribePolicies.html"
     params:
       querystring:
@@ -264,10 +264,10 @@ endpoints:
       service: "elasticbeanstalk"
       xml_tags: "member"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeApplicationsResponse.DescribeApplicationsResult.Applications"
-    desired_base_key: "Applications"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.apps" # No documentation
+    current_base_key: ["DescribeApplicationsResponse.DescribeApplicationsResult.Applications"]
+    desired_base_key: ["Applications"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.apps"] # No documentation
     documentation: "https://docs.aws.amazon.com/elasticbeanstalk/latest/APIReference/API_DescribeApplications.html"
     params:
       querystring:
@@ -286,10 +286,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeEnvironmentsResponse.DescribeEnvironmentsResult.Environments"
-    desired_base_key: "Environments"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.environments" # No documentation
+    current_base_key: ["DescribeEnvironmentsResponse.DescribeEnvironmentsResult.Environments"]
+    desired_base_key: ["Environments"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.environments"] # No documentation
     documentation: "https://docs.aws.amazon.com/elasticbeanstalk/latest/APIReference/API_DescribeEnvironments.html"
     params:
       querystring:
@@ -308,10 +308,10 @@ endpoints:
       indicator_from_structure: "response"
       indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeStacksResponse.DescribeStacksResult.Stacks"
-    desired_base_key: "Stacks"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.stacks" # No documentation
+    current_base_key: ["DescribeStacksResponse.DescribeStacksResult.Stacks"]
+    desired_base_key: ["Stacks"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.stacks"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeStacks.html"
     params:
       querystring:

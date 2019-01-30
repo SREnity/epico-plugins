@@ -1,0 +1,23 @@
+---
+name: "gcpinfra"
+paging:
+  location_to: "body"
+  indicator_from_field: "pageToken"
+  indicator_to_field: "pageToken"
+  indicator_from_structure: "response"
+  indicator_to_structure: "null_value"
+endpoints: 
+  - name: "aggregated_addresses"
+    vars:
+      service: "addresses"
+      project: "srenity-169420"
+    endpoint: "https://www.googleapis.com/compute/beta/projects/{{project}}/aggregated/addresses/"
+    current_base_key: ["items.global.addresses", "items.regions/us-central1.addresses", "items.regions/europe-west1.addresses", "items.regions/us-west1.addresses", "items.regions/asia-east1.addresses", "items.regions/us-east1.addresses", "items.regions/asia-northeast1.addresses", "items.regions/asia-southeast1.addresses", "items.regions/us-east4.addresses", "items.regions/australia-southeast1.addresses", "items.regions/europe-west2.addresses", "items.regions/europe-west3.addresses", "items.regions/southamerica-east1.addresses", "items.regions/asia-south1.addresses", "items.regions/northamerica-northeast1.addresses", "items.regions/europe-west4.addresses", "items.regions/europe-north1.addresses", "items.regions/us-west2.addresses", "items.regions/asia-east2.addresses"]
+    desired_base_key: ["Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses"]
+    current_error_key: ["items.global.warning", "items.regions/us-central1.warning", "items.regions/europe-west1.warning", "items.regions/us-west1.warning", "items.regions/asia-east1.warning", "items.regions/us-east1.warning", "items.regions/asia-northeast1.warning", "items.regions/asia-southeast1.warning", "items.regions/us-east4.warning", "items.regions/australia-southeast1.warning", "items.regions/europe-west2.warning", "items.regions/europe-west3.warning", "items.regions/southamerica-east1.warning", "items.regions/asia-south1.warning", "items.regions/northamerica-northeast1.warning", "items.regions/europe-west4.warning", "items.regions/europe-north1.warning", "items.regions/us-west2.warning", "items.regions/asia-east2.warning"]
+    desired_error_key: ["Errors.{{service}}.global", "Errors.{{service}}.regions/us-central1", "Errors.{{service}}.regions/europe-west1", "Errors.{{service}}.regions/us-west1", "Errors.{{service}}.regions/asia-east1", "Errors.{{service}}.regions/us-east1", "Errors.{{service}}.regions/asia-northeast1", "Errors.{{service}}.regions/asia-southeast1", "Errors.{{service}}.regions/us-east4", "Errors.{{service}}.regions/australia-southeast1", "Errors.{{service}}.regions/europe-west2", "Errors.{{service}}.regions/europe-west3", "Errors.{{service}}.regions/southamerica-east1", "Errors.{{service}}.regions/asia-south1", "Errors.{{service}}.regions/northamerica-northeast1", "Errors.{{service}}.regions/europe-west4", "Errors.{{service}}.regions/europe-north1", "Errors.{{service}}.regions/us-west2", "Errors.{{service}}.regions/asia-east2"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:

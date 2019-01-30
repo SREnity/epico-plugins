@@ -13,10 +13,10 @@ endpoints:
       region: "us-east-1"
       xml_tags: "item"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeVpcsResponse.vpcSet"
-    desired_base_key: "Vpcs"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.vpcs" # No documentation
+    current_base_key: ["DescribeVpcsResponse.vpcSet"]
+    desired_base_key: ["Vpcs"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.vpcs"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html"
     params:
       querystring:
@@ -30,10 +30,10 @@ endpoints:
       region: "us-east-1"
       xml_tags: "item"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeSubnetsResponse.subnetSet"
-    desired_base_key: "Subnets"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.subnets" # No documentation
+    current_base_key: ["DescribeSubnetsResponse.subnetSet"]
+    desired_base_key: ["Subnets"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.subnets"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSubnets.html"
     params:
       querystring:
@@ -47,10 +47,10 @@ endpoints:
       region: "us-east-1"
       xml_tags: "item"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeRouteTablesResponse.routeTableSet"
-    desired_base_key: "RouteTables"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.route_tables" # No documentation
+    current_base_key: ["DescribeRouteTablesResponse.routeTableSet"]
+    desired_base_key: ["RouteTables"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.route_tables"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeRouteTables.html"
     params:
       querystring:
@@ -64,10 +64,10 @@ endpoints:
       region: "us-east-1"
       xml_tags: "item"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeInternetGatewaysResponse.internetGatewaySet"
-    desired_base_key: "InternetGateways"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.igw" # No documentation
+    current_base_key: ["DescribeInternetGatewaysResponse.internetGatewaySet"]
+    desired_base_key: ["InternetGateways"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.igw"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeInternetGateways.html"
     params:
       querystring:
@@ -80,10 +80,10 @@ endpoints:
       service: "ec2"
       region: "us-east-1"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeEgressOnlyInternetGatewaysResponse.egressOnlyInternetGatewaySet"
-    desired_base_key: "EgressOnlyInternetGateways"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.eoigw" # No documentation
+    current_base_key: ["DescribeEgressOnlyInternetGatewaysResponse.egressOnlyInternetGatewaySet"]
+    desired_base_key: ["EgressOnlyInternetGateways"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.eoigw"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeEgressOnlyInternetGateways.html"
     params:
       querystring:
@@ -97,10 +97,10 @@ endpoints:
       region: "us-east-1"
       xml_tags: "item"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeAddressesResponse.addressesSet"
-    desired_base_key: "Addresses"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.addresses" # No documentation
+    current_base_key: ["DescribeAddressesResponse.addressesSet"]
+    desired_base_key: ["Addresses"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.addresses"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeAddresses.html"
     params:
       querystring:
@@ -113,10 +113,10 @@ endpoints:
       service: "ec2"
       region: "us-east-1"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeVpcEndpointsResponse.vpcEndpointSet"
-    desired_base_key: "VpcEndpoints"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.vpc_endpoints" # No documentation
+    current_base_key: ["DescribeVpcEndpointsResponse.vpcEndpointSet"]
+    desired_base_key: ["VpcEndpoints"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.vpc_endpoints"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcEndpoints.html"
     params:
       querystring:
@@ -130,10 +130,10 @@ endpoints:
       region: "us-east-1"
       xml_tags: "item"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeSecurityGroupsResponse.securityGroupInfo"
-    desired_base_key: "SecurityGroups"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.sgs" # No documentation
+    current_base_key: ["DescribeSecurityGroupsResponse.securityGroupInfo"]
+    desired_base_key: ["SecurityGroups"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.sgs"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeSecurityGroups.html"
     params:
       querystring:
@@ -146,10 +146,10 @@ endpoints:
       service: "ec2"
       region: "us-east-1"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeVpnGatewaysResponse.vpnGatewaySet"
-    desired_base_key: "VpnGateways"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.vpn_gw" # No documentation
+    current_base_key: ["DescribeVpnGatewaysResponse.vpnGatewaySet"]
+    desired_base_key: ["VpnGateways"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.vpn_gw"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnGateways.html"
     params:
       querystring:
@@ -162,10 +162,10 @@ endpoints:
       service: "ec2"
       region: "us-east-1"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeVpnConnectionsResponse.vpnConnectionSet"
-    desired_base_key: "VpnConnections"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.vpn_connectoins" # No documentation
+    current_base_key: ["DescribeVpnConnectionsResponse.vpnConnectionSet"]
+    desired_base_key: ["VpnConnections"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.vpn_connectoins"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpnConnections.html"
     params:
       querystring:
@@ -178,10 +178,10 @@ endpoints:
       service: "ec2"
       region: "us-east-1"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeCustomerGatewaysResponse.customerGatewaySet"
-    desired_base_key: "CustomerGateways"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.cgw" # No documentation
+    current_base_key: ["DescribeCustomerGatewaysResponse.customerGatewaySet"]
+    desired_base_key: ["CustomerGateways"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.cgw"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeCustomerGateways.html"
     params:
       querystring:
@@ -195,10 +195,10 @@ endpoints:
       region: "us-east-1"
       xml_tags: "item"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeNetworkAclsResponse.networkAclSet"
-    desired_base_key: "NetworkAcls"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.acls" # No documentation
+    current_base_key: ["DescribeNetworkAclsResponse.networkAclSet"]
+    desired_base_key: ["NetworkAcls"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.acls"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNetworkAcls.html"
     params:
       querystring:
@@ -212,10 +212,10 @@ endpoints:
       region: "us-east-1"
       xml_tags: "item"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeVpcPeeringConnectionsResponse.vpcPeeringConnectionSet"
-    desired_base_key: "VpcPeeringConnections"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.vpc_peering_connections" # No documentation
+    current_base_key: ["DescribeVpcPeeringConnectionsResponse.vpcPeeringConnectionSet"]
+    desired_base_key: ["VpcPeeringConnections"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.vpc_peering_connections"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcPeeringConnections.html"
     params:
       querystring:
@@ -228,10 +228,10 @@ endpoints:
       service: "ec2"
       region: "us-east-1"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeNatGatewaysResponse.natGatewaySet"
-    desired_base_key: "NatGateways"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.nat_gw" # No documentation
+    current_base_key: ["DescribeNatGatewaysResponse.natGatewaySet"]
+    desired_base_key: ["NatGateways"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.nat_gw"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeNatGateways.html"
     params:
       querystring:
@@ -245,10 +245,10 @@ endpoints:
       region: "us-east-1"
       xml_tags: "item"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeKeyPairsResponse.keySet"
-    desired_base_key: "KeyPairs"
-    current_error_key: "Response.Errors.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.keypairs" # No documentation
+    current_base_key: ["DescribeKeyPairsResponse.keySet"]
+    desired_base_key: ["KeyPairs"]
+    current_error_key: ["Response.Errors.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.keypairs"] # No documentation
     documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeKeyPairs.html"
     params:
       querystring:
@@ -260,12 +260,11 @@ endpoints:
     vars:
       service: "rds"
       region: "us-east-1"
-    # TODO: Should this have the region in it even though its global?
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: "DescribeAccountAttributesResponse.DescribeAccountAttributesResult.AccountQuotas.AccountQuota"
-    desired_base_key: "AccountQuotas"
-    current_error_key: "ErrorResponse.Error"
-    desired_error_key: "Errors.{{service}}.quotas"
+    current_base_key: ["DescribeAccountAttributesResponse.DescribeAccountAttributesResult.AccountQuotas.AccountQuota"]
+    desired_base_key: ["AccountQuotas"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.quotas"]
     documentation: "https://docs.aws.amazon.com/AmazonRDS/latest/APIReference/API_DescribeAccountAttributes.html"
     params:
       querystring:
@@ -278,12 +277,11 @@ endpoints:
       service: "iam"
       region: "us-east-1"
       xml_tags: "member"
-    # TODO: Should this have the region in it even though its global?
     endpoint: "https://{{service}}.amazonaws.com/"
-    current_base_key: "ListGroupsResponse.ListGroupsResult.Groups"
-    desired_base_key: "Groups"
-    current_error_key: "ErrorResponse.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.groups"
+    current_base_key: ["ListGroupsResponse.ListGroupsResult.Groups"]
+    desired_base_key: ["Groups"]
+    current_error_key: ["ErrorResponse.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.groups"]
     documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListGroups.html"
     params:
       querystring:
@@ -296,12 +294,11 @@ endpoints:
       service: "iam"
       region: "us-east-1"
       xml_tags: "member"
-    # TODO: Should this have the region in it even though its global?
     endpoint: "https://{{service}}.amazonaws.com/"
-    current_base_key: "ListRolesResponse.ListRolesResult.Roles"
-    desired_base_key: "Roles"
-    current_error_key: "ErrorResponse.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.roles"
+    current_base_key: ["ListRolesResponse.ListRolesResult.Roles"]
+    desired_base_key: ["Roles"]
+    current_error_key: ["ErrorResponse.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.roles"]
     documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListRoles.html"
     params:
       querystring:
@@ -314,12 +311,11 @@ endpoints:
       service: "iam"
       region: "us-east-1"
       xml_tags: "member"
-    # TODO: Should this have the region in it even though its global?
     endpoint: "https://{{service}}.amazonaws.com/"
-    current_base_key: "ListPoliciesResponse.ListPoliciesResult.Policies"
-    desired_base_key: "Policies"
-    current_error_key: "ErrorResponse.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.policies"
+    current_base_key: ["ListPoliciesResponse.ListPoliciesResult.Policies"]
+    desired_base_key: ["Policies"]
+    current_error_key: ["ErrorResponse.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.policies"]
     documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListPolicies.html"
     params:
       querystring:
@@ -332,12 +328,11 @@ endpoints:
       service: "iam"
       region: "us-east-1"
       xml_tags: "member"
-    # TODO: Should this have the region in it even though its global?
     endpoint: "https://{{service}}.amazonaws.com/"
-    current_base_key: "ListUsersResponse.ListUsersResult.Users"
-    desired_base_key: "Users"
-    current_error_key: "ErrorResponse.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.users"
+    current_base_key: ["ListUsersResponse.ListUsersResult.Users"]
+    desired_base_key: ["Users"]
+    current_error_key: ["ErrorResponse.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.users"]
     documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListUsers.html"
     params:
       querystring:
@@ -350,12 +345,11 @@ endpoints:
       service: "iam"
       region: "us-east-1"
       xml_tags: "member"
-    # TODO: Should this have the region in it even though its global?
     endpoint: "https://{{service}}.amazonaws.com/"
-    current_base_key: "ListAccessKeysResponse.ListAccessKeysResult.AccessKeyMetadata"
-    desired_base_key: "AccessKeys"
-    current_error_key: "ErrorResponse.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.key_metadata"
+    current_base_key: ["ListAccessKeysResponse.ListAccessKeysResult.AccessKeyMetadata"]
+    desired_base_key: ["AccessKeys"]
+    current_error_key: ["ErrorResponse.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.key_metadata"]
     documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListAccessKeys.html"
     params:
       querystring:
@@ -367,12 +361,11 @@ endpoints:
     vars:
       service: "iam"
       region: "us-east-1"
-    # TODO: Should this have the region in it even though its global?
     endpoint: "https://{{service}}.amazonaws.com/"
-    current_base_key: "GetAccountPasswordPolicyResponse.GetAccountPasswordPolicyResult.PasswordPolicy"
-    desired_base_key: "PasswordPolicy"
-    current_error_key: "ErrorResponse.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.password_policy"
+    current_base_key: ["GetAccountPasswordPolicyResponse.GetAccountPasswordPolicyResult.PasswordPolicy"]
+    desired_base_key: ["PasswordPolicy"]
+    current_error_key: ["ErrorResponse.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.password_policy"]
     documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_GetAccountPasswordPolicy.html"
     params:
       querystring:
@@ -385,12 +378,11 @@ endpoints:
       service: "iam"
       region: "us-east-1"
       xml_tags: "member"
-    # TODO: Should this have the region in it even though its global?
     endpoint: "https://{{service}}.amazonaws.com/"
-    current_base_key: "ListMFADevicesResponse.ListMFADevicesResult.MFADevices"
-    desired_base_key: "MFADevices"
-    current_error_key: "ErrorResponse.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.mfa_devices"
+    current_base_key: ["ListMFADevicesResponse.ListMFADevicesResult.MFADevices"]
+    desired_base_key: ["MFADevices"]
+    current_error_key: ["ErrorResponse.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.mfa_devices"]
     documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListMFADevices.html"
     params:
       querystring:
@@ -403,12 +395,11 @@ endpoints:
       service: "iam"
       region: "us-east-1"
       xml_tags: "member"
-    # TODO: Should this have the region in it even though its global?
     endpoint: "https://{{service}}.amazonaws.com/"
-    current_base_key: "ListVirtualMFADevicesResponse.ListVirtualMFADevicesResult.VirtualMFADevices"
-    desired_base_key: "VirtualMFADevices"
-    current_error_key: "ErrorResponse.Error" # No documentation
-    desired_error_key: "Errors.{{service}}.virtual_mfa_devices"
+    current_base_key: ["ListVirtualMFADevicesResponse.ListVirtualMFADevicesResult.VirtualMFADevices"]
+    desired_base_key: ["VirtualMFADevices"]
+    current_error_key: ["ErrorResponse.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.virtual_mfa_devices"]
     documentation: "https://docs.aws.amazon.com/IAM/latest/APIReference/API_ListVirtualMFADevices.html"
     params:
       querystring:

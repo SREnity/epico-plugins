@@ -45,7 +45,7 @@ func PluginPagingPeek( response []byte, responseKeys []string, oldPageValue inte
     switch peekParams[0] {
         default:
             return utils.DefaultJsonPagingPeek( response, responseKeys,
-                oldPageValue )
+                oldPageValue, peekParams )
     }
 
 }
