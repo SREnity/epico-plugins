@@ -1,0 +1,23 @@
+---
+# TODO: Expand this with more of the API.
+name: "cloudflare"
+paging:
+  location_to: "querystring"
+  indicator_from_field: "result_info.page,result_info.per_page,result_info.total_count"
+  indicator_to_field: "page"
+  indicator_from_structure: "calculated"
+  indicator_to_structure: "null_value"
+endpoints: 
+  - name: "zones"
+    vars:
+      service: "zones"
+    endpoint: "https://api.cloudflare.com/client/v4/{{service}}"
+    current_base_key: ["result"]
+    desired_base_key: ["Zones"]
+    current_error_key: ["errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:

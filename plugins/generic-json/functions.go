@@ -33,6 +33,8 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
             return utils.BasicAuth( apiRequest, authParams[1:] )
         case "QuerystringTokenAuth":
             return utils.QuerystringTokenAuth( apiRequest, authParams[1:] )
+        case "CustomHeaderAuth":
+            return utils.CustomHeaderAuth( apiRequest, authParams[1:] )
         case "JwtAuth":
             // Expects authParams[1..5] to be:
             // email, private key, private key id, scopes (csv), token url
@@ -51,9 +53,12 @@ func PluginPagingPeek( response []byte, responseKeys []string, oldPageValue inte
     }
 
     switch peekParams[0] {
+        case "CalculatePagingPeek":
+            return utils.CalculatePagingPeek( response, responseKeys,
+                oldPageValue, peekParams[1:] )
         default:
             return utils.DefaultJsonPagingPeek( response, responseKeys,
-                oldPageValue, peekParams )
+                oldPageValue, peekParams[1:] )
     }
 
 }
