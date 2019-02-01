@@ -1,0 +1,32 @@
+---
+# TODO: Expand this with more of the API.
+name: "datadog"
+paging:
+  location_to: "querystring"
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+  indicator_to_structure: "null_value"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "CustomQuerystringAuth"
+  - "api_key"
+  - "{{}}" # API Key
+  - "application_key"
+  - "{{}}" # Application Key
+endpoints: 
+  - name: "cpu"
+    vars:
+      service: "cpu"
+    endpoint: "https://app.datadoghq.com/api/v1/query"
+    current_base_key: ["series"]
+    desired_base_key: ["Cpu.Idle"]
+    current_error_key: ["errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: ""
+    params:
+      querystring: 
+        query: [ "system.cpu.idle{*}by{host}" ]
+        #Required at runtiime - to and from 
+      header:
+      body:

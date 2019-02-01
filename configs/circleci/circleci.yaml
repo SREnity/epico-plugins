@@ -7,6 +7,11 @@ paging:
   indicator_to_field: ""
   indicator_from_structure: ""
   indicator_to_structure: "null_value"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "CustomQuerystringAuth"
+  - "circle-token"
+  - "{{}}" # Token
 endpoints: 
   - name: "projects"
     vars:

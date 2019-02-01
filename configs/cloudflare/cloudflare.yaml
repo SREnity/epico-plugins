@@ -7,6 +7,15 @@ paging:
   indicator_to_field: "page"
   indicator_from_structure: "calculated"
   indicator_to_structure: "null_value"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params: 
+  - "CustomHeaderAuth"
+  - "X-Auth-Key"
+  - "{{}}" # Auth Key
+  - "X-Auth-Email"
+  - "{{}}" # Auth Email
+paging_params:
+  - "CalculatePagingPeek"
 endpoints: 
   - name: "zones"
     vars:
