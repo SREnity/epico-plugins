@@ -1,0 +1,28 @@
+---
+# TODO: Expand this with more of the API.
+name: "rollbar"
+paging:
+  location_to: "querystring"
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+  indicator_to_structure: "null_value"
+plugin: "/home/robert/Code/srenity/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "CustomQuerystringAuth"
+  - "access_token"
+  - "{{}}" # Token
+endpoints: 
+  - name: "projects"
+    vars:
+      service: "projects"
+    endpoint: "https://api.rollbar.com/api/1/{{service}}"
+    current_base_key: ["result"]
+    desired_base_key: ["Projects"]
+    current_error_key: ["message"]
+    desired_error_key: [""]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:

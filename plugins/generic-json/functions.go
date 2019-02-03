@@ -31,6 +31,10 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
     switch authParams[0] {
         case "BasicAuth":
             return utils.BasicAuth( apiRequest, authParams[1:] )
+        case "TokenAuth":
+            return utils.TokenAuth( apiRequest, authParams[1:] )
+        case "CustomHeaderAndBasicAuth":
+            return utils.CustomHeaderAndBasicAuth( apiRequest, authParams[1:] )
         case "CustomQuerystringAuth":
             return utils.CustomQuerystringAuth( apiRequest, authParams[1:] )
         case "CustomHeaderAuth":
