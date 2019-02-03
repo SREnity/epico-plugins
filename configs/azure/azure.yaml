@@ -1,0 +1,32 @@
+---
+# TODO: Expand this with more of the API.
+name: "azureinfra"
+paging:
+  location_to: "body"
+  indicator_from_field: "pageToken"
+  indicator_to_field: "pageToken"
+  indicator_from_structure: "param"
+  indicator_to_structure: "null_value"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "Oauth2TwoLegAuth"
+  - "{{}}" # Client ID 
+  - "{{}}" # Client Secret
+  - "{{}}" # Scopes (comma delimited string)
+  - "{{}}" # Token URL
+  - "{{}}" # Endpoint params (string with ":" key/value separator and "," between 
+endpoints: 
+  - name: "subscriptions"
+    vars:
+      service: "subscriptions"
+    endpoint: "https://management.azure.com/{{service}}"
+    current_base_key: ["value"]
+    desired_base_key: ["Subscriptions"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: ""
+    params:
+      querystring:
+        api-version: ["2014-04-01-preview"]
+      header:
+      body:

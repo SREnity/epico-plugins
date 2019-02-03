@@ -1,0 +1,28 @@
+---
+# TODO: Expand this with more of the API.
+name: "newrelic"
+paging:
+  location_to: "querystring"
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+  indicator_to_structure: "null_value"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params: 
+  - "CustomHeaderAuth"
+  - "X-Api-Key"
+  - "{{}}" # Api Key
+endpoints: 
+  - name: "applications"
+    vars:
+      service: "applications"
+    endpoint: "https://api.newrelic.com/v2/{{service}}.json"
+    current_base_key: ["applications"]
+    desired_base_key: ["Applications"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
