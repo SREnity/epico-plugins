@@ -1,0 +1,32 @@
+---
+# TODO: Expand this with more of the API.
+name: "pagerduty"
+paging:
+  location_to: "querystring"
+  indicator_from_field: "offset,limit,total"
+  indicator_to_field: "offset"
+  indicator_from_structure: "calculated"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "CustomHeaderAuth"
+  - "Authorization"
+  - "{{}}" # "Token token=" + Token 
+paging_params:
+  - "CalculatePagingPeek"
+endpoints: 
+  - name: "services"
+    vars:
+      service: "services"
+    endpoint: "https://api.pagerduty.com/{{service}}"
+    current_base_key: ["services"]
+    desired_base_key: ["Services"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: "https://api-reference.pagerduty.com/#!/Services/get_services"
+    params:
+      querystring:
+        limit: ["1"]
+        total: ["true"]
+      header:
+        Accept: ["application/vnd.pagerduty+json;version=2"]
+      body:

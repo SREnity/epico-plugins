@@ -11,7 +11,7 @@ plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
 auth_params:
   - "CustomHeaderAuth"
   - "Authorization"
-  - "{{}}" # "bearer " + Token <= Notice the space after 'bearer'
+  - "{{}}" # "Bearer " + Token <= Notice the space after 'Bearer'
 paging_params:
   - "RegexJsonPagingPeek"
   - "<([^>]*)>; rel=\"next\""
@@ -22,11 +22,10 @@ endpoints:
     endpoint: "https://api.github.com/user/{{service}}"
     current_base_key: [""]
     desired_base_key: ["Repos"]
-    current_error_key: [""]
-    desired_error_key: [""]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.github.{{service}}"]
     documentation: ""
     params:
       querystring:
-        page: ["12"]
       header:
       body:

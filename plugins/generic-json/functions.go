@@ -19,8 +19,12 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
     }
 
     // In the JSON plugin, these should all be JSON requests.
-    apiRequest.FullRequest.Header.Set("content-type", "application/json")
-    apiRequest.FullRequest.Header.Set("accept", "application/json")
+    apiRequest.FullRequest.Header.Set("Content-Type", "application/json")
+    _, ok := apiRequest.FullRequest.Header["Accept"]
+    _, ok1 := apiRequest.FullRequest.Header["accept"]
+    if !ok && !ok1 {
+        apiRequest.FullRequest.Header.Set("Accept", "application/json")
+    }
 
     // TODO: I would like to be able to dynamically call whatever function name
     //    is passed in authParams[0], but this is difficult in Go - particularly
