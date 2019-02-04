@@ -1,28 +1,32 @@
 ---
 # TODO: Expand this with more of the API.
-name: "srenity"
+name: "github"
 paging:
+  location_from: "header"
   location_to: "querystring"
-  indicator_from_field: ""
+  indicator_from_field: "Link"
   indicator_to_field: ""
-  indicator_from_structure: ""
-  indicator_to_structure: "null_value"
+  indicator_from_structure: "full_url"
 plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
 auth_params:
   - "CustomHeaderAuth"
   - "Authorization"
-  - "{{}}" # "Token token=" + Token 
+  - "{{}}" # "bearer " + Token <= Notice the space after 'bearer'
+paging_params:
+  - "RegexJsonPagingPeek"
+  - "<([^>]*)>; rel=\"next\""
 endpoints: 
-  - name: "user_plugins"
+  - name: "repos"
     vars:
-      service: "user_plugins"
-    endpoint: "https://srenitydashboard.io/api/v1/{{service}}.json"
+      service: "repos"
+    endpoint: "https://api.github.com/user/{{service}}"
     current_base_key: [""]
-    desired_base_key: ["Plugins"]
+    desired_base_key: ["Repos"]
     current_error_key: [""]
     desired_error_key: [""]
     documentation: ""
     params:
       querystring:
+        page: ["12"]
       header:
       body:

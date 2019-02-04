@@ -19,8 +19,8 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
     }
 
     // In the JSON plugin, these should all be JSON requests.
-    apiRequest.FullRequest.Header.Add("content-type", "application/json")
-    apiRequest.FullRequest.Header.Add("accept", "application/json")
+    apiRequest.FullRequest.Header.Set("content-type", "application/json")
+    apiRequest.FullRequest.Header.Set("accept", "application/json")
 
     // TODO: I would like to be able to dynamically call whatever function name
     //    is passed in authParams[0], but this is difficult in Go - particularly
@@ -31,8 +31,6 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
     switch authParams[0] {
         case "BasicAuth":
             return utils.BasicAuth( apiRequest, authParams[1:] )
-        case "TokenAuth":
-            return utils.TokenAuth( apiRequest, authParams[1:] )
         case "CustomHeaderAndBasicAuth":
             return utils.CustomHeaderAndBasicAuth( apiRequest, authParams[1:] )
         case "CustomQuerystringAuth":
@@ -61,6 +59,9 @@ func PluginPagingPeek( response []byte, responseKeys []string, oldPageValue inte
     switch peekParams[0] {
         case "CalculatePagingPeek":
             return utils.CalculatePagingPeek( response, responseKeys,
+                oldPageValue, peekParams[1:] )
+        case "RegexJsonPagingPeek":
+            return utils.RegexJsonPagingPeek( response, responseKeys,
                 oldPageValue, peekParams[1:] )
         default:
             return utils.DefaultJsonPagingPeek( response, responseKeys,
