@@ -1,0 +1,30 @@
+---
+# TODO: Expand this with more of the API.
+name: "onelogin"
+paging:
+  location_to: "querystring"
+  indicator_from_field: "pagination.next_link"
+  indicator_to_field: ""
+  indicator_from_structure: "full_url"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "Oauth2TwoLegAuth"
+  - "{{}}" # Client ID 
+  - "{{}}" # Client Secret
+  - "{{}}" # Scopes (comma delimited string)
+  - "https://api.us.onelogin.com/auth/oauth2/token" # Token URL
+  - "{{}}" # Endpoint params (string with ":" key/value separator and "," between 
+endpoints: 
+  - name: "users"
+    vars:
+      service: "users"
+    endpoint: "https://api.us.onelogin.com/api/1/{{service}}"
+    current_base_key: ["data"]
+    desired_base_key: ["Users"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:

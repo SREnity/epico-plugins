@@ -1,0 +1,31 @@
+---
+# TODO: Expand this with more of the API.
+name: "github"
+paging:
+  location_from: "header"
+  location_to: "querystring"
+  indicator_from_field: "Link"
+  indicator_to_field: ""
+  indicator_from_structure: "full_url"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "CustomHeaderAuth"
+  - "Authorization"
+  - "{{}}" # "SSWS " + Token <= Notice the space after 'SSWS'
+paging_params:
+  - "RegexJsonPagingPeek"
+  - "<([^>]*)>; rel=\"next\""
+endpoints: 
+  - name: "users"
+    vars:
+      service: "users"
+    endpoint: "https://OKTA_SUBDOMAIN.okta.com/api/v1/{{service}}"
+    current_base_key: [""]
+    desired_base_key: ["Users"]
+    current_error_key: ["errorCauses"]
+    desired_error_key: ["Errors.okta.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:

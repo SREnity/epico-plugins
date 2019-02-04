@@ -1,0 +1,30 @@
+---
+# SysDig's API is beta and needs a lot of work - also GitBooks does NOT help the
+#    situation with how flaky it is.
+# TODO: Expand this with more of the API.
+name: "sysdig"
+paging:
+  location_from: ""
+  location_to: ""
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+plugin: "/home/robert/Code/srenity/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "CustomHeaderAuth"
+  - "Authorization"
+  - "{{}}" # "Bearer " + Token <= Notice the space after 'Bearer' and caps
+endpoints: 
+  - name: "alerts"
+    vars:
+      service: "alerts"
+    endpoint: "https://app.sysdigcloud.com/api/{{service}}"
+    current_base_key: ["alerts"]
+    desired_base_key: ["Alerts"]
+    current_error_key: ["message"]
+    desired_error_key: ["Errors.sysdig.{{service}}"]
+    documentation: "https://sysdig.gitbooks.io/sysdig-cloud-api/content/rest_api/rest_api/rest_api/alerts.html"
+    params:
+      querystring:
+      header:
+      body:

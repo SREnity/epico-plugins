@@ -1,0 +1,30 @@
+---
+# TODO: Expand this with more of the API.
+name: "assembla"
+paging:
+  location_to: "querystring"
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+  indicator_to_structure: "null_value"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params: 
+  - "CustomHeaderAuth"
+  - "X-Api-Key"
+  - "{{}}" # Api Key
+  - "X-Api-Secret"
+  - "{{}}" # Api Secret
+endpoints: 
+  - name: "spaces"
+    vars:
+      service: "spaces"
+    endpoint: "https://api.assembla.com/v1/{{service}}.json"
+    current_base_key: [""]
+    desired_base_key: ["Spaces"]
+    current_error_key: ["error_description"]
+    desired_error_key: ["Errors.assembla.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
