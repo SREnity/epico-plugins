@@ -47,6 +47,8 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
             return utils.JwtAuth( apiRequest, authParams[1:] )
         case "Oauth2TwoLegAuth":
             return utils.Oauth2TwoLegAuth( apiRequest, authParams[1:] )
+        case "SessionTokenAuth":
+            return utils.SessionTokenAuth( apiRequest, authParams[1:] )
         default:
             return apiRequest
     }

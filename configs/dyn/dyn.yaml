@@ -1,0 +1,35 @@
+---
+# TODO: Expand this with more of the API.
+name: "cloudflare"
+paging:
+  location_to: ""
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+plugin: "/home/robert/Code/srenity/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params: 
+  - "SessionTokenAuth"
+  - "data.token"
+  - "Auth-Token"
+  - ""
+  - "https://api.dynect.net/REST/Session/"
+  - "customer_name"
+  - "{{}}" # Customer Name
+  - "user_name"
+  - "{{}}" # Username 
+  - "password"
+  - "{{}}" # Password 
+endpoints: 
+  - name: "zones"
+    vars:
+      service: "Zone"
+    endpoint: "https://api.dynect.net/REST/{{service}}"
+    current_base_key: ["data"]
+    desired_base_key: ["Zones"]
+    current_error_key: ["msgs.ERR_CD"]
+    desired_error_key: ["Errors.dyn.{{service}}"]
+    documentation: "https://help.dyn.com/get-zones-api/"
+    params:
+      querystring:
+      header:
+      body:
