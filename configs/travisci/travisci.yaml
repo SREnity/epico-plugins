@@ -1,6 +1,6 @@
 ---
 # TODO: Expand this with more of the API.
-name: "cloudflare"
+name: "travisci"
 paging:
   location_to: "querystring"
   indicator_from_field: "@pagination.offset,@pagination.limit,@pagination.count"
