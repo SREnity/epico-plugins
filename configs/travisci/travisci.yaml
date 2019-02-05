@@ -1,0 +1,30 @@
+---
+# TODO: Expand this with more of the API.
+name: "cloudflare"
+paging:
+  location_to: "querystring"
+  indicator_from_field: "@pagination.offset,@pagination.limit,@pagination.count"
+  indicator_to_field: "offset"
+  indicator_from_structure: "calculated"
+plugin: "/home/robert/Code/srenity/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params: 
+  - "CustomHeaderAuth"
+  - "Authorization"
+  - "{{}}" # "token " + Token => note the space after "token"
+paging_params:
+  - "CalculatePagingPeek"
+endpoints: 
+  - name: "repos"
+    vars:
+      service: "repos"
+    endpoint: "https://api.travis-ci.com/{{service}}"
+    current_base_key: ["repositories"]
+    desired_base_key: ["Repositories"]
+    current_error_key: ["errors"]
+    desired_error_key: ["Errors.travisci.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+        Travis-API-Version: ["3"]
+      body:

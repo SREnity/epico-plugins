@@ -9,7 +9,6 @@ paging:
   indicator_from_field: "DescribeInstancesResponse.nextToken" # Field name paging info comes in.
   indicator_to_field: "NextToken" # Field name paging info is passed back in.
   indicator_from_structure: "param" # response/iterator/etc ???necessary???
-  indicator_to_structure: "null_value" # How to know it's done?
 plugin: "FULL_PATH_TO/epico-plugins/plugins/aws/aws.so"
 endpoints: 
   - name: "ec2"
@@ -21,7 +20,6 @@ endpoints:
       indicator_from_field: "DescribeInstancesResponse.nextToken"
       indicator_to_field: "NextToken"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeInstancesResponse.reservationSet"]
     desired_base_key: ["Reservations"]
@@ -44,7 +42,6 @@ endpoints:
       indicator_from_field: "DescribeDBInstancesResponse.Marker"
       indicator_to_field: "Marker"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeDBInstancesResponse.DescribeDBInstancesResult.DBInstances"]
     desired_base_key: ["DBInstances"]
@@ -67,7 +64,6 @@ endpoints:
       indicator_from_field: "DescribeDBClustersResponse.Marker"
       indicator_to_field: "Marker"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeDBClustersResponse.DescribeDBClustersResult.DBClusters"]
     desired_base_key: ["DBClusters"]
@@ -90,7 +86,6 @@ endpoints:
       indicator_from_field: "DescribeDBSecurityGroupsResponse.Marker"
       indicator_to_field: "Marker"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeDBSecurityGroupsResponse.DescribeDBSecurityGroupsResult.DBSecurityGroups"]
     desired_base_key: ["DBSecurityGroups"]
@@ -113,7 +108,6 @@ endpoints:
       indicator_from_field: "DescribeDBSubnetGroupsResponse.Marker"
       indicator_to_field: "Marker"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeDBSubnetGroupsResponse.DescribeDBSubnetGroupsResult.DBSubnetGroups"]
     desired_base_key: ["DBSubnetGroups"]
@@ -136,7 +130,6 @@ endpoints:
       indicator_from_field: "DescribeReservedDBInstancesResponse.Marker"
       indicator_to_field: "Marker"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeReservedDBInstancesResponse.DescribeReservedDBInstancesResult.ReservedDBInstances.ReservedDBInstance"]
     desired_base_key: ["ReservedDBInstances"]
@@ -159,7 +152,6 @@ endpoints:
       indicator_from_field: "DescribeLoadBalancersResponse.Marker"
       indicator_to_field: "NextMarker"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeLoadBalancersResponse.DescribeLoadBalancersResult.LoadBalancers"]
     desired_base_key: ["LoadBalancers"]
@@ -181,7 +173,6 @@ endpoints:
       indicator_from_field: "DescribeLoadBalancersResponse.Marker"
       indicator_to_field: "NextMarker"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeLoadBalancersResponse.DescribeLoadBalancersResult.LoadBalancerDescriptions"]
     desired_base_key: ["LoadBalancers"]
@@ -203,7 +194,6 @@ endpoints:
       indicator_from_field: "DescribeAutoScalingGroupsResponse.NextToken"
       indicator_to_field: "NextToken"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeAutoScalingGroupsResponse.DescribeAutoScalingGroupsResult.AutoScalingGroups"]
     desired_base_key: ["AutoScalingGroups"]
@@ -225,7 +215,6 @@ endpoints:
       indicator_from_field: "DescribeLaunchConfigurationsResponse.NextToken"
       indicator_to_field: "NextToken"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeLaunchConfigurationsResponse.DescribeLaunchConfigurationsResult.LaunchConfigurations"]
     desired_base_key: ["LaunchConfigurations"]
@@ -247,7 +236,6 @@ endpoints:
       indicator_from_field: "DescribePoliciesResponse.NextToken"
       indicator_to_field: "NextToken"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribePoliciesResponse.DescribePoliciesResult.ScalingPolicies"]
     desired_base_key: ["ScalingPolicies"]
@@ -285,7 +273,6 @@ endpoints:
       indicator_from_field: "DescribeEnvironmentsResponse.NextToken"
       indicator_to_field: "NextToken"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeEnvironmentsResponse.DescribeEnvironmentsResult.Environments"]
     desired_base_key: ["Environments"]
@@ -307,7 +294,6 @@ endpoints:
       indicator_from_field: "DescribeStacksResponse.NextToken"
       indicator_to_field: "NextToken"
       indicator_from_structure: "param"
-      indicator_to_structure: "null_value"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeStacksResponse.DescribeStacksResult.Stacks"]
     desired_base_key: ["Stacks"]
