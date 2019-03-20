@@ -30,7 +30,7 @@ endpoints:
       querystring:
         Action: [ "DescribeInstances" ] # All flow lists iterated sequentially.
         Version: [ "2016-11-15" ]
-        MaxResults: [ 5 ]
+        MaxResults: [ 1000 ]
         NextToken: []
       header:
       body:
@@ -43,7 +43,7 @@ endpoints:
       indicator_to_field: "Marker"
       indicator_from_structure: "param"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: ["DescribeDBInstancesResponse.DescribeDBInstancesResult.DBInstances"]
+    current_base_key: ["DescribeDBInstancesResponse.DescribeDBInstancesResult.DBInstances.DBInstance"]
     desired_base_key: ["DBInstances"]
     current_error_key: ["ErrorResponse.Error"]
     desired_error_key: ["Errors.{{service}}.instances"]
@@ -65,7 +65,7 @@ endpoints:
       indicator_to_field: "Marker"
       indicator_from_structure: "param"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
-    current_base_key: ["DescribeDBClustersResponse.DescribeDBClustersResult.DBClusters"]
+    current_base_key: ["DescribeDBClustersResponse.DescribeDBClustersResult.DBClusters.DBCluster"]
     desired_base_key: ["DBClusters"]
     current_error_key: ["ErrorResponse.Error"]
     desired_error_key: ["Errors.{{service}}.clusters"]
@@ -147,6 +147,7 @@ endpoints:
   - name: "elb_elbs_v2"
     vars:
       service: "elasticloadbalancing"
+      xml_tags: "member"
     paging:
       location_to: "querystring"
       indicator_from_field: "DescribeLoadBalancersResponse.Marker"

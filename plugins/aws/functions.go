@@ -4,6 +4,7 @@ import (
     "bytes"
     "time"
     "strings"
+    "strconv"
 
     "github.com/SREnity/epico/signers/aws_v4"
     utils "github.com/SREnity/epico/utils"
@@ -50,7 +51,9 @@ func PluginPostProcess( apiResponseMap map[generic_structs.ComparableApiRequest]
     parsedStructure := make(map[string]interface{})
     parsedErrorStructure := make(map[string]interface{})
 
-    for response, apiResponse := range apiResponseMap {
+    requestCount := 0
+    for request, apiResponse := range apiResponseMap {
+        requestCount = requestCount + 1
         jsonBody, err := xj.Convert( bytes.NewReader( apiResponse ) )
         if err != nil {
             utils.LogFatal("AWS:PluginPostProcess", "Error converting XML API response", err)
@@ -59,23 +62,37 @@ func PluginPostProcess( apiResponseMap map[generic_structs.ComparableApiRequest]
 
         // This chunk reads in the list of responses and handles AWS' terrible
         //    XML return with infinite "item"/"member" tags.
+        count := 0
         processedJson := jsonBody.Bytes()
         for _, v := range jsonKeys {
-            if  v["api_call_name"] == response.Name {
+            if  v["api_call_name"] == request.Name {
+                count = count + 1
+                utils.LogWarn("POST", "(" + strconv.Itoa(requestCount) + ") KEY COUNT: " + strconv.Itoa(count), nil)
+                for kz, vz := range v {
+                    utils.LogWarn("POST", kz + ": " + vz, nil)
+                }
                 xmlKeys := strings.Split( v["xml_tags"], "," )
                 for _, k := range xmlKeys {
                     processedJson = utils.RemoveXmlTagFromJson(
                         k, processedJson)
                 }
+                break
             }
         }
+        utils.LogWarn("POST", "Continuing...", nil)
+        utils.LogWarn("POST", string(processedJson), nil)
 
         // TODO: Should I just rebuild the map and pass to the generic
         //    utils.DefaultJsonPostProcess function?
-        structureVar, errorVar := utils.ParsePostProcessedJson( response,
+        structureVar, errorVar := utils.ParsePostProcessedJson( request,
             jsonKeys, processedJson, parsedStructure, parsedErrorStructure )
         parsedStructure = structureVar
         parsedErrorStructure = errorVar
+        //for kz, vz := range parsedStructure {
+        //    for kkz, _ := range vz.(map[string]interface{}) {
+        //        utils.LogWarn("POST PS", "(" + kz + ") " + kkz, nil)
+        //    }
+        //}
 
     }
 

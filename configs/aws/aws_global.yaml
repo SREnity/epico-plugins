@@ -145,6 +145,7 @@ endpoints:
     vars:
       service: "ec2"
       region: "us-east-1"
+      xml_tags: "item"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeVpnGatewaysResponse.vpnGatewaySet"]
     desired_base_key: ["VpnGateways"]
@@ -227,6 +228,7 @@ endpoints:
     vars:
       service: "ec2"
       region: "us-east-1"
+      xml_tags: "item"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeNatGatewaysResponse.natGatewaySet"]
     desired_base_key: ["NatGateways"]
