@@ -4,7 +4,6 @@ import (
     "bytes"
     "time"
     "strings"
-    "strconv"
 
     "github.com/SREnity/epico/signers/aws_v4"
     utils "github.com/SREnity/epico/utils"
@@ -13,6 +12,7 @@ import (
 )
 
 var PluginAuthFunction = PluginAuth
+var PluginResponseToJsonFunction = PluginResponseToJson
 var PluginPostProcessFunction = PluginPostProcess
 var PluginPagingPeekFunction = utils.DefaultXmlPagingPeek
 
@@ -46,41 +46,38 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
 }
 
 
+func PluginResponseToJson( vars map[string]string, response []byte ) []byte {
+    jsonBody, err := xj.Convert( bytes.NewReader( response ) )
+    if err != nil {
+        utils.LogFatal( "AWS:PluginResponseToJson",
+            "Error converting XML API response", err )
+        return nil
+    }
+
+    processedJson := jsonBody.Bytes()
+    xmlKeys := strings.Split( vars["xml_tags"], "," )
+    for _, k := range xmlKeys {
+        processedJson = utils.RemoveXmlTagFromJson( k, processedJson )
+    }
+
+    return processedJson
+}
+
+
 func PluginPostProcess( apiResponseMap map[generic_structs.ComparableApiRequest][]byte, jsonKeys []map[string]string, postParams []string ) []byte {
 
     parsedStructure := make(map[string]interface{})
     parsedErrorStructure := make(map[string]interface{})
 
-    requestCount := 0
     for request, apiResponse := range apiResponseMap {
-        requestCount = requestCount + 1
-        jsonBody, err := xj.Convert( bytes.NewReader( apiResponse ) )
-        if err != nil {
-            utils.LogFatal("AWS:PluginPostProcess", "Error converting XML API response", err)
-            return nil
-        }
 
-        // This chunk reads in the list of responses and handles AWS' terrible
-        //    XML return with infinite "item"/"member" tags.
-        count := 0
-        processedJson := jsonBody.Bytes()
+        processedJson := []byte(nil)
         for _, v := range jsonKeys {
             if  v["api_call_name"] == request.Name {
-                count = count + 1
-                utils.LogWarn("POST", "(" + strconv.Itoa(requestCount) + ") KEY COUNT: " + strconv.Itoa(count), nil)
-                for kz, vz := range v {
-                    utils.LogWarn("POST", kz + ": " + vz, nil)
-                }
-                xmlKeys := strings.Split( v["xml_tags"], "," )
-                for _, k := range xmlKeys {
-                    processedJson = utils.RemoveXmlTagFromJson(
-                        k, processedJson)
-                }
+                processedJson = PluginResponseToJson( v, apiResponse )
                 break
             }
         }
-        utils.LogWarn("POST", "Continuing...", nil)
-        utils.LogWarn("POST", string(processedJson), nil)
 
         // TODO: Should I just rebuild the map and pass to the generic
         //    utils.DefaultJsonPostProcess function?
@@ -88,14 +85,10 @@ func PluginPostProcess( apiResponseMap map[generic_structs.ComparableApiRequest]
             jsonKeys, processedJson, parsedStructure, parsedErrorStructure )
         parsedStructure = structureVar
         parsedErrorStructure = errorVar
-        //for kz, vz := range parsedStructure {
-        //    for kkz, _ := range vz.(map[string]interface{}) {
-        //        utils.LogWarn("POST PS", "(" + kz + ") " + kkz, nil)
-        //    }
-        //}
 
     }
 
     returnJson := utils.CollapseJson( parsedStructure, parsedErrorStructure )
+
     return returnJson
 }
