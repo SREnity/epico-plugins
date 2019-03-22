@@ -73,9 +73,8 @@ func PluginPostProcess( apiResponseMap map[generic_structs.ComparableApiRequest]
 
         processedJson := []byte(nil)
         for _, v := range jsonKeys {
-            if  v["api_call_name"] == request.Name {
+            if  v["api_call_uuid"] == request.Uuid {
                 processedJson = PluginResponseToJson( v, apiResponse )
-                break
             }
         }
 
