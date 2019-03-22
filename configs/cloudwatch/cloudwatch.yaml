@@ -9,7 +9,7 @@ paging:
   indicator_from_field: "DescribeInstancesResponse.nextToken" # Field name paging info comes in.
   indicator_to_field: "NextToken" # Field name paging info is passed back in.
   indicator_from_structure: "param" # response/iterator/etc ???necessary???
-plugin: "/home/robert/Code/srenity/epico-plugins/plugins/aws/aws.so"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/aws/aws.so"
 endpoints: 
   - name: "ec2"
     vars:
