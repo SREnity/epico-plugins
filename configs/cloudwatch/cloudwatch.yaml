@@ -1,0 +1,174 @@
+---
+name: "awsinfra"
+vars_data:
+  region: [ "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "eu-north-1", "sa-east-1"] #, "us-gov-east-1", "us-gov-west-1" ] 
+vars:
+  region: "{{region}}"
+paging:
+  location_to: "querystring" # How we pass back our page.
+  indicator_from_field: "DescribeInstancesResponse.nextToken" # Field name paging info comes in.
+  indicator_to_field: "NextToken" # Field name paging info is passed back in.
+  indicator_from_structure: "param" # response/iterator/etc ???necessary???
+plugin: "/home/robert/Code/srenity/epico-plugins/plugins/aws/aws.so"
+endpoints: 
+  - name: "ec2"
+    vars:
+      xml_tags: "item"
+      service: "ec2"
+    return: false
+    paging:
+      location_to: "querystring"
+      indicator_from_field: "DescribeInstancesResponse.nextToken"
+      indicator_to_field: "NextToken"
+      indicator_from_structure: "param"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: ["DescribeInstancesResponse.reservationSet"]
+    desired_base_key: ["Reservations"]
+    current_error_key: ["Response.Errors.Error"]
+    desired_error_key: ["Errors.{{service}}.instances"]
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_Instance.html"
+    params:
+      querystring:
+        Action: [ "DescribeInstances" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+        MaxResults: [ 1000 ]
+        NextToken: []
+      header:
+      body:
+    endpoints:
+      DescribeInstancesResponse.reservationSet.instancesSet.instanceId:
+        - name: "cloudwatch_cpu"
+          vars:
+            xml_tags: "member"
+            service: "monitoring"
+            metric: "CPUUtilization"
+          endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+          current_base_key: ["GetMetricStatisticsResponse.GetMetricStatisticsResult.Datapoints"]
+          desired_base_key: ["{{metric}}.{{endpoint_key}}"]
+          current_error_key: ["ErrorResponse.Error"]
+          desired_error_key: ["Errors.{{service}}"]
+          documentation: "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html"
+          params:
+            querystring:
+              Action: [ "GetMetricStatistics" ] # Flow lists iterated sequentially.
+              Version: [ "2010-08-01" ]
+              Dimensions.member.1.Name: [ "InstanceId" ]
+              Dimensions.member.1.Value: [ "{{endpoint_key}}" ] #"i-0ee35c7bf164f7ae8" ]
+              Period: [ "86400" ]
+              Namespace: [ "AWS/EC2" ]
+              Statistics.member.1: [ "Average" ]
+              Statistics.member.2: [ "Sum" ]
+              Statistics.member.3: [ "Minimum" ]
+              Statistics.member.4: [ "Maximum" ]
+              MetricName: [ "{{metric}}" ]
+              Unit: [ "Percent" ]
+            header:
+            body:
+        - name: "cloudwatch_network_out"
+          vars:
+            xml_tags: "member"
+            service: "monitoring"
+            metric: "NetworkOut"
+          endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+          current_base_key: ["GetMetricStatisticsResponse.GetMetricStatisticsResult.Datapoints"]
+          desired_base_key: ["{{metric}}.{{endpoint_key}}"]
+          current_error_key: ["ErrorResponse.Error"]
+          desired_error_key: ["Errors.{{service}}"]
+          documentation: "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html"
+          params:
+            querystring:
+              Action: [ "GetMetricStatistics" ] # Flow lists iterated sequentially.
+              Version: [ "2010-08-01" ]
+              Dimensions.member.1.Name: [ "InstanceId" ]
+              Dimensions.member.1.Value: [ "{{endpoint_key}}" ] #"i-0ee35c7bf164f7ae8" ]
+              Period: [ "86400" ]
+              Namespace: [ "AWS/EC2" ]
+              Statistics.member.1: [ "Average" ]
+              Statistics.member.2: [ "Sum" ]
+              Statistics.member.3: [ "Minimum" ]
+              Statistics.member.4: [ "Maximum" ]
+              MetricName: [ "{{metric}}" ]
+              Unit: [ "Bytes" ]
+            header:
+            body:
+        - name: "cloudwatch_network_in"
+          vars:
+            xml_tags: "member"
+            service: "monitoring"
+            metric: "NetworkIn"
+          endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+          current_base_key: ["GetMetricStatisticsResponse.GetMetricStatisticsResult.Datapoints"]
+          desired_base_key: ["{{metric}}.{{endpoint_key}}"]
+          current_error_key: ["ErrorResponse.Error"]
+          desired_error_key: ["Errors.{{service}}"]
+          documentation: "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html"
+          params:
+            querystring:
+              Action: [ "GetMetricStatistics" ] # Flow lists iterated sequentially.
+              Version: [ "2010-08-01" ]
+              Dimensions.member.1.Name: [ "InstanceId" ]
+              Dimensions.member.1.Value: [ "{{endpoint_key}}" ] #"i-0ee35c7bf164f7ae8" ]
+              Period: [ "86400" ]
+              Namespace: [ "AWS/EC2" ]
+              Statistics.member.1: [ "Average" ]
+              Statistics.member.2: [ "Sum" ]
+              Statistics.member.3: [ "Minimum" ]
+              Statistics.member.4: [ "Maximum" ]
+              MetricName: [ "{{metric}}" ]
+              Unit: [ "Bytes" ]
+            header:
+            body:
+        - name: "cloudwatch_disk_write"
+          vars:
+            xml_tags: "member"
+            service: "monitoring"
+            metric: "DiskWriteBytes"
+          endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+          current_base_key: ["GetMetricStatisticsResponse.GetMetricStatisticsResult.Datapoints"]
+          desired_base_key: ["{{metric}}.{{endpoint_key}}"]
+          current_error_key: ["ErrorResponse.Error"]
+          desired_error_key: ["Errors.{{service}}"]
+          documentation: "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html"
+          params:
+            querystring:
+              Action: [ "GetMetricStatistics" ] # Flow lists iterated sequentially.
+              Version: [ "2010-08-01" ]
+              Dimensions.member.1.Name: [ "InstanceId" ]
+              Dimensions.member.1.Value: [ "{{endpoint_key}}" ] #"i-0ee35c7bf164f7ae8" ]
+              Period: [ "86400" ]
+              Namespace: [ "AWS/EC2" ]
+              Statistics.member.1: [ "Average" ]
+              Statistics.member.2: [ "Sum" ]
+              Statistics.member.3: [ "Minimum" ]
+              Statistics.member.4: [ "Maximum" ]
+              MetricName: [ "{{metric}}" ]
+              Unit: [ "Bytes" ]
+            header:
+            body:
+        - name: "cloudwatch_disk_read"
+          vars:
+            xml_tags: "member"
+            service: "monitoring"
+            metric: "DiskReadBytes"
+          endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+          current_base_key: ["GetMetricStatisticsResponse.GetMetricStatisticsResult.Datapoints"]
+          desired_base_key: ["{{metric}}.{{endpoint_key}}"]
+          current_error_key: ["ErrorResponse.Error"]
+          desired_error_key: ["Errors.{{service}}"]
+          documentation: "https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_GetMetricStatistics.html"
+          params:
+            querystring:
+              Action: [ "GetMetricStatistics" ] # Flow lists iterated sequentially.
+              Version: [ "2010-08-01" ]
+              Dimensions.member.1.Name: [ "InstanceId" ]
+              Dimensions.member.1.Value: [ "{{endpoint_key}}" ] #"i-0ee35c7bf164f7ae8" ]
+              Period: [ "86400" ]
+              Namespace: [ "AWS/EC2" ]
+              Statistics.member.1: [ "Average" ]
+              Statistics.member.2: [ "Sum" ]
+              Statistics.member.3: [ "Minimum" ]
+              Statistics.member.4: [ "Maximum" ]
+              MetricName: [ "{{metric}}" ]
+              Unit: [ "Bytes" ]
+            header:
+            body:

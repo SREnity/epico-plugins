@@ -6,6 +6,7 @@ import (
 )
 
 var PluginAuthFunction = PluginAuth
+var PluginResponseToJsonFunction = PluginResponseToJson
 var PluginPostProcessFunction = PluginPostProcess
 var PluginPagingPeekFunction = PluginPagingPeek
 
@@ -53,6 +54,11 @@ func PluginAuth( apiRequest generic_structs.ApiRequest, authParams []string ) ge
             return apiRequest
     }
 
+}
+
+
+func PluginResponseToJson( vars map[string]string, response []byte ) []byte {
+    return response
 }
 
 
