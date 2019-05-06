@@ -155,7 +155,7 @@ endpoints:
       indicator_from_structure: "param"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeLoadBalancersResponse.DescribeLoadBalancersResult.LoadBalancers"]
-    desired_base_key: ["LoadBalancers"]
+    desired_base_key: ["ApplicationLoadBalancers"]
     current_error_key: ["ErrorResponse.Error"]
     desired_error_key: ["Errors.{{service}}.elbs_v2"] # No documentation
     documentation: "https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html"
@@ -176,7 +176,7 @@ endpoints:
       indicator_from_structure: "param"
     endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
     current_base_key: ["DescribeLoadBalancersResponse.DescribeLoadBalancersResult.LoadBalancerDescriptions"]
-    desired_base_key: ["LoadBalancers"]
+    desired_base_key: ["ElasticLoadBalancers"]
     current_error_key: ["ErrorResponse.Error"]
     desired_error_key: ["Errors.{{service}}.elbs_v1"] # No documentation
     documentation: "https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html"
