@@ -1,27 +1,366 @@
----
-# TODO: Expand this with more of the API.
-name: "gcpinfra"
+name: "gcp"
 paging:
   location_to: "body"
   indicator_from_field: "pageToken"
   indicator_to_field: "pageToken"
   indicator_from_structure: "param"
-plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+plugin: "/Users/berrybytes/go/src/github.com/epico-demo/gcp.so"
 auth_params:
   - "JwtAuth"
-  - "{{}}" # Key Email
-  - "{{}}" # Private Key
-  - "{{}}" # Private Key ID
-  - "{{}}" # Scopes (comma delimted string)
-  - "{{}}" # Token URL
-endpoints: 
-  - name: "aggregated_addresses"
+  - "epico-gcp-plugin@xxxxxj-dev.iam.gserviceaccount.com" # Key Email
+  - "-----BEGIN PRIVATE KEY-----\n\n" # Private Key
+  - "" # Private Key ID
+  - "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/compute.readonly" # Scopes (comma delimted string)
+  - "https://oauth2.googleapis.com/token" # Token URL
+endpoints:
+  - name: "healthChecks"
     vars:
-      service: "addresses"
-      project: "srenity-169420"
-    endpoint: "https://www.googleapis.com/compute/beta/projects/{{project}}/aggregated/addresses/"
-    current_base_key: ["items.global.addresses", "items.regions/us-central1.addresses", "items.regions/europe-west1.addresses", "items.regions/us-west1.addresses", "items.regions/asia-east1.addresses", "items.regions/us-east1.addresses", "items.regions/asia-northeast1.addresses", "items.regions/asia-southeast1.addresses", "items.regions/us-east4.addresses", "items.regions/australia-southeast1.addresses", "items.regions/europe-west2.addresses", "items.regions/europe-west3.addresses", "items.regions/southamerica-east1.addresses", "items.regions/asia-south1.addresses", "items.regions/northamerica-northeast1.addresses", "items.regions/europe-west4.addresses", "items.regions/europe-north1.addresses", "items.regions/us-west2.addresses", "items.regions/asia-east2.addresses"]
-    desired_base_key: ["Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses", "Addresses"]
+      service: "health"
+      project: "prj-id"
+      resourceId: "op-health-check"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{project}/global/healthChecks"
+    current_base_key: ["items"]
+    desired_base_key: ["healthCheck"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: "https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks/list"
+    params:
+      querystring:
+      header:
+      body:
+  - name: "zones_list"
+    vars:
+      service: "zone"
+      project: "prj-id"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}/zones"
+    current_base_key: ["items"]
+    desired_base_key: ["zones"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
+  - name: "images_list"
+    vars:
+      service: "image"
+      project: "prj-id"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}/global/images"
+    current_base_key: ["items"]
+    desired_base_key: ["images"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
+  - name: "instance_list"
+    vars:
+      service: "instance"
+      project: "prj-id"
+      resourceId: "epico-test-1"
+      zone: "us-central1-a"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}/aggregated/instances"
+    current_base_key: ["items.zones/us-central1-a.instances", "items.zones/us-central1-b.instances", "items.zones/us-central1-c.instances"]
+    desired_base_key: ["instance", "instance", "instance"]
+    current_error_key: ["error.errors","error.errors","error.errors"]
+    desired_error_key: ["Errors.{{service}}","Errors.{{service}}","Errors.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
+  - name: "projects_list"
+    vars:
+      service: "projects"
+      project: "prj-id"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}"
+    current_base_key: ["items"]
+    desired_base_key: ["projects"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
+  - name: "backendBucket"
+    vars:
+      service: "bucket"
+      project: "prj-id"
+    endpoint: "https://compute.googleapis.com/compute/beta/projects/{{project}}/global/backendBuckets"
+    current_base_key: ["items"]
+    desired_base_key: ["backendBucketList"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
+  - name: "firewalls"
+    vars:
+      service: "firewalls.list"
+      project: "prj-id"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}/global/firewalls"
+    current_base_key: ["items"]
+    desired_base_key: ["firewalls_list"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
+  - name: "urlMaps"
+    vars:
+      service: "urlMaps.list"
+      project: "prj-id"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}/global/urlMaps"
+    current_base_key: ["items"]
+    desired_base_key: ["urlMaps"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: "https://cloud.google.com/compute/docs/reference/rest/v1/urlMaps/list?apix_params=%7B%22project%22%3A%22prj-id%22%7D"
+    params:
+      querystring:
+      header:
+      body:
+  - name: "autoscalers"
+    vars:
+      service: "autoscalers.list"
+      project: "prj-id"
+      zone: "us-central1-a"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}/aggregated/autoscalers"
+    current_base_key: ["items.regions/us-central1.autoscalers"]
+    desired_base_key: ["autoscalers"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: "https://cloud.google.com/compute/docs/reference/rest/v1/urlMaps/list?apix_params=%7B%22project%22%3A%22prj-id%22%7D"
+    params:
+      querystring:
+      header:
+      body:
+  - name: "instanceGroup"
+    vars:
+      service: "instanceGroupManagers.list"
+      project: "prj-id"
+      zone: "us-central1-a"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}/aggregated/instanceGroupManagers"
+    current_base_key: ["items.regions/us-central1.instanceGroupManagers"]
+    desired_base_key: ["instanceGroupManagers"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: "https://cloud.google.com/compute/docs/reference/rest/v1/urlMaps/list?apix_params=%7B%22project%22%3A%22prj-id%22%7D"
+    params:
+      querystring:
+      header:
+      body:
+  - name: "instanceGroup"
+    vars:
+      service: "instanceGroup.list"
+      project: "prj-id"
+      zone: "us-central1-a"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}/aggregated/instanceGroups"
+    current_base_key: ["items.regions/us-central1.instanceGroups"]
+    desired_base_key: ["instanceGroup"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
+  - name: "instanceTemplates"
+    vars:
+      service: "instanceTemplates.list"
+      project: "prj-id"
+      zone: "us-central1-a"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}/global/instanceTemplates"
+    current_base_key: ["items"]
+    desired_base_key: ["instanceGroup"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: "https://cloud.google.com/compute/docs/reference/rest/v1/instanceTemplates/list?apix_params=%7B%22project%22%3A%22prj-id%22%7D"
+    params:
+      querystring:
+      header:
+      body:
+  - name: "network"
+    vars:
+      service: "network.list"
+      project: "prj-id"
+      zone: "us-central1-a"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}/global/networks"
+    current_base_key: ["items"]
+    desired_base_key: ["networks_list"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation:
+    params:
+      querystring:
+      header:
+      body:
+  - name: "database"
+    vars:
+      service: "instance.list"
+      project: "prj-id"
+      zone: "us-central1-a"
+    endpoint: "https://www.googleapis.com/sql/v1beta4/projects/{{project}}/instances"
+    current_base_key: ["items"]
+    desired_base_key: ["sqlDbInstance"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation:
+    params:
+      querystring:
+      header:
+      body:
+  - name: "database"
+    vars:
+      service: "database.list"
+      project: "prj-id"
+      instance: "epico-db1"
+    endpoint: "https://www.googleapis.com/sql/v1beta4/projects/{{project}}/instances/{{instance}}/databases"
+    current_base_key: ["items"]
+    desired_base_key: ["sqlDatabase"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation:
+    params:
+      querystring:
+      header:
+      body:
+  - name: "kms"
+    vars:
+      service: "keyRings.list"
+      project: "prj-id"
+      instance: "epico-db1"
+      location: "us-central1"
+    endpoint: "https://cloudkms.googleapis.com/v1/projects/{{project}}/locations/{{location}}/keyRings"
+    current_base_key: ["keyRings"]
+    desired_base_key: ["keyRings"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation:
+    params:
+      querystring:
+      header:
+      body:
+  - name: "kms"
+    vars:
+      service: "cryptoKeys.list"
+      project: "prj-id"
+      instance: "epico-db1"
+      location: "us-central1"
+      keyRing: "hem"
+    endpoint: "https://cloudkms.googleapis.com/v1/projects/{{project}}/locations/{{location}}/keyRings/{{keyRing}}/cryptoKeys"
+    current_base_key: ["cryptoKeys"]
+    desired_base_key: ["cryptoKeys"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation:
+    params:
+      querystring:
+      header:
+      body:
+  - name: "kms"
+    vars:
+      service: "cryptoKeyVersions.list"
+      project: "prj-id"
+      instance: "epico-db1"
+      location: "us-central1"
+      keyRing: "hem"
+      cryptokey: "epico"
+    endpoint: "https://cloudkms.googleapis.com/v1/projects/{{project}}/locations/{{location}}/keyRings/{{keyRing}}/cryptoKeys/{{cryptoKey}}/cryptoKeyVersions"
+    current_base_key: ["cryptoKeyVersions"]
+    desired_base_key: ["cryptoKeyVersions"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation:
+    params:
+      querystring:
+      header:
+      body:
+  - name: "projects.sinks"
+    vars:
+      service: "projects.sinks.list"
+      project: "prj-id"
+    endpoint: "https://logging.googleapis.com/v2/projects/{{project}}/sinks"
+    current_base_key: ["sinks"]
+    desired_base_key: ["sinks"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation:
+    params:
+      querystring:
+      header:
+      body:
+  - name: "projects.alertPolicies"
+    vars:
+      service: "projects.alertPolicies.list"
+      project: "prj-id"
+    endpoint: "https://monitoring.googleapis.com/v3/projects/{{project}}/alertPolicies"
+    current_base_key: ["alertPolicies"]
+    desired_base_key: ["alertPolicies"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation:
+    params:
+      querystring:
+      header:
+      body:
+  - name: "projects.notificationChannels"
+    vars:
+      service: "projects.notificationChannels.list"
+      project: "prj-id"
+    endpoint: "https://monitoring.googleapis.com/v3/projects/{{project}}/notificationChannels"
+    current_base_key: ["notificationChannels"]
+    desired_base_key: ["notificationChannels"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation:
+    params:
+      querystring:
+      header:
+      body:
+  - name: "projects.metrics"
+    vars:
+      service: "projects.metrics.list"
+      project: "prj-id"
+    endpoint: "https://logging.googleapis.com/v2/projects/{{project}}/metrics"
+    current_base_key: ["metrics"]
+    desired_base_key: ["metrics"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation:
+    params:
+      querystring:
+      header:
+      body:
+  - name: "managedZones.list"
+    vars:
+      service: "managedZones.list"
+      project: "prj-id"
+    endpoint: "https://dns.googleapis.com/dns/v1/projects/{{project}}/managedZones"
+    current_base_key: ["managedZones"]
+    desired_base_key: ["managedZones"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation:
+    params:
+      querystring:
+      header:
+      body:
+  - name: "subnetworks.aggregatedList"
+    vars:
+      service: "subnetworks.aggregatedList"
+      project: "prj-id"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}/aggregated/subnetworks"
+    current_base_key: ["items.global.subnetworks", "items.regions/us-central1.subnetworks", "items.regions/europe-west1.subnetworks", "items.regions/us-west1.subnetworks", "items.regions/asia-east1.subnetworks", "items.regions/us-east1.subnetworks", "items.regions/asia-northeast1.subnetworks", "items.regions/asia-southeast1.subnetworks", "items.regions/us-east4.subnetworks", "items.regions/australia-southeast1.subnetworks", "items.regions/europe-west2.subnetworks", "items.regions/europe-west3.subnetworks", "items.regions/southamerica-east1.subnetworks", "items.regions/asia-south1.subnetworks", "items.regions/northamerica-northeast1.subnetworks", "items.regions/europe-west4.subnetworks", "items.regions/europe-north1.subnetworks", "items.regions/us-west2.subnetworks", "items.regions/asia-east2.subnetworks"]
+    desired_base_key: ["subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks", "subnetworks"]
     current_error_key: ["items.global.warning", "items.regions/us-central1.warning", "items.regions/europe-west1.warning", "items.regions/us-west1.warning", "items.regions/asia-east1.warning", "items.regions/us-east1.warning", "items.regions/asia-northeast1.warning", "items.regions/asia-southeast1.warning", "items.regions/us-east4.warning", "items.regions/australia-southeast1.warning", "items.regions/europe-west2.warning", "items.regions/europe-west3.warning", "items.regions/southamerica-east1.warning", "items.regions/asia-south1.warning", "items.regions/northamerica-northeast1.warning", "items.regions/europe-west4.warning", "items.regions/europe-north1.warning", "items.regions/us-west2.warning", "items.regions/asia-east2.warning"]
     desired_error_key: ["Errors.{{service}}.global", "Errors.{{service}}.regions/us-central1", "Errors.{{service}}.regions/europe-west1", "Errors.{{service}}.regions/us-west1", "Errors.{{service}}.regions/asia-east1", "Errors.{{service}}.regions/us-east1", "Errors.{{service}}.regions/asia-northeast1", "Errors.{{service}}.regions/asia-southeast1", "Errors.{{service}}.regions/us-east4", "Errors.{{service}}.regions/australia-southeast1", "Errors.{{service}}.regions/europe-west2", "Errors.{{service}}.regions/europe-west3", "Errors.{{service}}.regions/southamerica-east1", "Errors.{{service}}.regions/asia-south1", "Errors.{{service}}.regions/northamerica-northeast1", "Errors.{{service}}.regions/europe-west4", "Errors.{{service}}.regions/europe-north1", "Errors.{{service}}.regions/us-west2", "Errors.{{service}}.regions/asia-east2"]
     documentation: ""
