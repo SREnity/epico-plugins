@@ -15,7 +15,7 @@ auth_params:
 paging_params:
   - "RegexJsonPagingPeek"
   - "<([^>]*)>; rel=\"next\""
-endpoints: 
+endpoints:
   - name: "projects"
     vars:
       service: "projects"

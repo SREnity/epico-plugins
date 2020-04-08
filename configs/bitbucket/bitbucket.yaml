@@ -11,14 +11,14 @@ auth_params:
   - "BasicAuth"
   - "{{}}" # Username
   - "{{}}" # Password
-endpoints: 
+endpoints:
   - name: "repos"
     vars:
       service: "repositories"
       username: "USERNAME"
     endpoint: "https://api.bitbucket.org/2.0/{{service}}/{{username}}"
     current_base_key: ["values"]
-    desired_base_key: ["Respositories"]
+    desired_base_key: ["Repositories"]
     current_error_key: [""]
     desired_error_key: [""]
     documentation: ""
