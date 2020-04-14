@@ -4,14 +4,14 @@ paging:
   indicator_from_field: "pageToken"
   indicator_to_field: "pageToken"
   indicator_from_structure: "param"
-plugin: "/Users/berrybytes/go/src/github.com/epico-demo/gcp.so"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
 auth_params:
   - "JwtAuth"
-  - "epico-gcp-plugin@xxxxxj-dev.iam.gserviceaccount.com" # Key Email
-  - "-----BEGIN PRIVATE KEY-----\n\n" # Private Key
-  - "" # Private Key ID
-  - "https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/compute,https://www.googleapis.com/auth/compute.readonly" # Scopes (comma delimted string)
-  - "https://oauth2.googleapis.com/token" # Token URL
+  - "{{}}" # Key Email
+  - "{{}}" # Private Key
+  - "{{}}" # Private Key ID
+  - "{{}}" # Scopes (comma delimited string)
+  - "{{}}" # Token URL
 endpoints:
   - name: "healthChecks"
     vars:
