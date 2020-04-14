@@ -7,15 +7,15 @@ paging:
   indicator_to_field: ""
   indicator_from_structure: ""
 plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
-auth_params: 
+auth_params:
   - "CustomHeaderAndBasicAuth"
-  - "{{}}" # Username 
-  - "{{}}" # Password 
+  - "{{}}" # Username
+  - "{{}}" # Password
   - "App-Key"
   - "{{}}" # App Key
-  - "account-email"
+  - "Account-Email"
   - "{{}}" # Owner account email
-endpoints: 
+endpoints:
   - name: "alerts"
     vars:
       service: "actions"
