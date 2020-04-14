@@ -13,7 +13,7 @@ auth_params:
   - "{{}}" # API Key
   - "application_key"
   - "{{}}" # Application Key
-endpoints: 
+endpoints:
   - name: "cpu"
     vars:
       service: "cpu"
@@ -24,8 +24,9 @@ endpoints:
     desired_error_key: ["Errors.{{service}}"]
     documentation: ""
     params:
-      querystring: 
+      querystring:
         query: [ "system.cpu.idle{*}by{host}" ]
-        #Required at runtiime - to and from 
+        from: [ "{{time:-24h}}" ]
+        to: [ "{{time:now}}" ]
       header:
       body:
