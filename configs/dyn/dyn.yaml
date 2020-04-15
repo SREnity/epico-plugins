@@ -1,13 +1,13 @@
 ---
 # TODO: Expand this with more of the API.
-name: "cloudflare"
+name: "dyn"
 paging:
   location_to: ""
   indicator_from_field: ""
   indicator_to_field: ""
   indicator_from_structure: ""
 plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
-auth_params: 
+auth_params:
   - "SessionTokenAuth"
   - "data.token"
   - "Auth-Token"
@@ -16,10 +16,10 @@ auth_params:
   - "customer_name"
   - "{{}}" # Customer Name
   - "user_name"
-  - "{{}}" # Username 
+  - "{{}}" # Username
   - "password"
-  - "{{}}" # Password 
-endpoints: 
+  - "{{}}" # Password
+endpoints:
   - name: "zones"
     vars:
       service: "Zone"
