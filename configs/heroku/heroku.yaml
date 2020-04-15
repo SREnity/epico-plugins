@@ -11,8 +11,8 @@ plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
 auth_params:
   - "CustomHeaderAuth"
   - "Authorization"
-  - "{{}}" # "Bearer " + Token <= Notice the space after 'Bearer' and caps
-endpoints: 
+  - "Bearer {{}}" # "Bearer " + Token <= Notice the space after 'Bearer' and caps
+endpoints:
   - name: "apps"
     vars:
       service: "apps"
@@ -21,7 +21,7 @@ endpoints:
     desired_base_key: ["Applications"]
     current_error_key: ["message"]
     desired_error_key: ["Errors.heroku.{{service}}"]
-    documentation: ""
+    documentation: "https://devcenter.heroku.com/articles/platform-api-reference#app"
     params:
       querystring:
       header:
