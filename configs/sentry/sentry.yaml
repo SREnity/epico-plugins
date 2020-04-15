@@ -11,15 +11,15 @@ plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
 auth_params:
   - "CustomHeaderAuth"
   - "Authorization"
-  - "{{}}" # "Bearer " + Token <= Notice the space after 'Bearer'
+  - "Bearer {{}}" # "Bearer " + Token <= Notice the space after 'Bearer'
 paging_params:
   - "RegexJsonPagingPeek"
   - "<([^>]*)>; rel=\"next\"; results=\"true\""
-endpoints: 
+endpoints:
   - name: "projects"
     vars:
       service: "projects"
-    endpoint: "https://sentry.io/api/0/{{service}}"
+    endpoint: "https://sentry.io/api/0/{{service}}/"
     current_base_key: [""]
     desired_base_key: ["Projects"]
     current_error_key: ["error"]
