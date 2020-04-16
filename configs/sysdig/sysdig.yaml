@@ -13,8 +13,8 @@ plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
 auth_params:
   - "CustomHeaderAuth"
   - "Authorization"
-  - "{{}}" # "Bearer " + Token <= Notice the space after 'Bearer' and caps
-endpoints: 
+  - "Bearer {{}}" # "Bearer " + Token <= Notice the space after 'Bearer' and caps
+endpoints:
   - name: "alerts"
     vars:
       service: "alerts"
@@ -23,7 +23,7 @@ endpoints:
     desired_base_key: ["Alerts"]
     current_error_key: ["message"]
     desired_error_key: ["Errors.sysdig.{{service}}"]
-    documentation: "https://sysdig.gitbooks.io/sysdig-cloud-api/content/rest_api/rest_api/rest_api/alerts.html"
+    documentation: "https://app.sysdigcloud.com/apidocs/#!/Alerts/get_api_alerts"
     params:
       querystring:
       header:
