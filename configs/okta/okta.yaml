@@ -15,11 +15,12 @@ auth_params:
 paging_params:
   - "RegexJsonPagingPeek"
   - "<([^>]*)>; rel=\"next\""
+global_vars:
+  subdomain: "SUBDOMAIN"
 endpoints:
   - name: "users"
     vars:
       service: "users"
-      subdomain: "SUBDOMAIN"
     endpoint: "https://{{subdomain}}.okta.com/api/v1/{{service}}"
     current_base_key: [""]
     desired_base_key: ["Users"]
