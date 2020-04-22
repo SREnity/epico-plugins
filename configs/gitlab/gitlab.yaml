@@ -15,11 +15,13 @@ auth_params:
 paging_params:
   - "RegexJsonPagingPeek"
   - "<([^>]*)>; rel=\"next\""
+global_vars:
+  domain: "DOMAIN"
 endpoints:
   - name: "projects"
     vars:
       service: "projects"
-    endpoint: "https://gitlab.com/api/v4/{{service}}"
+    endpoint: "{{domain}}/api/v4/{{service}}"
     current_base_key: [""]
     desired_base_key: ["Projects"]
     current_error_key: ["error"]
@@ -28,5 +30,46 @@ endpoints:
     params:
       querystring:
         owned: ["true"]
+      header:
+      body:
+    endpoints:
+      id:
+        - name: "project_stats"
+          vars:
+            service: "project_stats"
+          endpoint: "{{domain}}/api/v4/projects/{{endpoint_key}}/statistics"
+          current_base_key: ["fetches"]
+          desired_base_key: ["ProjectStats.{{endpoint_key}}.Fetches"]
+          current_error_key: ["error"]
+          desired_error_key: ["Errors.gitlab.{{service}}"]
+          documentation: "https://docs.gitlab.com/ee/api/project_statistics.html"
+          params:
+            querystring:
+            header:
+            body:
+  - name: "runners"
+    vars:
+      service: "runners"
+    endpoint: "{{domain}}/api/v4/runners"
+    current_base_key: [""]
+    desired_base_key: ["Runners"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.gitlab.{{service}}"]
+    documentation: "https://docs.gitlab.com/ee/api/runners.html"
+    params:
+      querystring:
+      header:
+      body:
+  - name: "sidekiq_metrics"
+    vars:
+      service: "sidekiq_metrics"
+    endpoint: "{{domain}}/api/v4/sidekiq/compound_metrics"
+    current_base_key: ["queues", "jobs"]
+    desired_base_key: ["Queues", "Jobs"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.gitlab.{{service}}"]
+    documentation: "https://docs.gitlab.com/ee/api/sidekiq_metrics.html#get-a-compound-response-of-all-the-previously-mentioned-metrics"
+    params:
+      querystring:
       header:
       body:
