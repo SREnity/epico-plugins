@@ -12,11 +12,12 @@ auth_params:
   - "CustomHeaderAuth"
   - "Authorization"
   - "Bearer {{}}" # Token
+global_vars:
+  url: "URL"
 endpoints:
   - name: "projects"
     vars:
       service: "projects"
-      url: "URL"
     endpoint: "https://{{url}}/app/rest/latest/{{service}}"
     current_base_key: ["project"]
     desired_base_key: ["Projects"]
