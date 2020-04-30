@@ -1,5 +1,4 @@
 ---
-# TODO: Expand this with more of the API.
 name: "sentry"
 paging:
   location_from: "header"
@@ -29,3 +28,33 @@ endpoints:
       querystring:
       header:
       body:
+  - name: "organizations"
+    vars:
+      service: "organizations"
+    endpoint: "https://sentry.io/api/0/{{service}}/"
+    current_base_key: [""]
+    desired_base_key: ["Organizations"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.sentry.{{service}}"]
+    documentation: "https://docs.sentry.io/api/organizations/get-organization-index/"
+    params:
+      querystring:
+      header:
+      body:
+    endpoints:
+      slug:
+        - name: "organization_releases"
+          vars:
+            service: "releases"
+          endpoint: "https://sentry.io/api/0/organizations/{{endpoint_key}}/{{service}}/"
+          current_base_key: [""]
+          desired_base_key: ["OrganizationReleases"]
+          current_error_key: ["error"]
+          desired_error_key: ["Errors.sentry.{{service}}"]
+          endpoint_key_names:
+            slug: organization_slug
+          documentation: "https://docs.sentry.io/api/releases/get-organization-releases/"
+          params:
+            querystring:
+            header:
+            body:

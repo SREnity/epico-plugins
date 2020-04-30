@@ -18,7 +18,7 @@ endpoints:
   - name: "projects"
     vars:
       service: "projects"
-    endpoint: "https://{{url}}/app/rest/latest/{{service}}"
+    endpoint: "{{url}}/app/rest/latest/{{service}}"
     current_base_key: ["project"]
     desired_base_key: ["Projects"]
     current_error_key: [""]
@@ -27,4 +27,24 @@ endpoints:
     params:
       querystring:
       header:
+        Accept: ["application/json"]
       body:
+    endpoints:
+      "project.id":
+        - name: "builds"
+          vars:
+            service: "builds"
+          endpoint: "{{url}}/app/rest/latest/{{service}}"
+          current_base_key: ["build"]
+          desired_base_key: ["ProjectBuilds"]
+          current_error_key: [""]
+          desired_error_key: [""]
+          endpoint_key_names:
+            "project.name": project_name
+          documentation: ""
+          params:
+            querystring:
+              locator: ["affectedProject:(id:{{endpoint_key}}),count:1"]
+            header:
+              Accept: ["application/json"]
+            body:

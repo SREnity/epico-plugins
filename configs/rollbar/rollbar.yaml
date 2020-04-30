@@ -1,5 +1,4 @@
 ---
-# TODO: Expand this with more of the API.
 name: "rollbar"
 paging:
   location_to: "querystring"
@@ -11,16 +10,30 @@ auth_params:
   - "CustomQuerystringAuth"
   - "access_token"
   - "{{}}" # Token
-endpoints: 
-  - name: "projects"
+endpoints:
+  # TODO: Collect account-level token from user and re-enable this endpoint
+  # - name: "projects"
+  #   vars:
+  #     service: "projects"
+  #   endpoint: "https://api.rollbar.com/api/1/{{service}}"
+  #   current_base_key: ["result"]
+  #   desired_base_key: ["Projects"]
+  #   current_error_key: ["message"]
+  #   desired_error_key: [""]
+  #   documentation: ""
+  #   params:
+  #     querystring:
+  #     header:
+  #     body:
+  - name: "deploys"
     vars:
-      service: "projects"
+      service: "deploys"
     endpoint: "https://api.rollbar.com/api/1/{{service}}"
-    current_base_key: ["result"]
-    desired_base_key: ["Projects"]
+    current_base_key: ["result.deploys"]
+    desired_base_key: ["Deploys"]
     current_error_key: ["message"]
     desired_error_key: [""]
-    documentation: ""
+    documentation: "https://explorer.docs.rollbar.com/#operation/list-all-deploys"
     params:
       querystring:
       header:

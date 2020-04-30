@@ -1,0 +1,83 @@
+---
+name: "buddyci"
+paging:
+  location_to: "querystring"
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "CustomHeaderAuth"
+  - "Authorization"
+  - "Bearer {{}}" # Token
+endpoints:
+  - name: "workspaces"
+    vars:
+      service: "workspaces"
+    endpoint: "https://api.buddy.works/{{service}}"
+    current_base_key: ["workspaces"]
+    desired_base_key: ["Workspaces"]
+    current_error_key: ["errors"]
+    desired_error_key: ["Errors.buddy.{{service}}"]
+    documentation: "https://buddy.works/docs/api/general/workspaces/list-your-workspaces"
+    params:
+      querystring:
+      header:
+      body:
+    endpoints:
+      "workspaces.domain":
+        - name: "projects"
+          vars:
+            service: "projects"
+          endpoint: "https://api.buddy.works/workspaces/{{endpoint_key}}/{{service}}"
+          current_base_key: ["projects"]
+          desired_base_key: ["Projects"]
+          current_error_key: ["errors"]
+          desired_error_key: ["Errors.buddy.{{service}}"]
+          endpoint_key_names:
+            "workspaces.domain": workspace_domain
+          documentation: "https://buddy.works/docs/api/general/workspaces/list-your-workspaces"
+          params:
+            querystring:
+              status: ["ACTIVE"]
+            header:
+            body:
+          endpoints:
+            "projects.name":
+              - name: "pipelines"
+                vars:
+                  service: "pipelines"
+                endpoint: "https://api.buddy.works/workspaces/{{workspace_domain}}/projects/{{endpoint_key}}/{{service}}"
+                current_base_key: ["pipelines"]
+                desired_base_key: ["Pipelines"]
+                current_error_key: ["errors"]
+                desired_error_key: ["Errors.buddy.{{service}}"]
+                endpoint_key_names:
+                  workspace_domain: workspace_domain
+                  "projects.name": project_name
+                documentation: "https://buddy.works/docs/api/general/workspaces/list-your-workspaces"
+                params:
+                  querystring:
+                    status: ["ACTIVE"]
+                  header:
+                  body:
+                endpoints:
+                  "pipelines.id":
+                    - name: "executions"
+                      vars:
+                        service: "executions"
+                      endpoint: "https://api.buddy.works/workspaces/{{workspace_domain}}/projects/{{project_name}}/pipelines/{{endpoint_key}}/{{service}}"
+                      current_base_key: ["executions"]
+                      desired_base_key: ["Executions"]
+                      current_error_key: ["errors"]
+                      desired_error_key: ["Errors.buddy.{{service}}"]
+                      endpoint_key_names:
+                        workspace_domain: workspace_domain
+                        project_name: project_name
+                        "pipelines.name": pipeline_name
+                      documentation: "https://buddy.works/docs/api/general/workspaces/list-your-workspaces"
+                      params:
+                        querystring:
+                          status: ["ACTIVE"]
+                        header:
+                        body:

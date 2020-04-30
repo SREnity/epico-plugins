@@ -1,5 +1,4 @@
 ---
-# TODO: Expand this with more of the API.
 name: "circleci"
 paging:
   location_to: "querystring"
@@ -11,7 +10,7 @@ auth_params:
   - "CustomQuerystringAuth"
   - "circle-token"
   - "{{}}" # Token
-endpoints: 
+endpoints:
   - name: "projects"
     vars:
       service: "projects"
@@ -23,5 +22,20 @@ endpoints:
     documentation: ""
     params:
       querystring:
+      header:
+      body:
+  - name: "recent_builds"
+    vars:
+      service: "recent_builds"
+    endpoint: "https://circleci.com/api/v1.1/recent-builds"
+    current_base_key: [""]
+    desired_base_key: ["RecentBuilds"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: "https://circleci.com/docs/api/#recent-builds-across-all-projects"
+    params:
+      querystring:
+        shallow: ["true"]
+        limit: ["100"]
       header:
       body:

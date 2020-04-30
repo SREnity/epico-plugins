@@ -1,0 +1,26 @@
+---
+name: "godaddy"
+paging:
+  location_to: "querystring"
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "CustomHeaderAuth"
+  - "Authorization"
+  - "sso-key {{}}:{{}}" # Api key and secret
+endpoints:
+  - name: "domains"
+    vars:
+      service: "domains"
+    endpoint: "https://api.godaddy.com/v1/{{service}}"
+    current_base_key: [""]
+    desired_base_key: ["Domains"]
+    current_error_key: ["error_description"]
+    desired_error_key: ["Errors.godaddy.{{service}}"]
+    documentation: "https://developer.godaddy.com/doc/endpoint/domains#/v1/list"
+    params:
+      querystring:
+      header:
+      body:

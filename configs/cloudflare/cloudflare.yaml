@@ -1,5 +1,4 @@
 ---
-# TODO: Expand this with more of the API.
 name: "cloudflare"
 paging:
   location_to: "querystring"
@@ -27,3 +26,70 @@ endpoints:
       querystring:
       header:
       body:
+    endpoints:
+      "result.id":
+        - name: "dns_metrics"
+          vars:
+            service: "dns_analytics"
+          endpoint: "https://api.cloudflare.com/client/v4/zones/{{endpoint_key}}/{{service}}/report"
+          current_base_key: ["result"]
+          desired_base_key: ["DNSAnalytics"]
+          current_error_key: ["errors"]
+          desired_error_key: ["Errors.cloudflare.{{service}}"]
+          endpoint_key_names:
+            "result.name": zone_name
+          documentation: "https://api.cloudflare.com/#dns-analytics-table"
+          params:
+            querystring:
+              metrics: ["queryCount,uncachedCount,staleCount"] # TODO: Add response times for paid plans
+            header:
+            body:
+  - name: "accounts"
+    vars:
+      service: "accounts"
+    endpoint: "https://api.cloudflare.com/client/v4/{{service}}"
+    current_base_key: ["result"]
+    desired_base_key: ["Accounts"]
+    current_error_key: ["errors"]
+    desired_error_key: ["Errors.cloudflare.{{service}}"]
+    documentation: "https://api.cloudflare.com/#accounts-list-accounts"
+    params:
+      querystring:
+      header:
+      body:
+    endpoints:
+      "result.id":
+        - name: "dns_firewall_clusters"
+          vars:
+            service: "virtual_dns"
+          endpoint: "https://api.cloudflare.com/client/v4/accounts/{{endpoint_key}}/{{service}}"
+          current_base_key: ["result"]
+          desired_base_key: ["DNSFirewallClusters"]
+          current_error_key: ["errors"]
+          desired_error_key: ["Errors.cloudflare.{{service}}"]
+          endpoint_key_names:
+            "result.name": account_name
+            "result.id": account_id
+          documentation: "https://api.cloudflare.com/#dns-analytics-table"
+          params:
+            querystring:
+            header:
+            body:
+          endpoints:
+            "result.id":
+              - name: "dns_firewall_analytics"
+                vars:
+                  service: "dns_firewall_analytics"
+                endpoint: "https://api.cloudflare.com/client/v4/accounts/{{account_id}}/{{endpoint_key}}/dns_analytics/report"
+                current_base_key: ["result"]
+                desired_base_key: ["DNSFirewallAnalytics"]
+                current_error_key: ["errors"]
+                desired_error_key: ["Errors.cloudflare.{{service}}"]
+                endpoint_key_names:
+                  account_name: account_name
+                  account_id: account_id
+                documentation: "https://api.cloudflare.com/#dns-firewall-analytics-accounts--table"
+                params:
+                  querystring:
+                  header:
+                  body:

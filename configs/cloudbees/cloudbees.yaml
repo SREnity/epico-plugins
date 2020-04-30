@@ -1,0 +1,51 @@
+---
+name: "cloudbees"
+paging:
+  location_from: ""
+  location_to: "querystring"
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "BasicAuth"
+  - "{{}}"
+  - "{{}}"
+paging_params:
+  - "RegexJsonPagingPeek"
+  - "<([^>]*)>; rel=\"next\""
+global_vars:
+  domain: "DOMAIN"
+endpoints:
+  - name: "jobs"
+    vars:
+      service: "jobs"
+    endpoint: "{{domain}}/api/json"
+    current_base_key: ["jobs"]
+    desired_base_key: ["Jobs"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.cloudbees.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+        Accept: ["application/json"]
+      body:
+    endpoints:
+      "jobs.name":
+        - name: "job"
+          vars:
+            service: "job"
+          endpoint: "{{domain}}/{{service}}/{{endpoint_key}}/api/json"
+          current_base_key: ["builds"]
+          desired_base_key: ["Builds"]
+          current_error_key: ["error"]
+          desired_error_key: ["Errors.cloudbees.{{service}}"]
+          endpoint_key_names:
+            "jobs.fullDisplayName": job_name # TODO: Fix this
+          documentation: ""
+          params:
+            querystring:
+            header:
+              Accept: ["application/json"]
+            body:

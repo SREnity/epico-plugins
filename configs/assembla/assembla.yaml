@@ -7,13 +7,13 @@ paging:
   indicator_to_field: ""
   indicator_from_structure: ""
 plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
-auth_params: 
+auth_params:
   - "CustomHeaderAuth"
   - "X-Api-Key"
   - "{{}}" # Api Key
   - "X-Api-Secret"
   - "{{}}" # Api Secret
-endpoints: 
+endpoints:
   - name: "spaces"
     vars:
       service: "spaces"
@@ -22,8 +22,25 @@ endpoints:
     desired_base_key: ["Spaces"]
     current_error_key: ["error_description"]
     desired_error_key: ["Errors.assembla.{{service}}"]
-    documentation: ""
+    documentation: "https://api-docs.assembla.cc/content/ref/spaces_index.html"
     params:
       querystring:
       header:
       body:
+    endpoints:
+      id:
+        - name: "milestones"
+          vars:
+            service: "milestones"
+          endpoint: "https://api.assembla.com/v1/spaces/{{endpoint_key}}/{{service}}/all.json"
+          current_base_key: [""]
+          desired_base_key: ["Milestones"]
+          current_error_key: ["error_description"]
+          desired_error_key: ["Errors.assembla.{{service}}"]
+          documentation: "https://api-docs.assembla.cc/content/ref/milestones_all.html"
+          endpoint_key_names:
+            name: space_name
+          params:
+            querystring:
+            header:
+            body:

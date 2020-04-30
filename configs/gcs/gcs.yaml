@@ -1,0 +1,30 @@
+name: "google_cloud_source"
+paging:
+  location_to: "body"
+  indicator_from_field: "pageToken"
+  indicator_to_field: "pageToken"
+  indicator_from_structure: "param"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "JwtAuth"
+  - "{{}}" # Key Email
+  - "{{}}" # Private Key
+  - "{{}}" # Private Key ID
+  - "{{}}" # Scopes (comma delimited string)
+  - "{{}}" # Token URL
+global_vars:
+  project: "PROJECT"
+endpoints:
+  - name: "repos"
+    vars:
+      service: "repos"
+    endpoint: "https://sourcerepo.googleapis.com/v1/projects/{{project}}/{{service}}"
+    current_base_key: ["repos"]
+    desired_base_key: ["Repositories"]
+    current_error_key: ["error.errors"]
+    desired_error_key: ["Errors.gcs.{{service}}"]
+    documentation: "https://cloud.google.com/source-repositories/docs/reference/rest/v1/projects.repos/list"
+    params:
+      querystring:
+      header:
+      body:

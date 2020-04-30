@@ -43,6 +43,8 @@ endpoints:
           current_error_key: ["error"]
           desired_error_key: ["Errors.gitlab.{{service}}"]
           documentation: "https://docs.gitlab.com/ee/api/project_statistics.html"
+          endpoint_key_names:
+            id: project_id
           params:
             querystring:
             header:

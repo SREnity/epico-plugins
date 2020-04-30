@@ -21,12 +21,26 @@ endpoints:
     current_base_key: ["series"]
     desired_base_key: ["Cpu.Idle"]
     current_error_key: ["errors"]
-    desired_error_key: ["Errors.{{service}}"]
+    desired_error_key: ["Errors.{{service}}.cpu"]
     documentation: ""
     params:
       querystring:
         query: [ "system.cpu.idle{*}by{host}" ]
         from: [ "{{time:-24h}}" ]
         to: [ "{{time:now}}" ]
+      header:
+      body:
+  - name: "metrics"
+    vars:
+      service: "metrics"
+    endpoint: "https://app.datadoghq.com/api/v1/{{service}}"
+    current_base_key: ["metrics"]
+    desired_base_key: ["Metrics"]
+    current_error_key: ["errors"]
+    desired_error_key: ["Errors.{{service}}.metrics"]
+    documentation: ""
+    params:
+      querystring:
+        from: [ "{{time:-720h}}" ]
       header:
       body:

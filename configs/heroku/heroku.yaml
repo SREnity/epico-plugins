@@ -27,3 +27,35 @@ endpoints:
       header:
         Accept: ["application/vnd.heroku+json; version=3"]
       body:
+    endpoints:
+      id:
+        - name: "builds"
+          vars:
+            service: "builds"
+          endpoint: "https://api.heroku.com/apps/{{endpoint_key}}/{{service}}"
+          current_base_key: [""]
+          desired_base_key: ["ApplicationBuilds"]
+          current_error_key: ["message"]
+          desired_error_key: ["Errors.heroku.{{service}}"]
+          endpoint_key_names:
+            name: app_name
+          documentation: "https://devcenter.heroku.com/articles/platform-api-reference#build"
+          params:
+            querystring:
+            header:
+              Accept: ["application/vnd.heroku+json; version=3"]
+            body:
+  - name: "account_credits"
+    vars:
+      service: "account_credits"
+    endpoint: "https://api.heroku.com/account/credits"
+    current_base_key: [""]
+    desired_base_key: ["AccountCredits"]
+    current_error_key: ["message"]
+    desired_error_key: ["Errors.heroku.{{service}}"]
+    documentation: "https://devcenter.heroku.com/articles/platform-api-reference#credit"
+    params:
+      querystring:
+      header:
+        Accept: ["application/vnd.heroku+json; version=3"]
+      body:

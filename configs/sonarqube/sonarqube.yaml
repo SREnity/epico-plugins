@@ -1,0 +1,68 @@
+---
+name: "sonarqube"
+paging:
+  location_from: ""
+  location_to: "querystring"
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "BasicAuth"
+  - "{{}}"
+  - "" # Empty password
+paging_params:
+  - "RegexJsonPagingPeek"
+  - "<([^>]*)>; rel=\"next\""
+global_vars:
+  domain: "DOMAIN"
+endpoints:
+  - name: "projects"
+    vars:
+      service: "projects"
+    endpoint: "{{domain}}/api/{{service}}/search"
+    current_base_key: ["components"]
+    desired_base_key: ["Projects"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.sonarqube.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+        ps: ["500"] # Page size
+      header:
+      body:
+    endpoints:
+      "components.key":
+        - name: "project_issues"
+          vars:
+            service: "project_issues"
+          endpoint: "{{domain}}/api/issues/search?componentKeys={{endpoint_key}}"
+          current_base_key: ["issues"]
+          desired_base_key: ["ProjectIssues"]
+          current_error_key: ["errors"]
+          desired_error_key: ["Errors.sonarqube.{{service}}"]
+          endpoint_key_names:
+            "components.name": project_name
+          documentation: ""
+          params:
+            querystring:
+              ps: ["500"] # Page size
+            header:
+            body:
+        - name: "project_measures"
+          vars:
+            service: "measures"
+          endpoint: "{{domain}}/api/{{service}}/component_tree?component={{endpoint_key}}"
+          current_base_key: ["components"]
+          desired_base_key: ["ProjectMeasures"]
+          current_error_key: ["errors"]
+          desired_error_key: ["Errors.sonarqube.{{service}}"]
+          endpoint_key_names:
+            "components.name": project_name
+          documentation: ""
+          params:
+            querystring:
+              metricKeys: ["sqale_debt_ratio"]
+              ps: ["500"] # Page size
+            header:
+            body:
