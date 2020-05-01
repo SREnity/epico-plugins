@@ -29,18 +29,33 @@ endpoints:
       header:
         Travis-API-Version: ["3"]
       body:
-  - name: "organizations"
+    endpoints:
+      "repositories.id":
+        - name: "builds"
+          vars:
+            service: "builds"
+          endpoint: "https://api.travis-ci.com/repo/{{endpoint_key}}/{{service}}"
+          current_base_key: ["builds"]
+          desired_base_key: ["Builds"]
+          current_error_key: ["errors"]
+          desired_error_key: ["Errors.travisci.{{service}}"]
+          documentation: "https://docs.travis-ci.com/api/#builds"
+          params:
+            querystring:
+            header:
+              Travis-API-Version: ["3"]
+            body:
+  - name: "jobs"
     vars:
-      service: "orgs"
+      service: "jobs"
     endpoint: "https://api.travis-ci.com/{{service}}"
-    current_base_key: ["organizations"]
-    desired_base_key: ["Organizations"]
+    current_base_key: ["jobs"]
+    desired_base_key: ["Jobs"]
     current_error_key: ["errors"]
     desired_error_key: ["Errors.travisci.{{service}}"]
-    documentation: "https://developer.travis-ci.com/resource/organizations#for_current_user"
+    documentation: "https://developer.travis-ci.com/resource/jobs#for_current_user"
     params:
       querystring:
-        include: ["organization.repositories"]
       header:
         Travis-API-Version: ["3"]
       body:
