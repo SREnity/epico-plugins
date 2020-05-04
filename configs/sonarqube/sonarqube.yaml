@@ -47,13 +47,14 @@ endpoints:
           params:
             querystring:
               ps: ["500"] # Page size
+              qualifiers: ["TRK"]
             header:
             body:
         - name: "project_measures"
           vars:
             service: "measures"
           endpoint: "{{domain}}/api/{{service}}/component_tree?component={{endpoint_key}}"
-          current_base_key: ["components"]
+          current_base_key: ["baseComponent.measures"]
           desired_base_key: ["ProjectMeasures"]
           current_error_key: ["errors"]
           desired_error_key: ["Errors.sonarqube.{{service}}"]
@@ -62,7 +63,8 @@ endpoints:
           documentation: ""
           params:
             querystring:
-              metricKeys: ["sqale_debt_ratio"]
+              metricKeys: ["sqale_debt_ratio,complexity,duplicated_lines_density,coverage,test_success_density,sqale_index,new_violations,complexity_in_classes,complexity_in_functions"]
+              qualifiers: ["TRK"] # Per project
               ps: ["500"] # Page size
             header:
             body:
