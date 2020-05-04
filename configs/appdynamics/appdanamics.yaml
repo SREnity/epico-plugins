@@ -1,0 +1,82 @@
+name: "appdynamics"
+paging:
+  location_from: ""
+  location_to: ""
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  # Authentication must be implemented on Backend side
+paging_params:
+  # Needs to be implemented on Backend side
+global_vars:
+  domain: "DOMAIN"
+endpoints:
+  - name: "applications"
+    vars:
+      service: "applications"
+    endpoint: "{{domain}}/controller/rest/{{service}}"
+    current_base_key: ["applications"]
+    desired_base_key: ["Applications"]
+    current_error_key: ["message"]
+    desired_error_key: ["Errors.appdynamics.{{service}}"]
+    documentation: "https://docs.appdynamics.com/display/PRO45/Application+Model+API#ApplicationModelAPI-RetrieveAllBusinessApplications"
+    params:
+      querystring:
+        output: ["JSON"]
+      header:
+      body:
+    endpoints:
+      name:
+        - name: "metric-data"
+          vars:
+            service: "metric-data"
+          endpoint: "{{domain}}/controller/rest/applications/{{endpoint_key}}/{{service}}"
+          current_base_key: ["metric-datas"]
+          desired_base_key: ["MetricsDatas.{{endpoint_key}}.MetricDatas"]
+          current_error_key: ["message"]
+          desired_error_key: ["Errors.appdynamics.{{service}}"]
+          documentation: "https://docs.appdynamics.com/display/PRO45/Metric+and+Snapshot+API"
+          endpoint_key_names:
+            name: application_name
+          params:
+            querystring:
+              metric-path: "Application Infrastructure Performance|*|Individual Nodes|*|Hardware Resources|CPU|%Busy&time-range-type=BEFORE_NOW&duration-in-mins=15" #here I added just for CPU abnormalities since last 15 mins
+            header:
+            body:
+      name:
+        - name: "health-rules"
+          vars:
+            service: "health-rules"
+          endpoint: "{{domain}}/controller/alerting/rest/v1/applications/{{endpoint_key}}/{{service}}"
+          current_base_key: [""]
+          desired_base_key: ["HealthRules.{{endpoint_key}}.Data"]
+          current_error_key: ["message"]
+          desired_error_key: ["Errors.appdynamics.{{service}}"]
+          documentation: "https://docs.appdynamics.com/display/PRO45/Health+Rule+API#HealthRuleAPI-PropertyDetails"
+          endpoint_key_names:
+            name: application_name
+          params:
+            querystring:
+              metric-path: "Application Infrastructure Performance|*|Individual Nodes|*|Hardware Resources|CPU|%Busy&time-range-type=BEFORE_NOW&duration-in-mins=15" #here I added just for CPU abnormalities since last 15 mins
+            header:
+            body:
+
+      name:
+        - name: "email-digests"
+          vars:
+            service: "email-digests"
+          endpoint: "{{domain}}/controller/alerting/rest/v1/applications/{{endpoint_key}}/{{service}}"
+          current_base_key: [""]
+          desired_base_key: ["EmailDigests.{{endpoint_key}}.Data"]
+          current_error_key: ["message"]
+          desired_error_key: ["Errors.appdynamics.{{service}}"]
+          documentation: "https://docs.appdynamics.com/display/PRO45/Email+Digest+API"
+          endpoint_key_names:
+            name: application_name
+          params:
+            querystring:
+              metric-path: "Application Infrastructure Performance|*|Individual Nodes|*|Hardware Resources|CPU|%Busy&time-range-type=BEFORE_NOW&duration-in-mins=15" #here I added just for CPU abnormalities since last 15 mins
+            header:
+            body:

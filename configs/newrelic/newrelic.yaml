@@ -7,11 +7,11 @@ paging:
   indicator_to_field: ""
   indicator_from_structure: ""
 plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
-auth_params: 
+auth_params:
   - "CustomHeaderAuth"
   - "X-Api-Key"
   - "{{}}" # Api Key
-endpoints: 
+endpoints:
   - name: "applications"
     vars:
       service: "applications"
@@ -25,3 +25,16 @@ endpoints:
       querystring:
       header:
       body:
+  - name: "alerts_policies"
+    vars:
+      service: "alerts_policies"
+    endpoint: "https://api.newrelic.com/v2/{{service}}.json"
+    current_base_key: ["policies"]
+    desired_base_key: ["Policies"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.{{service}}"]
+    documentation: "https://docs.newrelic.com/docs/alerts/rest-api-alerts/new-relic-alerts-rest-api/rest-api-calls-new-relic-alerts"
+    params:
+        querystring:
+        header:
+        body:

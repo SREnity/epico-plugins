@@ -33,3 +33,33 @@ endpoints:
       querystring:
       header:
       body:
+    endpoints:
+      zone:
+        - name: "ddns"
+          vars:
+            service: "DDNS"
+          endpoint: "https://api.dynect.net/REST/{{service}}/{{endpoint_key}}"
+          current_base_key: [""]
+          desired_base_key: ["DDNS.{{endpoint_key}}.Data"]
+          current_error_key: ["msgs.ERR_CD"]
+          desired_error_key: ["Errors.dyn.{{service}}"]
+          documentation: "https://help.dyn.com/get-ddns-services-api/"
+          endpoint_key_names:
+            id: zone_name
+          params:
+            querystring:
+            header:
+            body:
+  - name: "tasks"
+    vars:
+      service: "Task"
+    endpoint: "https://api.dynect.net/REST/{{service}}/"
+    current_base_key: [""]
+    desired_base_key: ["Tasks"]
+    current_error_key: ["msgs.ERR_CD"]
+    desired_error_key: ["Errors.dyn.{{service}}"]
+    documentation: "https://help.dyn.com/get-all-dns-tasks-api/"
+    params:
+      querystring:
+      header:
+      body:
