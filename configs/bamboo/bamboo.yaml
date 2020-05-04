@@ -17,17 +17,34 @@ paging_params:
 global_vars:
   domain: "DOMAIN"
 endpoints:
-  - name: "builds"
+  - name: "plans"
     vars:
-      service: "builds"
-    endpoint: "{{domain}}/rest/api/latest/result"
-    current_base_key: ["results.result"]
-    desired_base_key: ["Builds"]
+      service: "plan"
+    endpoint: "{{domain}}/rest/api/latest/plan.json"
+    current_base_key: ["plans.plan"]
+    desired_base_key: ["Plans"]
     current_error_key: ["error"]
     desired_error_key: ["Errors.bamboo.{{service}}"]
-    documentation: ""
+    documentation: "https://developer.atlassian.com/server/bamboo/bamboo-rest-resources/#plan-service"
     params:
       querystring:
+        os_type: ["authBasic"]
       header:
-        Accept: ["application/json"]
       body:
+    endpoints:
+      "plans.plan.key":
+        - name: "build"
+          vars:
+            service: "result"
+          endpoint: "{{domain}}/rest/api/latest/result/{{endpoint_key}}.json"
+          current_base_key: ["results.result"]
+          desired_base_key: ["Builds"]
+          current_error_key: ["error"]
+          desired_error_key: ["Errors.bamboo.{{service}}"]
+          documentation: "https://developer.atlassian.com/server/bamboo/bamboo-rest-resources/#build-service----specific-plan"
+          params:
+            querystring:
+              os_type: ["authBasic"]
+              expand: ["results.result"]
+            header:
+            body:
