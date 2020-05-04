@@ -30,20 +30,29 @@ endpoints:
       querystring:
       header:
       body:
-    endpoints:
-      "groups.id":
-        - name: "memberships"
-          vars:
-            service: "memberships"
-          endpoint: "https://{{domain}}.zendesk.com/api/v2/groups/{{endpoint_key}}/{{service}}.json"
-          current_base_key: ["group_memberships"]
-          desired_base_key: ["GroupMemberships"]
-          current_error_key: ["error"]
-          desired_error_key: ["Errors.cloudbees.{{service}}"]
-          endpoint_key_names:
-            "groups.name": group_name
-          documentation: ""
-          params:
-            querystring:
-            header:
-            body:
+  - name: "users"
+    vars:
+      service: "users"
+    endpoint: "https://{{domain}}.zendesk.com/api/v2/{{service}}.json"
+    current_base_key: ["users"]
+    desired_base_key: ["Users"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.zendesk.{{service}}"]
+    documentation: "https://developer.zendesk.com/rest_api/docs/support/users"
+    params:
+      querystring:
+      header:
+      body:
+  - name: "tickets"
+    vars:
+      service: "tickets"
+    endpoint: "https://{{domain}}.zendesk.com/api/v2/{{service}}.json"
+    current_base_key: ["tickets"]
+    desired_base_key: ["Tickets"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.zendesk.{{service}}"]
+    documentation: "https://developer.zendesk.com/rest_api/docs/support/tickets"
+    params:
+      querystring:
+      header:
+      body:
