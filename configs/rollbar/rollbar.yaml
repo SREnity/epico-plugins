@@ -11,20 +11,6 @@ auth_params:
   - "access_token"
   - "{{}}" # Token
 endpoints:
-  # TODO: Collect account-level token from user and re-enable this endpoint
-  # - name: "projects"
-  #   vars:
-  #     service: "projects"
-  #   endpoint: "https://api.rollbar.com/api/1/{{service}}"
-  #   current_base_key: ["result"]
-  #   desired_base_key: ["Projects"]
-  #   current_error_key: ["message"]
-  #   desired_error_key: [""]
-  #   documentation: ""
-  #   params:
-  #     querystring:
-  #     header:
-  #     body:
   - name: "deploys"
     vars:
       service: "deploys"
@@ -34,6 +20,19 @@ endpoints:
     current_error_key: ["message"]
     desired_error_key: [""]
     documentation: "https://explorer.docs.rollbar.com/#operation/list-all-deploys"
+    params:
+      querystring:
+      header:
+      body:
+  - name: "items"
+    vars:
+      service: "items"
+    endpoint: "https://api.rollbar.com/api/1/{{service}}"
+    current_base_key: ["result.items"]
+    desired_base_key: ["Items"]
+    current_error_key: ["message"]
+    desired_error_key: [""]
+    documentation: "https://explorer.docs.rollbar.com/#operation/list-all-items"
     params:
       querystring:
       header:
