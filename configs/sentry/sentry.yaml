@@ -15,19 +15,6 @@ paging_params:
   - "RegexJsonPagingPeek"
   - "<([^>]*)>; rel=\"next\"; results=\"true\""
 endpoints:
-  - name: "projects"
-    vars:
-      service: "projects"
-    endpoint: "https://sentry.io/api/0/{{service}}/"
-    current_base_key: [""]
-    desired_base_key: ["Projects"]
-    current_error_key: ["error"]
-    desired_error_key: ["Errors.sentry.{{service}}"]
-    documentation: ""
-    params:
-      querystring:
-      header:
-      body:
   - name: "organizations"
     vars:
       service: "organizations"
@@ -43,18 +30,51 @@ endpoints:
       body:
     endpoints:
       slug:
-        - name: "organization_releases"
+        - name: "releases"
           vars:
             service: "releases"
           endpoint: "https://sentry.io/api/0/organizations/{{endpoint_key}}/{{service}}/"
           current_base_key: [""]
-          desired_base_key: ["OrganizationReleases"]
+          desired_base_key: ["Releases"]
           current_error_key: ["error"]
           desired_error_key: ["Errors.sentry.{{service}}"]
           endpoint_key_names:
             slug: organization_slug
-          documentation: "https://docs.sentry.io/api/releases/get-organization-releases/"
+          documentation: ""
           params:
             querystring:
             header:
             body:
+        - name: "projects"
+          vars:
+            service: "projects"
+          endpoint: "https://sentry.io/api/0/organizations/{{endpoint_key}}/{{service}}/"
+          current_base_key: [""]
+          desired_base_key: ["Projects"]
+          current_error_key: ["error"]
+          desired_error_key: ["Errors.sentry.{{service}}"]
+          endpoint_key_names:
+            slug: organization_slug
+          documentation: ""
+          params:
+            querystring:
+            header:
+            body:
+          endpoints:
+            slug:
+              - name: "issues"
+                vars:
+                  service: "issues"
+                endpoint: "https://sentry.io/api/0/projects/{{organization_slug}}/{{endpoint_key}}/{{service}}/"
+                current_base_key: [""]
+                desired_base_key: ["Issues"]
+                current_error_key: ["error"]
+                desired_error_key: ["Errors.sentry.{{service}}"]
+                endpoint_key_names:
+                  organization_slug: organization_slug
+                  slug: project_slug
+                documentation: "https://docs.sentry.io/api/events/get-project-group-index/"
+                params:
+                  querystring:
+                  header:
+                  body:
