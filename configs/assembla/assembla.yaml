@@ -44,3 +44,18 @@ endpoints:
             querystring:
             header:
             body:
+        - name: "tickets"
+          vars:
+            service: "tickets"
+          endpoint: "https://api.assembla.com/v1/spaces/{{endpoint_key}}/{{service}}.json"
+          current_base_key: [""]
+          desired_base_key: ["Tickets"]
+          current_error_key: ["error_description"]
+          desired_error_key: ["Errors.assembla.{{service}}"]
+          documentation: "https://api-docs.assembla.cc/content/ref/tickets_all.html"
+          endpoint_key_names:
+            name: space_name
+          params:
+            querystring:
+            header:
+            body:
