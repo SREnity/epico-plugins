@@ -39,12 +39,12 @@ endpoints:
             service: "project_stats"
           endpoint: "{{domain}}/api/v4/projects/{{endpoint_key}}/statistics"
           current_base_key: ["fetches"]
-          desired_base_key: ["ProjectStats.{{endpoint_key}}.Fetches"]
+          desired_base_key: ["ProjectStats.Fetches"]
           current_error_key: ["error"]
           desired_error_key: ["Errors.gitlab.{{service}}"]
           documentation: "https://docs.gitlab.com/ee/api/project_statistics.html"
           endpoint_key_names:
-            id: project_id
+            name_with_namespace: project_name
           params:
             querystring:
             header:
@@ -52,7 +52,7 @@ endpoints:
   - name: "runners"
     vars:
       service: "runners"
-    endpoint: "{{domain}}/api/v4/runners"
+    endpoint: "{{domain}}/api/v4/{{service}}"
     current_base_key: [""]
     desired_base_key: ["Runners"]
     current_error_key: ["error"]
