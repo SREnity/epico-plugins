@@ -45,15 +45,57 @@ endpoints:
             header:
               Accept: ["application/vnd.heroku+json; version=3"]
             body:
-  - name: "account_credits"
+        - name: "dynos"
+          vars:
+            service: "dynos"
+          endpoint: "https://api.heroku.com/apps/{{endpoint_key}}/{{service}}"
+          current_base_key: [""]
+          desired_base_key: ["Dynos"]
+          current_error_key: ["message"]
+          desired_error_key: ["Errors.heroku.{{service}}"]
+          documentation: "https://devcenter.heroku.com/articles/platform-api-reference#dyno"
+          params:
+            querystring:
+            header:
+              Accept: ["application/vnd.heroku+json; version=3"]
+            body:
+        - name: "releases"
+          vars:
+            service: "releases"
+          endpoint: "https://api.heroku.com/apps/{{endpoint_key}}/{{service}}"
+          current_base_key: [""]
+          desired_base_key: ["Releases"]
+          current_error_key: ["message"]
+          desired_error_key: ["Errors.heroku.{{service}}"]
+          documentation: "https://devcenter.heroku.com/articles/platform-api-reference#release-list"
+          params:
+            querystring:
+            header:
+              Accept: ["application/vnd.heroku+json; version=3"]
+            body:
+  - name: "account_invoices"
     vars:
-      service: "account_credits"
-    endpoint: "https://api.heroku.com/account/credits"
+      service: "account_invoices"
+    endpoint: "https://api.heroku.com/account/invoices"
     current_base_key: [""]
-    desired_base_key: ["AccountCredits"]
+    desired_base_key: ["Invoices"]
     current_error_key: ["message"]
     desired_error_key: ["Errors.heroku.{{service}}"]
-    documentation: "https://devcenter.heroku.com/articles/platform-api-reference#credit"
+    documentation: "https://devcenter.heroku.com/articles/platform-api-reference#invoice-list"
+    params:
+      querystring:
+      header:
+        Accept: ["application/vnd.heroku+json; version=3"]
+      body:
+  - name: "spaces"
+    vars:
+      service: "spaces"
+    endpoint: "https://api.heroku.com/{{service}}"
+    current_base_key: [""]
+    desired_base_key: ["Spaces"]
+    current_error_key: ["message"]
+    desired_error_key: ["Errors.heroku.{{service}}"]
+    documentation: "https://devcenter.heroku.com/articles/platform-api-reference#space-space-list-1"
     params:
       querystring:
       header:
