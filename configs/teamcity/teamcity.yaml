@@ -31,12 +31,12 @@ endpoints:
       body:
     endpoints:
       "project.id":
-        - name: "builds"
+        - name: "recent_builds"
           vars:
             service: "builds"
           endpoint: "{{url}}/app/rest/latest/{{service}}"
           current_base_key: ["build"]
-          desired_base_key: ["ProjectBuilds"]
+          desired_base_key: ["RecentBuilds"]
           current_error_key: [""]
           desired_error_key: [""]
           endpoint_key_names:
@@ -48,3 +48,18 @@ endpoints:
             header:
               Accept: ["application/json"]
             body:
+  - name: "builds"
+    vars:
+      service: "builds"
+    endpoint: "{{url}}/app/rest/latest/{{service}}"
+    current_base_key: ["build"]
+    desired_base_key: ["Builds"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: "https://www.jetbrains.com/help/teamcity/rest-api.html#RESTAPI-BuildRequests"
+    params:
+      querystring:
+        fields: ["build(id,number,status,queuedDate,finishDate,startDate,buildType(id,name,projectName))"]
+      header:
+        Accept: ["application/json"]
+      body:
