@@ -41,7 +41,7 @@ endpoints:
           documentation: "https://api.cloudflare.com/#dns-analytics-table"
           params:
             querystring:
-              metrics: ["queryCount,uncachedCount,staleCount"] # TODO: Add response times for paid plans
+              metrics: ["queryCount,uncachedCount,staleCount,responseTimeAvg"]
             header:
             body:
   - name: "accounts"
