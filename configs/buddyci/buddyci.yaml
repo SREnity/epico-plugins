@@ -55,7 +55,7 @@ endpoints:
                 endpoint_key_names:
                   workspace_domain: workspace_domain
                   "projects.name": project_name
-                documentation: "https://buddy.works/docs/api/general/workspaces/list-your-workspaces"
+                documentation: "https://buddy.works/docs/api/pipelines/create-manage-pipelines/list-pipelines"
                 params:
                   querystring:
                     status: ["ACTIVE"]
@@ -75,7 +75,7 @@ endpoints:
                         workspace_domain: workspace_domain
                         project_name: project_name
                         "pipelines.name": pipeline_name
-                      documentation: "https://buddy.works/docs/api/general/workspaces/list-your-workspaces"
+                      documentation: "https://buddy.works/docs/api/pipelines/executions/list"
                       params:
                         querystring:
                           status: ["ACTIVE"]
