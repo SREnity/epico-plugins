@@ -1,0 +1,25 @@
+name: "cfengine"
+paging:
+  #omit for now
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "Authorization"
+  - "api-token" # https://docs.cfengine.com/docs/3.12/reference-enterprise-api-ref-ldap-api.html
+  - "{{}}"
+paging_params:
+    #omit for now
+global_vars:
+endpoints:
+  - name: "status"
+    vars:
+      service: "status"
+    endpoint: "https://hub.cfengine.com/api/health-diagnostic/{{service}}"
+    current_base_key: ["totalFailed"]
+    desired_base_key: ["TotalFailed"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: "https://docs.cfengine.com/docs/3.12/reference-enterprise-api-ref-health-diagnostic.html"
+    params:
+      querystring:
+      header:
+      body:

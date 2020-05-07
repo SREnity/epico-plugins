@@ -1,5 +1,4 @@
 ---
-# TODO: Expand this with more of the API.
 name: "dyn"
 paging:
   location_to: ""
@@ -40,7 +39,7 @@ endpoints:
             service: "DDNS"
           endpoint: "https://api.dynect.net/REST/{{service}}/{{endpoint_key}}"
           current_base_key: [""]
-          desired_base_key: ["DDNS.{{endpoint_key}}.Data"]
+          desired_base_key: ["DDNS"]
           current_error_key: ["msgs.ERR_CD"]
           desired_error_key: ["Errors.dyn.{{service}}"]
           documentation: "https://help.dyn.com/get-ddns-services-api/"

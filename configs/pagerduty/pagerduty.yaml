@@ -1,5 +1,3 @@
----
-# TODO: Expand this with more of the API.
 name: "pagerduty"
 paging:
   location_to: "querystring"
@@ -41,8 +39,8 @@ endpoints:
     documentation: "https://developer.pagerduty.com/api-reference/reference/REST/openapiv3.json/paths/~1incidents/get"
     params:
       querystring:
-        statuses[]: ["triggered", "acknowledged"]
-        urgencies[]: ["high"]
+        statuses: ["triggered", "acknowledged"]
+        urgencies: ["high"]
       header:
         Accept: ["application/vnd.pagerduty+json;version=2"]
       body:
@@ -81,7 +79,7 @@ endpoints:
             service: "notification_rules"
           endpoint: "https://api.pagerduty.com/users/{{endpoint_key}}/{{service}}"
           current_base_key: ["notification_rules"]
-          desired_base_key: ["NotificationRules.{{endpoint_key}}.Rules"]
+          desired_base_key: ["NotificationRules"]
           current_error_key: [""]
           desired_error_key: [""]
           documentation: "https://developer.pagerduty.com/api-reference/reference/REST/openapiv3.json/paths/~1users~1%7Bid%7D~1notification_rules/get"

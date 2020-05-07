@@ -34,7 +34,7 @@ endpoints:
             service: "metric-data"
           endpoint: "{{domain}}/controller/rest/applications/{{endpoint_key}}/{{service}}"
           current_base_key: ["metric-datas"]
-          desired_base_key: ["MetricsDatas.{{endpoint_key}}.MetricDatas"]
+          desired_base_key: ["MetricsDatas"]
           current_error_key: ["message"]
           desired_error_key: ["Errors.appdynamics.{{service}}"]
           documentation: "https://docs.appdynamics.com/display/PRO45/Metric+and+Snapshot+API"
@@ -42,7 +42,7 @@ endpoints:
             name: application_name
           params:
             querystring:
-              metric-path: "Application Infrastructure Performance|*|Individual Nodes|*|Hardware Resources|CPU|%Busy&time-range-type=BEFORE_NOW&duration-in-mins=15" #here I added just for CPU abnormalities since last 15 mins
+              metric-path: ["Application Infrastructure Performance|*|Individual Nodes|*|Hardware Resources|CPU|%Busy&time-range-type=BEFORE_NOW&duration-in-mins=15"] #here I added just for CPU abnormalities since last 15 mins
             header:
             body:
       name:
@@ -51,7 +51,7 @@ endpoints:
             service: "health-rules"
           endpoint: "{{domain}}/controller/alerting/rest/v1/applications/{{endpoint_key}}/{{service}}"
           current_base_key: [""]
-          desired_base_key: ["HealthRules.{{endpoint_key}}.Data"]
+          desired_base_key: ["HealthRules"]
           current_error_key: ["message"]
           desired_error_key: ["Errors.appdynamics.{{service}}"]
           documentation: "https://docs.appdynamics.com/display/PRO45/Health+Rule+API#HealthRuleAPI-PropertyDetails"
@@ -61,14 +61,13 @@ endpoints:
             querystring:
             header:
             body:
-
       name:
         - name: "email-digests"
           vars:
             service: "email-digests"
           endpoint: "{{domain}}/controller/alerting/rest/v1/applications/{{endpoint_key}}/{{service}}"
           current_base_key: [""]
-          desired_base_key: ["EmailDigests.{{endpoint_key}}.Data"]
+          desired_base_key: ["EmailDigests"]
           current_error_key: ["message"]
           desired_error_key: ["Errors.appdynamics.{{service}}"]
           documentation: "https://docs.appdynamics.com/display/PRO45/Email+Digest+API"

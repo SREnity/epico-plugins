@@ -1,5 +1,3 @@
----
-# TODO: Expand this with more of the API.
 name: "pingdom"
 paging:
   location_to: "querystring"
@@ -24,8 +22,40 @@ endpoints:
     desired_base_key: ["Alerts"]
     current_error_key: ["error"]
     desired_error_key: ["Errors.{{service}}"]
+    documentation: "https://www.pingdom.com/api/2.1/#MethodGet+Actions+%28Alerts%29+List"
+    params:
+      querystring:
+      header:
+      body:
+  - name: "checks"
+    vars:
+      service: "checks"
+    endpoint: "https://api.pingdom.com/api/2.1/{{service}}"
+    current_base_key: ["checks"]
+    desired_base_key: ["Checks"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.pingdom.{{service}}"]
     documentation: ""
     params:
       querystring:
       header:
       body:
+    endpoints:
+      id:
+        - name: "summary.performance"
+          vars:
+            service: "summary.performance"
+          endpoint: "https://api.pingdom.com/api/2.1/{{service}}/{{endpoint_key}}"
+          current_base_key: ["summary.hours"]
+          desired_base_key: ["PerformanceSummary"]
+          current_error_key: ["error"]
+          desired_error_key: ["Errors.pingdom.{{service}}"]
+          documentation: "https://www.pingdom.com/api/2.1/#MethodGet+Check+List"
+          endpoint_key_names:
+            id: check_id
+          params:
+            querystring:
+              resolution: ["hour"]
+              from: ["240"] #for calculating downtime/statistics take last 10 days
+            header:
+            body:
