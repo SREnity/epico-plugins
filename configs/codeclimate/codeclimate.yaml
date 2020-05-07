@@ -1,0 +1,64 @@
+---
+# TODO: Expand this with more of the API.
+name: "codeclimate"
+paging:
+  location_from: ""
+  location_to: ""
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "CustomHeaderAuth"
+  - "Authorization"
+  - "Token token={{}}"
+endpoints:
+  - name: "orgs"
+    vars:
+      service: "orgs"
+    endpoint: "https://api.codeclimate.com/v1/{{service}}"
+    current_base_key: ["data"]
+    desired_base_key: ["Organizations"]
+    current_error_key: ["errors"]
+    desired_error_key: ["Errors.codeclimate.{{service}}"]
+    documentation: "https://developer.codeclimate.com/#organizations"
+    params:
+      querystring:
+      header:
+        Accept: ["application/vnd.api+json"]
+      body:
+    endpoints:
+      "data.id":
+        - name: "repos"
+          vars:
+            service: "repos"
+          endpoint: "https://api.codeclimate.com/v1/orgs/{{endpoint_key}}/{{service}}"
+          current_base_key: ["data"]
+          desired_base_key: ["Repositories"]
+          current_error_key: ["errors"]
+          desired_error_key: ["Errors.codeclimate.{{service}}"]
+          endpoint_key_names:
+            "data.attributes.name": organisation_name
+          documentation: "https://developer.codeclimate.com/#get-repositories"
+          params:
+            querystring:
+            header:
+            body:
+          endpoints:
+            "data.id":
+              - name: "test_reports"
+                vars:
+                  service: "test_reports"
+                endpoint: "https://api.codeclimate.com/v1/repos/{{endpoint_key}}/{{service}}"
+                current_base_key: ["data"]
+                desired_base_key: ["TestReports"]
+                current_error_key: ["errors"]
+                desired_error_key: ["Errors.codeclimate.{{service}}"]
+                endpoint_key_names:
+                  organisation_name: organisation_name
+                  "data.attributes.github_slug": repository_name
+                documentation: "https://developer.codeclimate.com/#get-test-coverage-reports"
+                params:
+                  querystring:
+                  header:
+                  body:
