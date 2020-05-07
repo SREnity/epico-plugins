@@ -49,6 +49,36 @@ endpoints:
             querystring:
             header:
             body:
+        - name: "project_jobs"
+          vars:
+            service: "jobs"
+          endpoint: "{{domain}}/api/v4/projects/{{endpoint_key}}/{{service}}"
+          current_base_key: [""]
+          desired_base_key: ["ProjectJobs"]
+          current_error_key: ["error"]
+          desired_error_key: ["Errors.gitlab.{{service}}"]
+          documentation: "https://docs.gitlab.com/ee/api/jobs.html"
+          endpoint_key_names:
+            name_with_namespace: project_name
+          params:
+            querystring:
+            header:
+            body:
+        - name: "project_deployments"
+          vars:
+            service: "deployments"
+          endpoint: "{{domain}}/api/v4/projects/{{endpoint_key}}/{{service}}"
+          current_base_key: [""]
+          desired_base_key: ["ProjectDeployments"]
+          current_error_key: ["error"]
+          desired_error_key: ["Errors.gitlab.{{service}}"]
+          documentation: "https://docs.gitlab.com/ee/api/deployments.html"
+          endpoint_key_names:
+            name_with_namespace: project_name
+          params:
+            querystring:
+            header:
+            body:
   - name: "runners"
     vars:
       service: "runners"
