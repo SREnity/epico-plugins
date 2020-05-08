@@ -1,0 +1,62 @@
+name: "chef"
+paging:
+  location_from: "querystring"
+  location_to: ""
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "Authorization"
+  - "api-token"
+  - "{{}}" # Token
+paging_params:
+  - "RegexJsonPagingPeek"
+  - "<([^>]*)>; rel=\"next\""
+global_vars:
+  domain: "DOMAIN"
+endpoints:
+  - name: "nodes"
+    vars:
+      service: "search"
+    endpoint: "{{domain}}/api/v0/compliance/reporting/nodes/{{service}}"
+    current_base_key: ["nodes"]
+    desired_base_key: ["Nodes"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: "https://automate.chef.io/docs/api/#operation/ListNodes"
+    params:
+      querystring:
+      header:
+      body:
+    endpoints:
+      id:
+        - name: "run_counts"
+          vars:
+            service: "run_counts"
+          endpoint: "{{domain}}/api/v0/cfgmgmt/stats/{{service}}?node_id={{endpoint_key}}"
+          current_base_key: ["failure, success, total"]
+          desired_base_key: ["Failure, Success, Total"]
+          current_error_key: [""]
+          desired_error_key: [""]
+          documentation: "https://automate.chef.io/docs/api/#operation/GetRunsCounts"
+          endpoint_key_names:
+            id: node_id
+          params:
+            querystring:
+            header:
+            body:
+      id:
+        - name: "runs"
+          vars:
+            service: "runs"
+          endpoint: "{{domain}}/api/v0/cfgmgmt/nodes/{{endpoint_key}}/{{service}}"
+          current_base_key: [""]
+          desired_base_key: ["Runs"]
+          current_error_key: [""]
+          desired_error_key: [""]
+          documentation: "https://automate.chef.io/docs/api/#operation/GetRuns"
+          params:
+            querystring:
+            header:
+            body:

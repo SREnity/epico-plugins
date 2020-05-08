@@ -1,5 +1,3 @@
----
-# TODO: Expand this with more of the API.
 name: "pagerduty"
 paging:
   location_to: "querystring"
@@ -30,3 +28,62 @@ endpoints:
       header:
         Accept: ["application/vnd.pagerduty+json;version=2"]
       body:
+  - name: "incidents"
+    vars:
+      service: "incidents"
+    endpoint: "https://api.pagerduty.com/{{service}}"
+    current_base_key: ["incidents"]
+    desired_base_key: ["Incidents"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: "https://developer.pagerduty.com/api-reference/reference/REST/openapiv3.json/paths/~1incidents/get"
+    params:
+      querystring:
+        statuses: ["triggered", "acknowledged"]
+        urgencies: ["high"]
+      header:
+        Accept: ["application/vnd.pagerduty+json;version=2"]
+      body:
+  - name: "escalation_policies"
+    vars:
+      service: "escalation_policies"
+    endpoint: "https://api.pagerduty.com/{{service}}"
+    current_base_key: ["escalation_policies"]
+    desired_base_key: ["EscalationPolicies"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: "https://developer.pagerduty.com/api-reference/reference/REST/openapiv3.json/paths/~1escalation_policies/get"
+    params:
+      querystring:
+      header:
+        Accept: ["application/vnd.pagerduty+json;version=2"]
+      body:
+  - name: "users"
+    vars:
+      service: "users"
+    endpoint: "https://api.pagerduty.com/{{service}}"
+    current_base_key: ["users"]
+    desired_base_key: ["Users"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: "https://developer.pagerduty.com/api-reference/reference/REST/openapiv3.json/paths/~1users/get"
+    params:
+      querystring:
+      header:
+        Accept: ["application/vnd.pagerduty+json;version=2"]
+      body:
+    endpoints:
+      id:
+        - name: "notification_rules"
+          vars:
+            service: "notification_rules"
+          endpoint: "https://api.pagerduty.com/users/{{endpoint_key}}/{{service}}"
+          current_base_key: ["notification_rules"]
+          desired_base_key: ["NotificationRules"]
+          current_error_key: [""]
+          desired_error_key: [""]
+          documentation: "https://developer.pagerduty.com/api-reference/reference/REST/openapiv3.json/paths/~1users~1%7Bid%7D~1notification_rules/get"
+          params:
+            querystring:
+            header:
+            body:
