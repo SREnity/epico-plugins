@@ -6,7 +6,7 @@ paging:
   indicator_to_field: "NextToken" # Field name paging info is passed back in.
   indicator_from_structure: "param" # response/iterator/etc ???necessary???
 plugin: "FULL_PATH_TO/epico-plugins/plugins/aws/aws.so"
-endpoints: 
+endpoints:
   - name: "ec2_vpcs"
     vars:
       service: "ec2"
@@ -272,6 +272,22 @@ endpoints:
       querystring:
         Action: [ "DescribeAccountAttributes" ] # All flow lists iterated sequentially.
         Version: [ "2014-10-31" ]
+      header:
+      body:
+  - name: "cloudfront_distributions"
+    vars:
+      service: "cloudfront"
+      region: "us-east-1"
+      xml_tags: "DistributionSummary"
+    endpoint: "https://{{service}}.amazonaws.com/2019-03-26/distribution"
+    current_base_key: ["DistributionList"]
+    desired_base_key: ["DistributionList"]
+    current_error_key: ["ErrorResponse.Error"] # No documentation
+    desired_error_key: ["Errors.{{service}}.groups"]
+    documentation: "https://docs.aws.amazon.com/cloudfront/latest/APIReference/API_ListDistributions.html"
+    params:
+      querystring:
+        MaxItems: ["1000"]
       header:
       body:
   - name: "iam_groups"
