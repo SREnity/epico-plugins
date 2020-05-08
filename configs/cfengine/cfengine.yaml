@@ -1,14 +1,18 @@
 name: "cfengine"
 paging:
-  #omit for now
+  location_from: "querystring"
+  location_to: ""
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
 plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
 auth_params:
-  - "Authorization"
-  - "api-token" # https://docs.cfengine.com/docs/3.12/reference-enterprise-api-ref-ldap-api.html
-  - "{{}}"
+  - "BasicAuth"
+  - "{{}}" # Username
+  - "{{}}" # Password
 paging_params:
-    #omit for now
-global_vars:
+  - "RegexJsonPagingPeek"
+  - "<([^>]*)>; rel=\"next\""
 endpoints:
   - name: "status"
     vars:

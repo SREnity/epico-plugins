@@ -7,9 +7,10 @@ paging:
   indicator_from_structure: ""
 plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
 auth_params:
-  # Authentication must be implemented on Backend side
-paging_params:
-  # Needs to be implemented on Backend side
+  - "BasicAuth"
+  - "{{}}" # Username
+  - "{{}}" # AccountName
+  - "{{}}" # Password
 global_vars:
   domain: "DOMAIN"
 endpoints:

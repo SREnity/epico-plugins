@@ -1,4 +1,3 @@
----
 name: "dyn"
 paging:
   location_to: ""
@@ -44,7 +43,7 @@ endpoints:
           desired_error_key: ["Errors.dyn.{{service}}"]
           documentation: "https://help.dyn.com/get-ddns-services-api/"
           endpoint_key_names:
-            id: zone_name
+            zone: zone_name
           params:
             querystring:
             header:
