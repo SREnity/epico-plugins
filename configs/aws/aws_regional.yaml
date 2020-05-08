@@ -1,7 +1,7 @@
 ---
 name: "awsinfra"
 vars_data:
-  region: [ "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "eu-north-1", "sa-east-1"] #, "us-gov-east-1", "us-gov-west-1" ] 
+  region: [ "us-east-1", "us-east-2", "us-west-1", "us-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "ap-northeast-3", "ca-central-1", "eu-central-1", "eu-west-1", "eu-west-2", "eu-west-3", "eu-north-1", "sa-east-1"] #, "us-gov-east-1", "us-gov-west-1" ]
 vars:
   region: "{{region}}"
 paging:
@@ -10,7 +10,7 @@ paging:
   indicator_to_field: "NextToken" # Field name paging info is passed back in.
   indicator_from_structure: "param" # response/iterator/etc ???necessary???
 plugin: "FULL_PATH_TO/epico-plugins/plugins/aws/aws.so"
-endpoints: 
+endpoints:
   - name: "ec2"
     vars:
       xml_tags: "item"
@@ -184,6 +184,25 @@ endpoints:
       querystring:
         Action: [ "DescribeLoadBalancers" ] # All flow lists iterated sequentially.
         Version: [ "2012-06-01" ]
+      header:
+      body:
+  - name: "opsworks_stacks"
+    vars:
+      service: "opsworks"
+      xml_tags: "member"
+    paging:
+      location_to: ""
+      indicator_from_field: ""
+      indicator_to_field: ""
+      indicator_from_structure: "param"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    current_base_key: ["Stacks"]
+    desired_base_key: ["Stacks"]
+    current_error_key: ["ErrorResponse.Error"]
+    desired_error_key: ["Errors.{{service}}.opsworks_stacks"] # No documentation
+    documentation: "https://docs.aws.amazon.com/opsworks/latest/APIReference/API_DescribeStacks.html"
+    params:
+      querystring:
       header:
       body:
   - name: "autoscaling_asg"
