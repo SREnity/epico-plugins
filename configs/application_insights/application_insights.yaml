@@ -1,0 +1,27 @@
+name: "application_insights"
+paging:
+  location_to: ""
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: "param"
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "CustomHeaderAuth"
+  - "X-Api-Key"
+  - "{{}}"
+global_vars:
+  app_id: "APP_ID"
+endpoints:
+  - name: "requests_duration"
+    vars:
+      service: "requests_duration"
+    endpoint: "https://api.applicationinsights.io/v1/apps/{{app_id}}/metrics/requests/duration"
+    current_base_key: ["value"]
+    desired_base_key: ["RequestsDuration"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.application_insights.{{service}}"]
+    documentation: "https://dev.applicationinsights.io/documentation/Using-the-API/Metrics"
+    params:
+      querystring:
+      header:
+      body:
