@@ -1,0 +1,58 @@
+name: "azure_devops"
+paging:
+  location_to: "querystring"
+  indicator_from_field: ""
+  indicator_to_field: ""
+  indicator_from_structure: ""
+plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+auth_params:
+  - "BasicAuth"
+  - "{{}}" # username
+  - "{{}}" # personal API token
+global_vars:
+  organization: "ORGANIZATION"
+endpoints:
+  - name: "projects"
+    vars:
+      service: "projects"
+    endpoint: "https://dev.azure.com/{{organization}}/_apis/{{service}}"
+    current_base_key: ["value"]
+    desired_base_key: ["Projects"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: "https://docs.microsoft.com/en-us/rest/api/azure/devops/core/projects/list"
+    params:
+      querystring:
+        api-version: ["5.1"]
+      header:
+      body:
+    endpoints:
+      "value.name":
+        - name: "builds"
+          vars:
+            service: "builds"
+          endpoint: "https://dev.azure.com/{{organization}}/{{endpoint_key}}/_apis/build/{{service}}"
+          current_base_key: ["value"]
+          desired_base_key: ["Builds"]
+          current_error_key: [""]
+          desired_error_key: [""]
+          documentation: "https://docs.microsoft.com/en-us/rest/api/azure/devops/build/builds/list?view=azure-devops-rest-5.1"
+          params:
+            querystring:
+              api-version: ["5.1"]
+            header:
+            body:
+        - name: "deployments"
+          vars:
+            service: "deployments"
+          endpoint: "https://vsrm.dev.azure.com/speedywizard/speedywizard/_apis/release/{{service}}"
+          current_base_key: ["value"]
+          desired_base_key: ["Deployments"]
+          current_error_key: [""]
+          desired_error_key: [""]
+          documentation: "https://docs.microsoft.com/en-us/rest/api/azure/devops/release/deployments/list?view=azure-devops-rest-5.1"
+          params:
+            querystring:
+              api-version: ["5.1"]
+            header:
+            body:
