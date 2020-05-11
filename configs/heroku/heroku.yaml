@@ -45,6 +45,22 @@ endpoints:
             header:
               Accept: ["application/vnd.heroku+json; version=3"]
             body:
+        - name: "domains"
+          vars:
+            service: "domains"
+          endpoint: "https://api.heroku.com/apps/{{endpoint_key}}/{{service}}"
+          current_base_key: [""]
+          desired_base_key: ["ApplicationDomains"]
+          current_error_key: ["message"]
+          desired_error_key: ["Errors.heroku.{{service}}"]
+          endpoint_key_names:
+            name: app_name
+          documentation: "https://devcenter.heroku.com/articles/platform-api-reference#domain-list"
+          params:
+            querystring:
+            header:
+              Accept: ["application/vnd.heroku+json; version=3"]
+            body:
         - name: "dynos"
           vars:
             service: "dynos"

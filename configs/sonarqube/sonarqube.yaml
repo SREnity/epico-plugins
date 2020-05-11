@@ -63,7 +63,7 @@ endpoints:
           documentation: ""
           params:
             querystring:
-              metricKeys: ["sqale_debt_ratio,complexity,duplicated_lines_density,coverage,test_success_density,sqale_index,new_violations,complexity_in_classes,complexity_in_functions"]
+              metricKeys: ["sqale_debt_ratio,complexity,bugs,security_rating,duplicated_lines_density,coverage,test_success_density,sqale_index,new_violations,complexity_in_classes,complexity_in_functions"]
               qualifiers: ["TRK"] # Per project
               ps: ["500"] # Page size
             header:

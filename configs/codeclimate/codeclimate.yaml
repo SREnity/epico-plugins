@@ -62,3 +62,19 @@ endpoints:
                   querystring:
                   header:
                   body:
+              - name: "builds"
+                vars:
+                  service: "builds"
+                endpoint: "https://api.codeclimate.com/v1/repos/{{endpoint_key}}/{{service}}"
+                current_base_key: ["data"]
+                desired_base_key: ["Builds"]
+                current_error_key: ["errors"]
+                desired_error_key: ["Errors.codeclimate.{{service}}"]
+                endpoint_key_names:
+                  organisation_name: organisation_name
+                  github_slug: repository_name
+                documentation: "https://developer.codeclimate.com/#get-builds"
+                params:
+                  querystring:
+                  header:
+                  body:

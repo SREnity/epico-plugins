@@ -31,3 +31,16 @@ endpoints:
         tree: ["jobs[name,url,lastBuild[number,result,duration,timestamp],builds[number,result,timestamp]]"]
       header:
       body:
+  - name: "alerts"
+    vars:
+      service: "monitoring-alerts"
+    endpoint: "{{domain}}/{{service}}/api/json"
+    current_base_key: ["conditions"]
+    desired_base_key: ["Alerts"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.cloudbees.{{service}}"]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:

@@ -44,6 +44,38 @@ endpoints:
             body:
           endpoints:
             "projects.name":
+              - name: "pullrequests"
+                vars:
+                  service: "pulls"
+                endpoint: "https://api.buddy.works/workspaces/{{workspace_domain}}/projects/{{endpoint_key}}/repository/{{service}}"
+                current_base_key: ["pull_requests"]
+                desired_base_key: ["PullRequests"]
+                current_error_key: ["errors"]
+                desired_error_key: ["Errors.buddy.{{service}}"]
+                endpoint_key_names:
+                  workspace_domain: workspace_domain
+                  "projects.name": project_name
+                documentation: "https://buddy.works/docs/api/version-control/pull-requests/list-pull-requests"
+                params:
+                  querystring:
+                  header:
+                  body:
+              - name: "tags"
+                vars:
+                  service: "tags"
+                endpoint: "https://api.buddy.works/workspaces/{{workspace_domain}}/projects/{{endpoint_key}}/repository/{{service}}"
+                current_base_key: ["tags"]
+                desired_base_key: ["Tags"]
+                current_error_key: ["errors"]
+                desired_error_key: ["Errors.buddy.{{service}}"]
+                endpoint_key_names:
+                  workspace_domain: workspace_domain
+                  "projects.name": project_name
+                documentation: "https://buddy.works/docs/api/version-control/tags/list-tags"
+                params:
+                  querystring:
+                  header:
+                  body:
               - name: "pipelines"
                 vars:
                   service: "pipelines"

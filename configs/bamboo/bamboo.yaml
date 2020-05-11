@@ -17,10 +17,24 @@ paging_params:
 global_vars:
   domain: "DOMAIN"
 endpoints:
+  - name: "queue"
+    vars:
+      service: "queue"
+    endpoint: "{{domain}}/rest/api/latest/{{service}}.json"
+    current_base_key: ["queuedBuilds"]
+    desired_base_key: ["QueuedBuildsStats"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.bamboo.{{service}}"]
+    documentation: "https://developer.atlassian.com/server/bamboo/bamboo-rest-resources/#build-queue-service"
+    params:
+      querystring:
+        os_type: ["authBasic"]
+      header:
+      body:
   - name: "plans"
     vars:
       service: "plan"
-    endpoint: "{{domain}}/rest/api/latest/plan.json"
+    endpoint: "{{domain}}/rest/api/latest/{{service}}.json"
     current_base_key: ["plans.plan"]
     desired_base_key: ["Plans"]
     current_error_key: ["error"]
