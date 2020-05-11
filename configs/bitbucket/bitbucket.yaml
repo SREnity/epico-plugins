@@ -22,8 +22,23 @@ endpoints:
     desired_base_key: ["Repositories"]
     current_error_key: [""]
     desired_error_key: [""]
-    documentation: ""
+    documentation: "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories"
     params:
       querystring:
       header:
       body:
+    endpoints:
+      "values.full_name":
+        - name: "pull_requests"
+          vars:
+            service: "pullrequests"
+          endpoint: "https://api.bitbucket.org/2.0/repositories/{{username}}/{{endpoint_key}}/{{service}}"
+          current_base_key: ["values"]
+          desired_base_key: ["PullRequests"]
+          current_error_key: [""]
+          desired_error_key: [""]
+          documentation: "https://developer.atlassian.com/bitbucket/api/2/reference/resource/repositories/%7Bworkspace%7D/%7Brepo_slug%7D/pullrequests"
+          params:
+            querystring:
+            header:
+            body:

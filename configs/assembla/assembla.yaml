@@ -14,6 +14,20 @@ auth_params:
   - "X-Api-Secret"
   - "{{}}" # Api Secret
 endpoints:
+  - name: "unread_mentions"
+    vars:
+      service: "mentions"
+    endpoint: "https://api.assembla.com/v1/user/{{service}}.json"
+    current_base_key: [""]
+    desired_base_key: ["Mentions"]
+    current_error_key: ["error_description"]
+    desired_error_key: ["Errors.assembla.{{service}}"]
+    documentation: "https://api-docs.assembla.cc/content/ref/mentions_index.html"
+    params:
+      querystring:
+        unread: ["true"]
+      header:
+      body:
   - name: "spaces"
     vars:
       service: "spaces"
@@ -53,6 +67,19 @@ endpoints:
           current_error_key: ["error_description"]
           desired_error_key: ["Errors.assembla.{{service}}"]
           documentation: "https://api-docs.assembla.cc/content/ref/tickets_all.html"
+          endpoint_key_names:
+            name: space_name
+          params:
+            querystring:
+            header:
+            body:
+        - name: "active_tickets"
+          endpoint: "https://api.assembla.com/v1/spaces/{{endpoint_key}}/tickets/my_active.json"
+          current_base_key: [""]
+          desired_base_key: ["ActiveTickets"]
+          current_error_key: ["error_description"]
+          desired_error_key: ["Errors.assembla.active_tickets"]
+          documentation: "https://api-docs.assembla.cc/content/ref/tickets_my_active.html"
           endpoint_key_names:
             name: space_name
           params:

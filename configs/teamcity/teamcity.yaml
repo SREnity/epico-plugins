@@ -48,6 +48,23 @@ endpoints:
             header:
               Accept: ["application/json"]
             body:
+        - name: "queued_builds"
+          vars:
+            service: "buildQueue"
+          endpoint: "{{url}}/app/rest/{{service}}"
+          current_base_key: ["build"]
+          desired_base_key: ["QueuedBuilds"]
+          current_error_key: [""]
+          desired_error_key: [""]
+          endpoint_key_names:
+            "project.name": project_name
+          documentation: "https://www.jetbrains.com/help/teamcity/rest-api.html#RESTAPI-QueuedBuilds"
+          params:
+            querystring:
+              locator: ["project:(id:{{endpoint_key}})"]
+            header:
+              Accept: ["application/json"]
+            body:
   - name: "builds"
     vars:
       service: "builds"

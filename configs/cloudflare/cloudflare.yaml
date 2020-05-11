@@ -44,6 +44,21 @@ endpoints:
               metrics: ["queryCount,uncachedCount,staleCount,responseTimeAvg"]
             header:
             body:
+        - name: "dnssec"
+          vars:
+            service: "dnssec"
+          endpoint: "https://api.cloudflare.com/client/v4/zones/{{endpoint_key}}/{{service}}"
+          current_base_key: ["result"]
+          desired_base_key: ["DNSSEC"]
+          current_error_key: ["errors"]
+          desired_error_key: ["https://api.cloudflare.com/#dnssec-dnssec-details"]
+          endpoint_key_names:
+            "result.name": zone_name
+          documentation: "https://api.cloudflare.com/#dns-analytics-table"
+          params:
+            querystring:
+            header:
+            body:
   - name: "accounts"
     vars:
       service: "accounts"
