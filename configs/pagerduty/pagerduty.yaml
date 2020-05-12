@@ -39,8 +39,8 @@ endpoints:
     documentation: "https://developer.pagerduty.com/api-reference/reference/REST/openapiv3.json/paths/~1incidents/get"
     params:
       querystring:
-        statuses: ["triggered", "acknowledged"]
-        urgencies: ["high"]
+        statuses[]: ["triggered", "acknowledged"]
+        urgencies[]: ["high"]
       header:
         Accept: ["application/vnd.pagerduty+json;version=2"]
       body:

@@ -17,8 +17,8 @@ endpoints:
     endpoint: "https://api.pingdom.com/api/3.1/{{service}}"
     current_base_key: ["actions.alerts"]
     desired_base_key: ["Alerts"]
-    current_error_key: ["error"]
-    desired_error_key: ["Errors.{{service}}"]
+    current_error_key: ["error.errormessage"]
+    desired_error_key: ["Errors.pingdom.{{service}}"]
     documentation: "https://docs.pingdom.com/api/#tag/Actions/paths/~1actions/get"
     params:
       querystring:
@@ -30,7 +30,7 @@ endpoints:
     endpoint: "https://api.pingdom.com/api/3.1/{{service}}"
     current_base_key: ["checks"]
     desired_base_key: ["Checks"]
-    current_error_key: ["error"]
+    current_error_key: ["error.errormessage"]
     desired_error_key: ["Errors.pingdom.{{service}}"]
     documentation: "https://docs.pingdom.com/api/#tag/Checks/paths/~1checks/get"
     params:
@@ -45,9 +45,9 @@ endpoints:
           endpoint: "https://api.pingdom.com/api/3.1/{{service}}/{{endpoint_key}}"
           current_base_key: ["summary.hours"]
           desired_base_key: ["PerformanceSummary"]
-          current_error_key: ["error"]
+          current_error_key: ["error.errormessage"]
           desired_error_key: ["Errors.pingdom.{{service}}"]
-          documentation: "https://docs.pingdom.com/api/#tag/Summary.performance/paths/~1summary.performance~1{checkid}/get"
+          documentation: "https://docs.pingdom.com/api/#tag/Summary.performance/paths/~1summary.performance~1"
           endpoint_key_names:
             id: check_id
           params:

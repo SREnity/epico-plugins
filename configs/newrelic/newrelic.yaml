@@ -23,6 +23,25 @@ endpoints:
       querystring:
       header:
       body:
+    endpoints:
+      id:
+        - name: "metrics"
+          vars:
+            service: "metrics"
+          endpoint: "https://api.newrelic.com/v2/applications/{{endpoint_key}}/{{service}}/data.json"
+          current_base_key: ["metric_data"]
+          desired_base_key: ["MetricData"]
+          current_error_key: ["error"]
+          desired_error_key: ["Errors.{{service}}"]
+          documentation: "https://docs.newrelic.com/docs/apis/rest-api-v2/browser-examples-v2/obtaining-browser-end-user-page-load-time-data-v2#DOM_processing_time"
+          endpoint_key_names:
+            id: app_id
+          params:
+            querystring:
+              names: ["EndUser/RB"]
+              values: ["average_dom_content_load_time"]
+            header:
+            body:
   - name: "alerts_policies"
     vars:
       service: "alerts_policies"

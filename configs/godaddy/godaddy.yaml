@@ -24,3 +24,16 @@ endpoints:
       querystring:
       header:
       body:
+  - name: "subscriptions"
+    vars:
+      service: "subscriptions"
+    endpoint: "https://api.godaddy.com/v1/{{service}}"
+    current_base_key: ["subscriptions"]
+    desired_base_key: ["Subscriptions"]
+    current_error_key: ["error_description"]
+    desired_error_key: ["Errors.godaddy.{{service}}"]
+    documentation: "https://developer.godaddy.com/doc/endpoint/subscriptions#/v1/list"
+    params:
+      querystring:
+      header:
+      body:
