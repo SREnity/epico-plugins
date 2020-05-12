@@ -25,3 +25,16 @@ endpoints:
       querystring:
       header:
       body:
+  - name: "pageviews_duration_metric"
+    vars:
+      service: "pageviews_duration"
+    endpoint: "https://api.applicationinsights.io/v1/apps/{{app_id}}/metrics/pageViews/duration"
+    current_base_key: ["value"]
+    desired_base_key: ["PageViewsDuration"]
+    current_error_key: [""]
+    desired_error_key: [""]
+    documentation: "https://dev.applicationinsights.io/reference"
+    params:
+      querystring:
+      header:
+      body:
