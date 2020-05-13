@@ -5,24 +5,21 @@ paging:
   indicator_to_field: ""
   indicator_from_structure: ""
 plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
+skip_content_type: true
 auth_params:
-  - "CustomHeaderAndBasicAuth"
-  - "{{}}" # Username
-  - "{{}}" # Password
-  - "App-Key"
-  - "{{}}" # App Key
-  - "Account-Email"
-  - "{{}}" # Owner account email
+  - "CustomHeaderAuth"
+  - "Authorization"
+  - "Bearer {{}}" # API token
 endpoints:
   - name: "alerts"
     vars:
       service: "actions"
-    endpoint: "https://api.pingdom.com/api/2.1/{{service}}"
+    endpoint: "https://api.pingdom.com/api/3.1/{{service}}"
     current_base_key: ["actions.alerts"]
     desired_base_key: ["Alerts"]
     current_error_key: ["error"]
     desired_error_key: ["Errors.{{service}}"]
-    documentation: "https://www.pingdom.com/api/2.1/#MethodGet+Actions+%28Alerts%29+List"
+    documentation: "https://docs.pingdom.com/api/#tag/Actions/paths/~1actions/get"
     params:
       querystring:
       header:
@@ -30,12 +27,12 @@ endpoints:
   - name: "checks"
     vars:
       service: "checks"
-    endpoint: "https://api.pingdom.com/api/2.1/{{service}}"
+    endpoint: "https://api.pingdom.com/api/3.1/{{service}}"
     current_base_key: ["checks"]
     desired_base_key: ["Checks"]
     current_error_key: ["error"]
     desired_error_key: ["Errors.pingdom.{{service}}"]
-    documentation: ""
+    documentation: "https://docs.pingdom.com/api/#tag/Checks/paths/~1checks/get"
     params:
       querystring:
       header:
@@ -45,12 +42,12 @@ endpoints:
         - name: "summary.performance"
           vars:
             service: "summary.performance"
-          endpoint: "https://api.pingdom.com/api/2.1/{{service}}/{{endpoint_key}}"
+          endpoint: "https://api.pingdom.com/api/3.1/{{service}}/{{endpoint_key}}"
           current_base_key: ["summary.hours"]
           desired_base_key: ["PerformanceSummary"]
           current_error_key: ["error"]
           desired_error_key: ["Errors.pingdom.{{service}}"]
-          documentation: "https://www.pingdom.com/api/2.1/#MethodGet+Check+List"
+          documentation: "https://docs.pingdom.com/api/#tag/Summary.performance/paths/~1summary.performance~1{checkid}/get"
           endpoint_key_names:
             id: check_id
           params:
