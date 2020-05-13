@@ -6,12 +6,10 @@ paging:
   indicator_from_structure: "full_url"
 plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
 auth_params:
-  - "Oauth2TwoLegAuth"
+  - "OneloginAuth"
   - "{{}}" # Client ID
   - "{{}}" # Client Secret
-  - "{{}}" # Scopes (comma delimited string)
   - "https://api.us.onelogin.com/auth/oauth2/token" # Token URL
-  - "{{}}" # Endpoint params (string with ":" key/value separator and "," between
 # TODO: support both US and EU
 endpoints:
   - name: "users"

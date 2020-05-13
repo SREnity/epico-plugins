@@ -50,6 +50,8 @@ func PluginAuth(apiRequest generic_structs.ApiRequest, authParams []string) gene
 		return utils.Oauth2TwoLegAuth(apiRequest, authParams[1:])
 	case "SessionTokenAuth":
 		return utils.SessionTokenAuth(apiRequest, authParams[1:])
+	case "OneloginAuth":
+		return utils.OneloginAuth(apiRequest, authParams[1:])
 	default:
 		return apiRequest
 	}
