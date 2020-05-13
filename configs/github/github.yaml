@@ -29,3 +29,30 @@ endpoints:
       querystring:
       header:
       body:
+  - name: "issues"
+    vars:
+      service: "issues"
+    endpoint: "https://api.github.com/{{service}}"
+    current_base_key: [""]
+    desired_base_key: ["Issues"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.github.{{service}}"]
+    documentation: "https://developer.github.com/v3/issues/"
+    params:
+      querystring:
+        labels: ["bug"]
+      header:
+      body:
+  - name: "rate_limit"
+    vars:
+      service: "rate_limit"
+    endpoint: "https://api.github.com/{{service}}"
+    current_base_key: ["resources"]
+    desired_base_key: ["Resources"]
+    current_error_key: ["error"]
+    desired_error_key: ["Errors.github.{{service}}"]
+    documentation: "https://developer.github.com/v3/rate_limit/"
+    params:
+      querystring:
+      header:
+      body:

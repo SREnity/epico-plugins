@@ -56,3 +56,16 @@ endpoints:
         type: ["PASSWORD"]
       header:
       body:
+  - name: "trusted_origins"
+    vars:
+      service: "trustedOrigins"
+    endpoint: "https://{{subdomain}}.okta.com/api/v1/{{service}}"
+    current_base_key: [""]
+    desired_base_key: ["TrustedOrigins"]
+    current_error_key: ["errorCauses"]
+    desired_error_key: ["Errors.okta.{{service}}"]
+    documentation: "https://developer.okta.com/docs/reference/api/trusted-origins/#list-all-trusted-originst"
+    params:
+      querystring:
+      header:
+      body:
