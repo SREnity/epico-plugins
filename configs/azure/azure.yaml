@@ -9,12 +9,13 @@ paging:
 plugin: "FULL_PATH_TO/epico-plugins/plugins/generic-json/generic-json.so"
 auth_params:
   - "Oauth2TwoLegAuth"
-  - "{{}}" # Client ID 
+  - "{{}}" # Client ID
   - "{{}}" # Client Secret
-  - "{{}}" # Scopes (comma delimited string)
+  - "{{}}" # Scopes
   - "{{}}" # Token URL
-  - "{{}}" # Endpoint params (string with ":" key/value separator and "," between 
-endpoints: 
+  - "resource|https://management.azure.com/" # Endpoint params (string with "|" key/value separator and "," between pairs
+  - "in_params" # Auth style
+endpoints:
   - name: "subscriptions"
     vars:
       service: "subscriptions"
