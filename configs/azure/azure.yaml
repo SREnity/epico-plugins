@@ -27,6 +27,314 @@ endpoints:
     documentation: ""
     params:
       querystring:
-        api-version: ["2014-04-01-preview"]
+        api-version: ["2020-01-01"]
       header:
       body:
+    endpoints:
+      "value.subscriptionId":
+        - name: "security_contacts"
+          vars:
+            service: "securityContacts"
+          endpoint: "https://management.azure.com/subscriptions/{{endpoint_key}}/providers/Microsoft.Security/{{service}}"
+          current_base_key: ["value"]
+          desired_base_key: ["SecurityContacts"]
+          current_error_key: [""]
+          desired_error_key: [""]
+          documentation: "https://docs.microsoft.com/en-us/rest/api/securitycenter/securitycontacts/list"
+          endpoint_key_names:
+            "{{endpoint_key}}": subscription_id
+          params:
+            querystring:
+              api-version: ["2017-08-01-preview"]
+            header:
+            body:
+        - name: "resource_groups"
+          vars:
+            service: "resourcegroups"
+          endpoint: "https://management.azure.com/subscriptions/{{endpoint_key}}/{{service}}"
+          current_base_key: ["value"]
+          desired_base_key: ["ResourceGroups"]
+          current_error_key: [""]
+          desired_error_key: [""]
+          documentation: "https://docs.microsoft.com/en-us/rest/api/resources/resourcegroups/list"
+          endpoint_key_names:
+            "{{endpoint_key}}": subscription_id
+          params:
+            querystring:
+              api-version: ["2019-10-01"]
+            header:
+            body:
+          endpoints:
+            "value.name":
+              - name: "network_security_groups"
+                vars:
+                  service: "networkSecurityGroups"
+                endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{endpoint_key}}/providers/Microsoft.Network/{{service}}"
+                current_base_key: ["value"]
+                desired_base_key: ["NetworkSecurityGroups"]
+                current_error_key: [""]
+                desired_error_key: [""]
+                documentation: "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/list"
+                endpoint_key_names:
+                  subscription_id: subscription_id
+                  "{{endpoint_key}}": resource_group_name
+                params:
+                  querystring:
+                    api-version: ["2020-04-01"]
+                  header:
+                  body:
+              - name: "web_application_firewall_policies"
+                vars:
+                  service: "ApplicationGatewayWebApplicationFirewallPolicies"
+                endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{endpoint_key}}/providers/Microsoft.Network/{{service}}"
+                current_base_key: ["value"]
+                desired_base_key: ["WAFPolicies"]
+                current_error_key: [""]
+                desired_error_key: [""]
+                documentation: "https://docs.microsoft.com/en-us/rest/api/virtualnetwork/networksecuritygroups/list"
+                endpoint_key_names:
+                  subscription_id: subscription_id
+                  "{{endpoint_key}}": resource_group_name
+                params:
+                  querystring:
+                    api-version: ["2020-04-01"]
+                  header:
+                  body:
+              - name: "jit_network_access_policies"
+                vars:
+                  service: "jitNetworkAccessPolicies"
+                endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{endpoint_key}}/providers/Microsoft.Security/{{service}}"
+                current_base_key: ["value"]
+                desired_base_key: ["JITPolicies"]
+                current_error_key: [""]
+                desired_error_key: [""]
+                documentation: "https://docs.microsoft.com/en-us/rest/api/securitycenter/jitnetworkaccesspolicies/listbyresourcegroup"
+                endpoint_key_names:
+                  subscription_id: subscription_id
+                  "{{endpoint_key}}": resource_group_name
+                params:
+                  querystring:
+                    api-version: ["2020-01-01"]
+                  header:
+                  body:
+              - name: "alerts"
+                vars:
+                  service: "alerts"
+                endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{endpoint_key}}/providers/Microsoft.Security/{{service}}"
+                current_base_key: ["value"]
+                desired_base_key: ["SecurityCenterAlerts"]
+                current_error_key: [""]
+                desired_error_key: [""]
+                documentation: "https://docs.microsoft.com/en-us/rest/api/securitycenter/alerts/listbyresourcegroup"
+                endpoint_key_names:
+                  subscription_id: subscription_id
+                  "{{endpoint_key}}": resource_group_name
+                params:
+                  querystring:
+                    api-version: ["2019-01-01"]
+                  header:
+                  body:
+              - name: "disks"
+                vars:
+                  service: "disks"
+                endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{endpoint_key}}/providers/Microsoft.Compute/{{service}}"
+                current_base_key: ["value"]
+                desired_base_key: ["VMDisks"]
+                current_error_key: [""]
+                desired_error_key: [""]
+                documentation: "https://docs.microsoft.com/en-us/rest/api/compute/disks/listbyresourcegroup"
+                endpoint_key_names:
+                  subscription_id: subscription_id
+                  "{{endpoint_key}}": resource_group_name
+                params:
+                  querystring:
+                    api-version: ["2019-07-01"]
+                  header:
+                  body:
+              - name: "sql_servers"
+                vars:
+                  service: "servers"
+                endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{endpoint_key}}/providers/Microsoft.Sql/{{service}}"
+                current_base_key: ["value"]
+                desired_base_key: ["SQLServers"]
+                current_error_key: [""]
+                desired_error_key: [""]
+                documentation: "https://docs.microsoft.com/en-us/rest/api/sql/servers/listbyresourcegroup"
+                endpoint_key_names:
+                  subscription_id: subscription_id
+                  "{{endpoint_key}}": resource_group_name
+                params:
+                  querystring:
+                    api-version: ["2019-06-01-preview"]
+                  header:
+                  body:
+                endpoints:
+                  "value.name":
+                    - name: "firewall_rules"
+                      vars:
+                        service: "firewallRules"
+                      endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{resource_group_name}}/providers/Microsoft.Sql/servers/{{endpoint_key}}/{{service}}"
+                      current_base_key: ["value"]
+                      desired_base_key: ["SQLServersFirewallRules"]
+                      current_error_key: [""]
+                      desired_error_key: [""]
+                      documentation: "https://docs.microsoft.com/en-us/rest/api/sql/firewallrules/listbyserver"
+                      endpoint_key_names:
+                        subscription_id: subscription_id
+                        resource_group_name: resource_group_name
+                        "{{endpoint_key}}": server_name
+                      params:
+                        querystring:
+                          api-version: ["2014-04-01"]
+                        header:
+                        body:
+                    - name: "alert_policies"
+                      vars:
+                        service: "securityAlertPolicies"
+                      endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{resource_group_name}}/providers/Microsoft.Sql/servers/{{endpoint_key}}/{{service}}"
+                      current_base_key: ["value"]
+                      desired_base_key: ["SQLServerAlertPolicies"]
+                      current_error_key: [""]
+                      desired_error_key: [""]
+                      documentation: "https://docs.microsoft.com/en-us/rest/api/sql/serversecurityalertpolicies/listbyserver"
+                      endpoint_key_names:
+                        subscription_id: subscription_id
+                        resource_group_name: resource_group_name
+                        "{{endpoint_key}}": server_name
+                      params:
+                        querystring:
+                          api-version: ["2017-03-01-preview"]
+                        header:
+                        body:
+                    - name: "sql_servers_auditing_settings"
+                      vars:
+                        service: "auditingSettings"
+                      endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{resource_group_name}}/providers/Microsoft.Sql/servers/{{endpoint_key}}/{{service}}"
+                      current_base_key: ["value"]
+                      desired_base_key: ["SQLServerAuditingSettings"]
+                      current_error_key: [""]
+                      desired_error_key: [""]
+                      documentation: "https://docs.microsoft.com/en-us/rest/api/sql/serversecurityalertpolicies/listbyserver"
+                      endpoint_key_names:
+                        subscription_id: subscription_id
+                        resource_group_name: resource_group_name
+                        "{{endpoint_key}}": server_name
+                      params:
+                        querystring:
+                          api-version: ["2017-03-01-preview"]
+                        header:
+                        body:
+                    - name: "sql_servers_extended_auditing_settings"
+                      vars:
+                        service: "extendedAuditingSettings"
+                      endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{resource_group_name}}/providers/Microsoft.Sql/servers/{{endpoint_key}}/{{service}}"
+                      current_base_key: ["value"]
+                      desired_base_key: ["SQLServerExtendedAuditingSettings"]
+                      current_error_key: [""]
+                      desired_error_key: [""]
+                      documentation: "https://docs.microsoft.com/en-us/rest/api/sql/server%20extended%20auditing%20settings/listbyserver"
+                      endpoint_key_names:
+                        subscription_id: subscription_id
+                        resource_group_name: resource_group_name
+                        "{{endpoint_key}}": server_name
+                      params:
+                        querystring:
+                          api-version: ["2017-03-01-preview"]
+                        header:
+                        body:
+                    - name: "sql_databases"
+                      vars:
+                        service: "databases"
+                      endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{resource_group_name}}/providers/Microsoft.Sql/servers/{{endpoint_key}}/{{service}}"
+                      current_base_key: ["value"]
+                      desired_base_key: ["SQLDatabases"]
+                      current_error_key: [""]
+                      desired_error_key: [""]
+                      documentation: "https://docs.microsoft.com/en-us/rest/api/sql/databases/listbyserver"
+                      endpoint_key_names:
+                        subscription_id: subscription_id
+                        resource_group_name: resource_group_name
+                        "{{endpoint_key}}": server_name
+                      params:
+                        querystring:
+                          api-version: ["2017-10-01-preview"]
+                        header:
+                        body:
+                      endpoints:
+                        "value.name":
+                          - name: "sql_databases_alert_policies"
+                            vars:
+                              service: "securityAlertPolicies"
+                            endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{resource_group_name}}/providers/Microsoft.Sql/servers/{{server_name}}/databases/{{endpoint_key}}/{{service}}/default"
+                            current_base_key: ["value"]
+                            desired_base_key: ["SQLDatabaseAlertPolicies"]
+                            current_error_key: [""]
+                            desired_error_key: [""]
+                            documentation: "https://docs.microsoft.com/en-us/rest/api/sql/databasethreatdetectionpolicies/get"
+                            endpoint_key_names:
+                              subscription_id: subscription_id
+                              resource_group_name: resource_group_name
+                              server_name: server_name
+                              "{{endpoint_key}}": database_name
+                            params:
+                              querystring:
+                                api-version: ["2014-04-01"]
+                              header:
+                              body:
+                          - name: "sql_databases_auditing_settings"
+                            vars:
+                              service: "auditingSettings"
+                            endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{resource_group_name}}/providers/Microsoft.Sql/servers/{{server_name}}/databases/{{endpoint_key}}/{{service}}"
+                            current_base_key: ["value"]
+                            desired_base_key: ["SQLDatabaseAuditingSettings"]
+                            current_error_key: [""]
+                            desired_error_key: [""]
+                            documentation: "https://docs.microsoft.com/en-us/rest/api/sql/databasethreatdetectionpolicies/get"
+                            endpoint_key_names:
+                              subscription_id: subscription_id
+                              resource_group_name: resource_group_name
+                              server_name: server_name
+                              "{{endpoint_key}}": database_name
+                            params:
+                              querystring:
+                                api-version: ["2017-03-01-preview"]
+                              header:
+                              body:
+                          - name: "sql_databases_extended_auditing_settings"
+                            vars:
+                              service: "extendedAuditingSettings"
+                            endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{resource_group_name}}/providers/Microsoft.Sql/servers/{{server_name}}/databases/{{endpoint_key}}/{{service}}"
+                            current_base_key: ["value"]
+                            desired_base_key: ["SQLDatabaseExtendedAuditingSettings"]
+                            current_error_key: [""]
+                            desired_error_key: [""]
+                            documentation: "https://docs.microsoft.com/en-us/rest/api/sql/databasethreatdetectionpolicies/get"
+                            endpoint_key_names:
+                              subscription_id: subscription_id
+                              resource_group_name: resource_group_name
+                              server_name: server_name
+                              "{{endpoint_key}}": database_name
+                            params:
+                              querystring:
+                                api-version: ["2017-03-01-preview"]
+                              header:
+                              body:
+                          - name: "sql_databases_transparent_data_encryption"
+                            vars:
+                              service: "transparentDataEncryption"
+                            endpoint: "https://management.azure.com/subscriptions/{{subscription_id}}/resourceGroups/{{resource_group_name}}/providers/Microsoft.Sql/servers/{{server_name}}/databases/{{endpoint_key}}/{{service}}/current"
+                            current_base_key: ["value"]
+                            desired_base_key: ["SQLDatabaseTransparentDataEncryption"]
+                            current_error_key: [""]
+                            desired_error_key: [""]
+                            documentation: "https://docs.microsoft.com/en-us/rest/api/sql/transparentdataencryptions/get"
+                            endpoint_key_names:
+                              subscription_id: subscription_id
+                              resource_group_name: resource_group_name
+                              server_name: server_name
+                              "{{endpoint_key}}": database_name
+                            params:
+                              querystring:
+                                api-version: ["2014-04-01"]
+                              header:
+                              body:
