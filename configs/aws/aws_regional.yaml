@@ -190,6 +190,8 @@ endpoints:
     vars:
       service: "opsworks"
       xml_tags: "member"
+    skip_endpoint:
+      region: ["ap-northeast-3", "eu-north-1"]
     paging:
       location_to: ""
       indicator_from_field: ""
