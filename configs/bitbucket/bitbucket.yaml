@@ -32,7 +32,7 @@ endpoints:
         - name: "pull_requests"
           vars:
             service: "pullrequests"
-          endpoint: "https://api.bitbucket.org/2.0/repositories/{{username}}/{{endpoint_key}}/{{service}}"
+          endpoint: "https://api.bitbucket.org/2.0/repositories/{{endpoint_key}}/{{service}}"
           current_base_key: ["values"]
           desired_base_key: ["PullRequests"]
           current_error_key: [""]
