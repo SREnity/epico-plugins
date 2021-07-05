@@ -17,6 +17,22 @@ paging_params:
 global_vars:
   domain: "DOMAIN"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "projects"
+    endpoint: "{{domain}}/api/{{service}}/search"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "components" ]
+    desired_base_key: [ "Projects" ]
+    current_error_key: [ "error" ]
+    desired_error_key: [ "Errors" ]
+    documentation: ""
+    params:
+      querystring:
+        ps: [ "500" ] # Page size
+      header:
+      body:
   - name: "projects"
     vars:
       service: "projects"

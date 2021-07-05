@@ -10,6 +10,21 @@ auth_params:
   - "X-Api-Key"
   - "{{}}" # Api Key
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "alerts_policies"
+    endpoint: "https://api.newrelic.com/v2/{{service}}.json"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "policies" ]
+    desired_base_key: [ "Policies" ]
+    current_error_key: [ "error.title" ]
+    desired_error_key: [ "Errors" ]
+    documentation: "https://docs.newrelic.com/docs/alerts/rest-api-alerts/new-relic-alerts-rest-api/rest-api-calls-new-relic-alerts"
+    params:
+      querystring:
+      header:
+      body:
   - name: "applications"
     vars:
       service: "applications"

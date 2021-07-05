@@ -13,6 +13,21 @@ auth_params:
 paging_params:
   - "CalculatePagingPeek"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "zones"
+    endpoint: "https://api.cloudflare.com/client/v4/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "result" ]
+    desired_base_key: [ "Zones" ]
+    current_error_key: [ "errors" ]
+    desired_error_key: [ "Errors.{{service}}" ]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
   - name: "zones"
     vars:
       service: "zones"

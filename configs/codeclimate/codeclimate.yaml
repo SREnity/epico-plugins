@@ -13,6 +13,22 @@ auth_params:
   - "Authorization"
   - "Token token={{}}"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "orgs"
+    endpoint: "https://api.codeclimate.com/v1/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "data" ]
+    desired_base_key: [ "Organizations" ]
+    current_error_key: [ "errors.detail" ]
+    desired_error_key: [ "Errors" ]
+    documentation: "https://developer.codeclimate.com/#organizations"
+    params:
+      querystring:
+      header:
+        Accept: [ "application/vnd.api+json" ]
+      body:
   - name: "orgs"
     vars:
       service: "orgs"

@@ -15,6 +15,22 @@ auth_params:
 global_vars:
   url: "URL"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "projects"
+    endpoint: "{{url}}/app/rest/latest/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "project" ]
+    desired_base_key: [ "Projects" ]
+    current_error_key: [ "" ]
+    desired_error_key: [ "" ]
+    documentation: ""
+    params:
+      querystring:
+      header:
+        Accept: [ "application/json" ]
+      body:
   - name: "projects"
     vars:
       service: "projects"

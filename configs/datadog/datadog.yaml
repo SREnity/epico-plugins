@@ -14,6 +14,24 @@ auth_params:
   - "application_key"
   - "{{}}" # Application Key
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "cpu"
+    endpoint: "https://app.datadoghq.com/api/v1/query"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "series" ]
+    desired_base_key: [ "Cpu.Idle" ]
+    current_error_key: [ "errors" ]
+    desired_error_key: [ "Errors" ]
+    documentation: ""
+    params:
+      querystring:
+        query: [ "system.cpu.idle{*}by{host}" ]
+        from: [ "{{time:-24h}}" ]
+        to: [ "{{time:now}}" ]
+      header:
+      body:
   - name: "cpu"
     vars:
       service: "cpu"

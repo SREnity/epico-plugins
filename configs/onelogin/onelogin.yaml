@@ -12,6 +12,21 @@ auth_params:
   - "https://api.us.onelogin.com/auth/oauth2/token" # Token URL
 # TODO: support both US and EU
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "users"
+    endpoint: "https://api.us.onelogin.com/api/1/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "data" ]
+    desired_base_key: [ "Users" ]
+    current_error_key: [ "" ]
+    desired_error_key: [ "" ]
+    documentation: "https://developers.onelogin.com/api-docs/1/users/get-users"
+    params:
+      querystring:
+      header:
+      body:
   - name: "users"
     vars:
       service: "users"

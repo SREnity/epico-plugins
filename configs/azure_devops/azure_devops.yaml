@@ -12,6 +12,22 @@ auth_params:
 global_vars:
   organization: "ORGANIZATION"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "projects"
+    endpoint: "https://dev.azure.com/{{organization}}/_apis/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "value" ]
+    desired_base_key: [ "Projects" ]
+    current_error_key: [ "" ]
+    desired_error_key: [ "" ]
+    documentation: "https://docs.microsoft.com/en-us/rest/api/azure/devops/core/projects/list"
+    params:
+      querystring:
+        api-version: [ "5.1" ]
+      header:
+      body:
   - name: "projects"
     vars:
       service: "projects"

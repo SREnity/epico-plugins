@@ -15,6 +15,21 @@ paging_params:
   - "RegexJsonPagingPeek"
   - "<([^>]*)>; rel=\"next\"; results=\"true\""
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "organizations"
+    endpoint: "https://sentry.io/api/0/{{service}}/"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "" ]
+    desired_base_key: [ "Organizations" ]
+    current_error_key: [ "detail" ]
+    desired_error_key: [ "Errors" ]
+    documentation: "https://docs.sentry.io/api/organizations/get-organization-index/"
+    params:
+      querystring:
+      header:
+      body:
   - name: "organizations"
     vars:
       service: "organizations"

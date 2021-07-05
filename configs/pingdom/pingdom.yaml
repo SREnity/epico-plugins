@@ -11,6 +11,21 @@ auth_params:
   - "Authorization"
   - "Bearer {{}}" # API token
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "actions"
+    endpoint: "https://api.pingdom.com/api/3.1/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "actions.alerts" ]
+    desired_base_key: [ "Alerts" ]
+    current_error_key: [ "error.errormessage" ]
+    desired_error_key: [ "Errors" ]
+    documentation: "https://docs.pingdom.com/api/#tag/Actions/paths/~1actions/get"
+    params:
+      querystring:
+      header:
+      body:
   - name: "alerts"
     vars:
       service: "actions"

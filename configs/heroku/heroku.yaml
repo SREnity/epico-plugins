@@ -13,6 +13,22 @@ auth_params:
   - "Authorization"
   - "Bearer {{}}" # "Bearer " + Token <= Notice the space after 'Bearer' and caps
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "account_invoices"
+    endpoint: "https://api.heroku.com/account/invoices"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "" ]
+    desired_base_key: [ "Invoices" ]
+    current_error_key: [ "message" ]
+    desired_error_key: [ "Errors" ]
+    documentation: "https://devcenter.heroku.com/articles/platform-api-reference#invoice-list"
+    params:
+      querystring:
+      header:
+        Accept: [ "application/vnd.heroku+json; version=3" ]
+      body:
   - name: "apps"
     vars:
       service: "apps"

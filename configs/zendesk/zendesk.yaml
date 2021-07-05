@@ -17,6 +17,21 @@ paging_params:
 global_vars:
   domain: "DOMAIN"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "groups"
+    endpoint: "https://{{domain}}.zendesk.com/api/v2/{{service}}.json"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "groups" ]
+    desired_base_key: [ "Groups" ]
+    current_error_key: [ "error" ]
+    desired_error_key: [ "Errors" ]
+    documentation: "https://developer.zendesk.com/rest_api/docs/support/groups"
+    params:
+      querystring:
+      header:
+      body:
   - name: "groups"
     vars:
       service: "groups"

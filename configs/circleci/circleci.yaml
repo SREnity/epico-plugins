@@ -11,6 +11,21 @@ auth_params:
   - "circle-token"
   - "{{}}" # Token
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "projects"
+    endpoint: "https://circleci.com/api/v1.1/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "" ]
+    desired_base_key: [ "Projects" ]
+    current_error_key: [ "message" ]
+    desired_error_key: [ "Errors" ]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
   - name: "projects"
     vars:
       service: "projects"

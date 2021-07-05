@@ -15,6 +15,21 @@ endpoints:
     vars:
       service: "workspaces"
     endpoint: "https://api.buddy.works/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "workspaces" ]
+    desired_base_key: [ "Workspaces" ]
+    current_error_key: [ "errors.message" ]
+    desired_error_key: [ "Errors" ]
+    documentation: "https://buddy.works/docs/api/general/workspaces/list-your-workspaces"
+    params:
+      querystring:
+      header:
+      body:
+  - name: "workspaces"
+    vars:
+      service: "workspaces"
+    endpoint: "https://api.buddy.works/{{service}}"
     current_base_key: ["workspaces"]
     desired_base_key: ["Workspaces"]
     current_error_key: ["errors"]

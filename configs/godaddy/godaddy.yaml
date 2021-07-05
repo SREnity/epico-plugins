@@ -11,6 +11,21 @@ auth_params:
   - "Authorization"
   - "sso-key {{}}:{{}}" # Api key and secret
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "domains"
+    endpoint: "https://api.godaddy.com/v1/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [""]
+    desired_base_key: ["Domains"]
+    current_error_key: ["message"]
+    desired_error_key: ["Errors"]
+    documentation: "https://developer.godaddy.com/doc/endpoint/domains#/v1/list"
+    params:
+      querystring:
+      header:
+      body:
   - name: "domains"
     vars:
       service: "domains"

@@ -12,6 +12,21 @@ auth_params:
 global_vars:
   app_id: "APP_ID"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "requests_duration"
+    endpoint: "https://api.applicationinsights.io/v1/apps/{{app_id}}/metrics/requests/duration"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: ["value"]
+    desired_base_key: ["RequestsDuration"]
+    current_error_key: ["error.message"]
+    desired_error_key: ["Errors"]
+    documentation: "https://dev.applicationinsights.io/documentation/Using-the-API/Metrics"
+    params:
+      querystring:
+      header:
+      body:
   - name: "requests_duration"
     vars:
       service: "requests_duration"

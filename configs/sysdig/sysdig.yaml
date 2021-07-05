@@ -15,6 +15,22 @@ auth_params:
   - "Authorization"
   - "Bearer {{}}" # "Bearer " + Token <= Notice the space after 'Bearer' and caps
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "alerts"
+    endpoint: "https://app.sysdigcloud.com/api/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "alerts" ]
+    desired_base_key: [ "Alerts" ]
+    current_error_key: [ "message" ]
+    desired_error_key: [ "Errors" ]
+    documentation: "https://app.sysdigcloud.com/apidocs/#!/Alerts/get_api_alerts"
+    params:
+      querystring:
+      header:
+      body:
+
   - name: "alerts"
     vars:
       service: "alerts"

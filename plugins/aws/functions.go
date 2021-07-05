@@ -38,7 +38,7 @@ func PluginAuth(apiRequest generic_structs.ApiRequest, authParams []string) gene
 	}
 
 	if err != nil {
-		utils.LogFatal("AWS:PluginAuth", "Error presigning the AWS request", err)
+		utils.LogError("AWS:PluginAuth", "Error presigning the AWS request", err)
 	}
 
 	return apiRequest
@@ -47,8 +47,7 @@ func PluginAuth(apiRequest generic_structs.ApiRequest, authParams []string) gene
 func PluginResponseToJson(vars map[string]string, response []byte) []byte {
 	jsonBody, err := xj.Convert(bytes.NewReader(response))
 	if err != nil {
-		utils.LogFatal("AWS:PluginResponseToJson",
-			"Error converting XML API response", err)
+		utils.LogError("AWS:PluginResponseToJson", "Error converting XML API response", err)
 		return nil
 	}
 

@@ -17,6 +17,22 @@ paging_params:
 global_vars:
   domain: "DOMAIN"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "jobs"
+    endpoint: "{{domain}}/api/json"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "jobs" ]
+    desired_base_key: [ "Jobs" ]
+    current_error_key: [ "error" ]
+    desired_error_key: [ "Errors" ]
+    documentation: ""
+    params:
+      querystring:
+        tree: [ "jobs[name,url,lastBuild[number,result,duration,timestamp],builds[number,result,timestamp]]" ]
+      header:
+      body:
   - name: "jobs_with_builds"
     vars:
       service: "jobs"

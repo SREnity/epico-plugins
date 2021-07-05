@@ -18,6 +18,21 @@ paging_params:
 global_vars:
   domain: "DOMAIN"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "runners"
+    endpoint: "{{domain}}/api/v4/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "" ]
+    desired_base_key: [ "Runners" ]
+    current_error_key: [ "message" ]
+    desired_error_key: [ "Errors" ]
+    documentation: "https://docs.gitlab.com/ee/api/runners.html"
+    params:
+      querystring:
+      header:
+      body:
   - name: "projects"
     vars:
       service: "projects"

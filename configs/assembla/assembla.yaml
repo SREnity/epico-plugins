@@ -14,6 +14,22 @@ auth_params:
   - "X-Api-Secret"
   - "{{}}" # Api Secret
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "mentions"
+    endpoint: "https://api.assembla.com/v1/user/{{service}}.json"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [""]
+    desired_base_key: ["Mentions"]
+    current_error_key: ["error_description"]
+    desired_error_key: ["Errors"]
+    documentation: "https://api-docs.assembla.cc/content/ref/mentions_index.html"
+    params:
+      querystring:
+        unread: ["true"]
+      header:
+      body:
   - name: "unread_mentions"
     vars:
       service: "mentions"

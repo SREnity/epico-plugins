@@ -7,6 +7,25 @@ paging:
   indicator_from_structure: "param" # response/iterator/etc ???necessary???
 plugin: "FULL_PATH_TO/epico-plugins/plugins/aws/aws.so"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "ec2"
+      region: "us-east-1"
+      xml_tags: "item"
+    endpoint: "https://{{service}}.{{region}}.amazonaws.com/"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: ["DescribeVpcsResponse.vpcSet"]
+    desired_base_key: ["Vpcs"]
+    current_error_key: ["Response.Errors.Error.Message"]
+    desired_error_key: ["Errors"]
+    documentation: "https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeVpcs.html"
+    params:
+      querystring:
+        Action: [ "DescribeVpcs" ] # All flow lists iterated sequentially.
+        Version: [ "2016-11-15" ]
+      header:
+      body:
   - name: "ec2_vpcs"
     vars:
       service: "ec2"

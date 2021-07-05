@@ -13,6 +13,22 @@ auth_params:
 global_vars:
   domain: "DOMAIN"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "applications"
+    endpoint: "{{domain}}/controller/rest/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "applications" ]
+    desired_base_key: [ "Applications" ]
+    current_error_key: [ "message" ]
+    desired_error_key: [ "Errors.appdynamics.{{service}}" ]
+    documentation: "https://docs.appdynamics.com/display/PRO45/Application+Model+API#ApplicationModelAPI-RetrieveAllBusinessApplications"
+    params:
+      querystring:
+        output: [ "JSON" ]
+      header:
+      body:
   - name: "applications"
     vars:
       service: "applications"

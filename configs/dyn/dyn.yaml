@@ -22,6 +22,21 @@ endpoints:
     vars:
       service: "Zone"
     endpoint: "https://api.dynect.net/REST/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "data" ]
+    desired_base_key: [ "Zones" ]
+    current_error_key: [ "msgs.ERR_CD" ]
+    desired_error_key: [ "Errors.dyn.{{service}}" ]
+    documentation: "https://help.dyn.com/get-zones-api/"
+    params:
+      querystring:
+      header:
+      body:
+  - name: "zones"
+    vars:
+      service: "Zone"
+    endpoint: "https://api.dynect.net/REST/{{service}}"
     current_base_key: ["data"]
     desired_base_key: ["Zones"]
     current_error_key: ["msgs.ERR_CD"]

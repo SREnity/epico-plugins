@@ -12,6 +12,24 @@ auth_params:
 paging_params:
   - "CalculatePagingPeek"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "services"
+    endpoint: "https://api.pagerduty.com/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "services" ]
+    desired_base_key: [ "Services" ]
+    current_error_key: [ "" ]
+    desired_error_key: [ "" ]
+    documentation: "https://api-reference.pagerduty.com/#!/Services/get_services"
+    params:
+      querystring:
+        limit: [ "1" ]
+        total: [ "true" ]
+      header:
+        Accept: [ "application/vnd.pagerduty+json;version=2" ]
+      body:
   - name: "services"
     vars:
       service: "services"

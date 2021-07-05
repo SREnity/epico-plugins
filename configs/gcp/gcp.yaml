@@ -15,6 +15,21 @@ auth_params:
 global_vars:
   project: "PROJECT"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "healthChecks"
+    endpoint: "https://compute.googleapis.com/compute/v1/projects/{{project}}/global/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "items" ]
+    desired_base_key: [ "HealthChecks" ]
+    current_error_key: [ "error.errors" ]
+    desired_error_key: [ "Errors" ]
+    documentation: "https://cloud.google.com/compute/docs/reference/rest/v1/healthChecks/list"
+    params:
+      querystring:
+      header:
+      body:
   - name: "healthChecks"
     vars:
       service: "healthChecks"

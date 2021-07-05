@@ -14,6 +14,23 @@ auth_params:
 paging_params:
   - "CalculatePagingPeek"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "repos"
+    endpoint: "https://api.travis-ci.com/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "repositories" ]
+    desired_base_key: [ "Repositories" ]
+    current_error_key: [ "errors" ]
+    desired_error_key: [ "Errors" ]
+    documentation: ""
+    params:
+      querystring:
+        include: [ "repository.current_build" ]
+      header:
+        Travis-API-Version: [ "3" ]
+      body:
   - name: "repos"
     vars:
       service: "repos"

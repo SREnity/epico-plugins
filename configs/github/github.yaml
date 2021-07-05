@@ -16,6 +16,21 @@ paging_params:
   - "RegexJsonPagingPeek"
   - "<([^>]*)>; rel=\"next\""
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "repos"
+    endpoint: "https://api.github.com/user/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "" ]
+    desired_base_key: [ "Repos" ]
+    current_error_key: [ "message" ]
+    desired_error_key: [ "Errors" ]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
   - name: "repos"
     vars:
       service: "repos"

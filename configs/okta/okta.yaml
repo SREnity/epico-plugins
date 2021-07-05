@@ -16,6 +16,21 @@ paging_params:
 global_vars:
   subdomain: "SUBDOMAIN"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "users"
+    endpoint: "https://{{subdomain}}.okta.com/api/v1/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "" ]
+    desired_base_key: [ "Users" ]
+    current_error_key: [ "errorCauses" ]
+    desired_error_key: [ "Errors" ]
+    documentation: ""
+    params:
+      querystring:
+      header:
+      body:
   - name: "users"
     vars:
       service: "users"

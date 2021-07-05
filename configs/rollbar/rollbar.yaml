@@ -11,6 +11,21 @@ auth_params:
   - "access_token"
   - "{{}}" # Token
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "deploys"
+    endpoint: "https://api.rollbar.com/api/1/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "result.deploys" ]
+    desired_base_key: [ "Deploys" ]
+    current_error_key: [ "message" ]
+    desired_error_key: [ "Errors" ]
+    documentation: "https://explorer.docs.rollbar.com/#operation/list-all-deploys"
+    params:
+      querystring:
+      header:
+      body:
   - name: "deploys"
     vars:
       service: "deploys"

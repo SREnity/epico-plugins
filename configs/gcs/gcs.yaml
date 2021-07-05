@@ -15,6 +15,21 @@ auth_params:
 global_vars:
   project: "PROJECT"
 endpoints:
+  - name: "connectionCheck"
+    vars:
+      service: "repos"
+    endpoint: "https://sourcerepo.googleapis.com/v1/projects/{{project}}/{{service}}"
+    use_for_connection_check: true
+    skip_for_scans: true
+    current_base_key: [ "repos" ]
+    desired_base_key: [ "Repositories" ]
+    current_error_key: [ "error.errors" ]
+    desired_error_key: [ "Errors}" ]
+    documentation: "https://cloud.google.com/source-repositories/docs/reference/rest/v1/projects.repos/list"
+    params:
+      querystring:
+      header:
+      body:
   - name: "repos"
     vars:
       service: "repos"
