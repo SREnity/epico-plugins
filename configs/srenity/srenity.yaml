@@ -15,7 +15,7 @@ endpoints:
   - name: "user_plugins"
     vars:
       service: "user_plugins"
-    endpoint: "DASHBOARD_API_URL/api/v1/{{service}}.json"
+    endpoint: "INSIGHTS_URL/api/v1/{{service}}.json"
     use_for_connection_check: true
     current_base_key: [""]
     desired_base_key: ["Plugins"]
